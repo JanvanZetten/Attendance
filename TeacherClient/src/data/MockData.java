@@ -7,6 +7,7 @@ package data;
 
 import be.Student;
 import be.Class;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,9 +16,10 @@ import java.util.List;
  */
 public class MockData {
     
-    private List<Class> listOne;
-    private List<Class> listTwo;
-    private List<Class> listThree;
+    private ArrayList<Class> listAllClasses;
+    private ArrayList<Class> listOne;
+    private ArrayList<Class> listTwo;
+    private ArrayList<Class> listThree;
     
     private Class SCO;
     private Class SDE;
@@ -34,13 +36,22 @@ public class MockData {
         ITO = new Class(3, "ITO");
         Sløjd = new Class(4, "Sløjd");
         
+        listAllClasses = new ArrayList<Class>();
+        listAllClasses.add(SCO);
+        listAllClasses.add(SDE);
+        listAllClasses.add(ITO);
+        listAllClasses.add(Sløjd);
+        
+        listOne = new ArrayList<Class>();
         listOne.add(SCO);
         listOne.add(ITO);
         
+        listTwo = new ArrayList<Class>();
         listTwo.add(SCO);
         listTwo.add(SDE);
         listTwo.add(ITO);
         
+        listThree = new ArrayList<Class>();
         listThree.add(SDE);
         listThree.add(Sløjd);
         
@@ -49,6 +60,10 @@ public class MockData {
         Jan = new Student(3, "JanvanZetten", listThree);
     }
 
+    public List<Class> getListAllClasses() {
+        return listAllClasses;
+    }
+    
     public List<Class> getListOne() {
         return listOne;
     }
