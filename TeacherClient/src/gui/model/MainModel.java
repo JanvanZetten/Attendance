@@ -7,20 +7,19 @@ package gui.model;
 
 import be.Student;
 import be.Class;
+import data.MockData;
 
 /**
  *
  * @author alexl
  */
 public class MainModel {
+    
+    private MockData data;
 
     public void createMockData() {
-        new Class(1, "SCO");
-        new Class(2, "SDE");
-        new Class(3, "ITO");
-        new Class(4, "Hjemkunstskab");
-        
-        new Student(1, "Alex Tygesen", )
+        data = new MockData();
+        data.createMockData();
     }
     
 }
