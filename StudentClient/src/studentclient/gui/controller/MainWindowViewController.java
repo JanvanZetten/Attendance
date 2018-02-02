@@ -7,7 +7,11 @@ package studentclient.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
+import studentclient.gui.model.MainModel;
 
 /**
  * FXML Controller class
@@ -15,6 +19,8 @@ import javafx.fxml.Initializable;
  * @author janvanzetten
  */
 public class MainWindowViewController implements Initializable {
+    
+    MainModel mainModel = new MainModel();
 
     /**
      * Initializes the controller class.
@@ -23,5 +29,23 @@ public class MainWindowViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void handleAbsenceGraph(ActionEvent event) {
+        mainModel.showAbsenceGraph();
+    }
+
+    @FXML
+    private void handlePresent(ActionEvent event) {
+        mainModel.handlePresent(event);
+    }
+
+    @FXML
+    private void handleNextWeek(MouseEvent event) {
+    }
+
+    @FXML
+    private void handlePreviousWeek(MouseEvent event) {
+    }
     
 }

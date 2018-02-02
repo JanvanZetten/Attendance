@@ -21,12 +21,12 @@
             <Font name="Helvetica Neue Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="408.0" layoutY="9.0" text="Week 10" textFill="#54585e" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="5.0">
+      <Label fx:id="lblWeek" layoutX="408.0" layoutY="9.0" text="Week 10" textFill="#54585e" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="Helvetica Neue" size="36.0" />
          </font>
       </Label>
-      <Polygon fill="#3176b5" layoutX="583.0" layoutY="41.0" rotate="90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="-25.0" AnchorPane.topAnchor="-25.0">
+      <Polygon fill="#3176b5" layoutX="583.0" layoutY="41.0" onMouseReleased="#handleNextWeek" rotate="90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="-25.0" AnchorPane.topAnchor="-25.0">
         <points>
           <Double fx:value="-50.0" />
           <Double fx:value="40.0" />
@@ -36,7 +36,7 @@
           <Double fx:value="-60.0" />
         </points>
       </Polygon>
-      <Polygon fill="#3176b5" layoutX="380.0" layoutY="41.0" rotate="-90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="-25.0">
+      <Polygon fill="#3176b5" layoutX="380.0" layoutY="41.0" onMouseReleased="#handlePreviousWeek" rotate="-90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="-25.0">
          <points>
             <Double fx:value="-50.0" />
             <Double fx:value="40.0" />
@@ -56,12 +56,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="209.0" style="-fx-background-color: #db3b26;" text="Absence graph" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+            <Button mnemonicParsing="false" onAction="#handleAbsenceGraph" prefHeight="47.0" prefWidth="209.0" style="-fx-background-color: #db3b26;" text="Absence graph" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Helvetica Neue Bold" size="24.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="248.0" style="-fx-background-color: #54ad32;" text="Present" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <Button mnemonicParsing="false" onAction="#handlePresent" prefHeight="47.0" prefWidth="248.0" style="-fx-background-color: #54ad32;" text="Present" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Helvetica Neue Bold" size="24.0" />
                </font>
