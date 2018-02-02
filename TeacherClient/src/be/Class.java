@@ -15,7 +15,8 @@ public class Class {
     private String name;
     
     public Class (int id, String name) {
-        
+        this.id = id;
+        this.name = name;
     }
     
 }
