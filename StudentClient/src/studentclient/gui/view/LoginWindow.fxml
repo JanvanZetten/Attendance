@@ -23,17 +23,17 @@
             <Font name="Helvetica Neue Bold" size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="11.0" layoutY="68.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
+      <TextField fx:id="UsernameField" layoutX="11.0" layoutY="68.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
          <font>
             <Font name="Helvetica Neue" size="18.0" />
          </font>
       </TextField>
-      <PasswordField layoutX="10.0" layoutY="186.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="150.0">
+      <PasswordField fx:id="PaswordField" layoutX="10.0" layoutY="186.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="150.0">
          <font>
             <Font name="Helvetica Neue" size="18.0" />
          </font>
       </PasswordField>
-      <Button layoutX="153.0" layoutY="270.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: #46a2f8; -fx-text-fill: White;" text="Login" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <Button layoutX="153.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: #46a2f8; -fx-text-fill: White;" text="Login" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <font>
             <Font name="Helvetica Neue Bold" size="18.0" />
          </font>
