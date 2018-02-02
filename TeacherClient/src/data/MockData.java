@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author alexl
  */
-public class Data {
+public class MockData {
     
     private List<Class> listOne;
     private List<Class> listTwo;
@@ -48,5 +48,47 @@ public class Data {
         Asbjørn = new Student(2, "Asbjørn Mansa EtEllerAndet", listTwo);
         Jan = new Student(3, "JanvanZetten", listThree);
     }
+
+    public List<Class> getListOne() {
+        return listOne;
+    }
+
+    public List<Class> getListTwo() {
+        return listTwo;
+    }
+
+    public List<Class> getListThree() {
+        return listThree;
+    }
+
+    public Class getSCO() {
+        return SCO;
+    }
+
+    public Class getSDE() {
+        return SDE;
+    }
+
+    public Class getITO() {
+        return ITO;
+    }
+
+    public Class getSløjd() {
+        return Sløjd;
+    }
+
+    public Student getAlex() {
+        return Alex;
+    }
+
+    public Student getAsbjørn() {
+        return Asbjørn;
+    }
+
+    public Student getJan() {
+        return Jan;
+    }
+    
+    
     
 }
