@@ -22,7 +22,7 @@ public class TeacherClientStart extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/gui/view/MainView.fxml"));
+        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/gui/view/LoginWindow.fxml"));
         Parent root = fxLoader.load();
         scene = new Scene(root);
         stage.setScene(scene);

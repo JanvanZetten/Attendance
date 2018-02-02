@@ -2,10 +2,18 @@ package be;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 
 /**
  * En Gruppe
@@ -38,7 +46,30 @@ public class HBoxCell extends HBox
         HBox.setHgrow(label, Priority.ALWAYS);
         HBox.setHgrow(button1, Priority.ALWAYS);
         HBox.setHgrow(button2, Priority.ALWAYS);
-
+        
+        //styling
+        Background bluebackground = new Background(new BackgroundFill(Paint.valueOf("#46a2f8"), new CornerRadii(5), Insets.EMPTY));
+        Background purplebackground = new Background(new BackgroundFill(Paint.valueOf("#0d264d"), CornerRadii.EMPTY, Insets.EMPTY));
+        
+        button1.setFont(Font.font("Helvetica Neue"));
+        button1.setFont(Font.font(18));
+        button1.setTextFill(Paint.valueOf("White"));
+        button1.setBackground(bluebackground);
+        
+        button2.setFont(Font.font("Helvetica Neue"));
+        button2.setFont(Font.font(18));
+        button2.setTextFill(Paint.valueOf("White"));
+        button2.setBackground(bluebackground);
+        
+        label.setFont(Font.font("Helvetica Neue"));
+        label.setFont(Font.font(29));
+        label.setTextFill(Paint.valueOf("White"));
+        label.setAlignment(Pos.CENTER_LEFT);
+        label.setBackground(purplebackground);
+                
+                
+        
+        
         button1.setText(buttonText1);
         button1.setOnAction(new EventHandler<ActionEvent>()
         {
