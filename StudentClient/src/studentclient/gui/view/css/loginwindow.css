@@ -2,6 +2,10 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
 
+.text-field {
+    -fx-background-color: #d9d9d9;
+    -fx-text-fill: #434343;
 }
+
+
