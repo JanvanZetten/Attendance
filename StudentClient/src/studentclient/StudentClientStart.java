@@ -17,13 +17,18 @@ import javafx.stage.Stage;
  * @author janvanzetten
  */
 public class StudentClientStart extends Application {
-    
+
     @Override
-    public void start(Stage stage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("gui/view/LoginWindow.fxml"));
-        
+    public void start(Stage stage) throws Exception {
+        Parent root;
+        if (true) {
+            root = FXMLLoader.load(getClass().getResource("gui/view/LoginWindow.fxml"));
+        } else {
+            root = FXMLLoader.load(getClass().getResource("gui/view/MainWindowView.fxml"));
+        }
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.setTitle("ESAV - Student");
         stage.getIcons().add(new Image("studentclient/Resources/EASVLogo.png"));
@@ -36,5 +41,5 @@ public class StudentClientStart extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
