@@ -1,9 +1,13 @@
 package studentclient.gui.model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -13,6 +17,7 @@ import javafx.scene.text.TextAlignment;
 import studentclient.be.Course;
 import studentclient.be.CourseComparator;
 import studentclient.be.ScheduleDay;
+import studentclient.bll.TimeUtils;
 
 /**
  *
@@ -21,12 +26,19 @@ import studentclient.be.ScheduleDay;
 public class Schedule extends GridPane
 {
     private final int HEADER_HEIGHT = 20;
-    private final int MINUTS_IN_AN_HOUR = 60;
+    private final int MINUTES_IN_AN_HOUR = 60;
     private final int START_TIME;
     private final int END_TIME;
     private final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
     private final Color DOTTED_BORDER_LINE_COLOR = Color.LIGHTGREY;
     private final Color DEFAULT_COURSE_COLOR = Color.DEEPSKYBLUE;
+    private final String ID_TIME_COLUMN = "timeCol";
+    private final String ID_DAY_ROW = "dayRow";
+    private final String ID_COURSE = "course";
+    private final String ID_COURSE_FIELD = "courseField";
+
+    private AnchorPane[] apLst;
+    private TimeUtils tu;
 
     /**
      * Creates schedule between given times.
@@ -37,6 +49,13 @@ public class Schedule extends GridPane
     {
         // construct GridPane.
         super();
+
+        apLst = new AnchorPane[5];
+        for (int i = 0; i < apLst.length; i++)
+        {
+            apLst[i] = new AnchorPane();
+        }
+        tu = new TimeUtils();
 
         // Set restraints.
         if (startTime > endTime)
@@ -62,7 +81,7 @@ public class Schedule extends GridPane
     private void setupSchedule()
     {
         // Set gap between elements.
-        this.setHgap(1.0);
+        this.setHgap(0.0);
         this.setVgap(1.0);
 
         // Set column contraint to center content and use percent of width.
@@ -81,21 +100,58 @@ public class Schedule extends GridPane
         this.getColumnConstraints().add(column2);
 
         // Add empty upper left corner.
-        this.add(schemeElement(""), 0, 1);
+        StackPane sp = schemeElement("");
+        sp.setId(ID_DAY_ROW);
+        this.add(sp, 0, 1);
 
         // Add all days from ScheduleDay Enum.
         int col = 1;
         for (ScheduleDay scheduleDay : ScheduleDay.values())
         {
-            this.add(schemeElement(scheduleDay.getDay()), col, 1);
+            // Add day to GridPane/this.
+            sp = schemeElement(scheduleDay.getDay());
+            sp.setId(ID_DAY_ROW);
+            this.add(sp, col, 1);
+
+            // Set cursor.
+            int cursor = START_TIME * MINUTES_IN_AN_HOUR;
+            VBox courseBox = new VBox();
+            courseBox.setId(ID_COURSE_FIELD);
+            StackPane element;
+
+            // Insert empty panes for the rest of the day.
+            while (cursor < END_TIME * MINUTES_IN_AN_HOUR)
+            {
+                int nextPivot = MINUTES_IN_AN_HOUR - (cursor % MINUTES_IN_AN_HOUR);
+                element = schemeElement("", nextPivot * 1.0);
+                if (cursor % MINUTES_IN_AN_HOUR == 0)
+                {
+                    element.setStyle(element.getStyle() + "; -fx-border-color: " + DOTTED_BORDER_LINE_COLOR.toString().split("x")[1].substring(0, 6) + ";" + "-fx-border-style: dotted hidden hidden hidden;");
+                }
+                courseBox.getChildren().add(element);
+                cursor += nextPivot;
+            }
+
+            // Add course to GridPane/this.
+            sp = new StackPane();
+            sp.getChildren().add(courseBox);
+            apLst[col - 1].getChildren().add(sp);
+            apLst[col - 1].setTopAnchor(sp, 0.0);
+            apLst[col - 1].setLeftAnchor(sp, 0.0);
+            apLst[col - 1].setRightAnchor(sp, 0.0);
+
+            this.add(apLst[col - 1], col, 2);
+
+            // Addition to column counter.
             col++;
         }
 
         // Add a VBox with all the whole hours.
         VBox time = new VBox();
+        time.setId(ID_TIME_COLUMN);
         for (int i = START_TIME; i < END_TIME; i++)
         {
-            StackPane element = schemeElement(i + ":00", MINUTS_IN_AN_HOUR * 1.0);
+            StackPane element = schemeElement(i + ":00", MINUTES_IN_AN_HOUR * 1.0);
             element.setAlignment(Pos.TOP_CENTER);
             element.setStyle(element.getStyle() + "; -fx-border-color: " + DOTTED_BORDER_LINE_COLOR.toString().split("x")[1].substring(0, 6) + ";" + "-fx-border-style: dotted hidden hidden hidden;");
             time.getChildren().add(element);
@@ -109,6 +165,24 @@ public class Schedule extends GridPane
      */
     public void setupCourses(List<Course> courses)
     {
+        List<Node> toRemove = new ArrayList<>();
+        for (int i = 0; i < apLst.length; i++)
+        {
+            toRemove.clear();
+            for (int j = 0; j < apLst[i].getChildren().size(); j++)
+            {
+                if (apLst[i].getChildren().get(j).getId() == null)
+                {
+                    continue;
+                }
+                if (apLst[i].getChildren().get(j).getId().equalsIgnoreCase(ID_COURSE))
+                {
+                    toRemove.add(apLst[i].getChildren().get(j));
+                }
+            }
+            apLst[i].getChildren().removeAll(toRemove);
+        }
+
         // Sort courses by day and start time.
         courses.sort(new CourseComparator());
 
@@ -117,8 +191,6 @@ public class Schedule extends GridPane
         for (ScheduleDay day : ScheduleDay.values())
         {
             // Set cursor.
-            int cursor = START_TIME * MINUTS_IN_AN_HOUR;
-            VBox courseBox = new VBox();
             StackPane element;
 
             // Check through all courses.
@@ -128,75 +200,60 @@ public class Schedule extends GridPane
                 if (course.getScheduleDay() == day)
                 {
                     // Do nothing in case the course is before given start time.
-                    if (START_TIME * MINUTS_IN_AN_HOUR > course.getEndTime())
+                    if (START_TIME * MINUTES_IN_AN_HOUR > course.getEndTime())
                     {
+                        // DO-NOTHING.
                     }
-                    // If the start time is before the given start time. Print rest of course.
-                    else if (course.getStartTime() < START_TIME * MINUTS_IN_AN_HOUR)
+                    else
                     {
-                        int start = START_TIME * MINUTS_IN_AN_HOUR < course.getStartTime() ? course.getStartTime() : START_TIME * MINUTS_IN_AN_HOUR;
-                        int end = END_TIME * MINUTS_IN_AN_HOUR > course.getEndTime() ? course.getEndTime() : END_TIME * MINUTS_IN_AN_HOUR;
-                        element = schemeElement(course.getTitle() + "\n" + course.getTeacher(), end - start * 1.0, DEFAULT_COURSE_COLOR);
-                        cursor += end - start;
-                        courseBox.getChildren().add(element);
-                    }
-                    // If the course is within given time.
-                    else if (course.getEndTime() < END_TIME * MINUTS_IN_AN_HOUR)
-                    {
-                        // If at beginning of day or before a course.
-                        if (cursor == START_TIME * MINUTS_IN_AN_HOUR || cursor < course.getStartTime())
+                        int start;
+                        int end;
+                        // If the start time is before the given start time. Print rest of course.
+                        if (course.getStartTime() < START_TIME * MINUTES_IN_AN_HOUR)
                         {
-                            // While distance to next course is larger than distance to whole hour.
-                            while (course.getStartTime() - cursor > MINUTS_IN_AN_HOUR - (cursor % MINUTS_IN_AN_HOUR))
-                            {
-                                // Print empty pane down to next whole hour.
-                                int nextPivot = MINUTS_IN_AN_HOUR - (cursor % MINUTS_IN_AN_HOUR);
-                                element = schemeElement("", nextPivot * 1.0);
-                                // If cursor is at whole hour insert a pane with seperator top.
-                                if (cursor % MINUTS_IN_AN_HOUR == 0)
-                                {
-                                    element.setStyle(element.getStyle() + "; -fx-border-color: " + DOTTED_BORDER_LINE_COLOR.toString().split("x")[1].substring(0, 6) + ";" + "-fx-border-style: dotted hidden hidden hidden;");
-                                }
-                                courseBox.getChildren().add(element);
-                                cursor += nextPivot;
-                            }
-
-                            // Insert empty pane down to next course.
-                            int nextPivot = course.getStartTime() - cursor;
-                            element = schemeElement("", nextPivot * 1.0);
-                            if (cursor % MINUTS_IN_AN_HOUR == 0)
-                            {
-                                element.setStyle(element.getStyle() + "; -fx-border-color: " + DOTTED_BORDER_LINE_COLOR.toString().split("x")[1].substring(0, 6) + ";" + "-fx-border-style: dotted hidden hidden hidden;");
-                            }
-                            courseBox.getChildren().add(element);
-                            cursor += nextPivot;
+                            start = START_TIME * MINUTES_IN_AN_HOUR < course.getStartTime() ? course.getStartTime() : START_TIME * MINUTES_IN_AN_HOUR;
+                            end = END_TIME * MINUTES_IN_AN_HOUR > course.getEndTime() ? course.getEndTime() : END_TIME * MINUTES_IN_AN_HOUR;
+                        }
+                        // If the course is within given time.
+                        else if (course.getEndTime() < END_TIME * MINUTES_IN_AN_HOUR)
+                        {
+                            start = START_TIME * MINUTES_IN_AN_HOUR < course.getStartTime() ? course.getStartTime() : START_TIME * MINUTES_IN_AN_HOUR;
+                            end = END_TIME * MINUTES_IN_AN_HOUR > course.getEndTime() ? course.getEndTime() : END_TIME * MINUTES_IN_AN_HOUR;
+                        }
+                        else
+                        {
+                            continue;
                         }
 
                         // Insert course.
-                        int start = START_TIME * MINUTS_IN_AN_HOUR < course.getStartTime() ? course.getStartTime() : START_TIME * MINUTS_IN_AN_HOUR;
-                        int end = END_TIME * MINUTS_IN_AN_HOUR > course.getEndTime() ? course.getEndTime() : END_TIME * MINUTS_IN_AN_HOUR;
-                        element = schemeElement(course.getTitle() + "\n" + course.getTeacher(), end - start * 1.0, DEFAULT_COURSE_COLOR);
-                        cursor += end - start;
-                        courseBox.getChildren().add(element);
+                        element = schemeElement(tu.min2MinHourFormat(course.getStartTime()) + " - " + tu.min2MinHourFormat(course.getEndTime()) + "\n" + course.getTitle() + "\n" + course.getClassRoom().getName() + "\n" + course.getTeacher(), end - start * 1.0, DEFAULT_COURSE_COLOR);
+                        element.setId(ID_COURSE);
+
+                        if ((start - (START_TIME * MINUTES_IN_AN_HOUR)) % MINUTES_IN_AN_HOUR == 0)
+                        {
+                            element.setStyle(element.getStyle()
+                                    + "; -fx-border-color: "
+                                    + DEFAULT_BACKGROUND_COLOR.toString().split("x")[1].substring(0, 6)
+                                    + ", "
+                                    + DOTTED_BORDER_LINE_COLOR.toString().split("x")[1].substring(0, 6)
+                                    + ";"
+                                    + "-fx-border-style: solid, dotted hidden hidden hidden;");
+                        }
+                        else
+                        {
+                            element.setStyle(element.getStyle()
+                                    + "; -fx-border-color: "
+                                    + DEFAULT_BACKGROUND_COLOR.toString().split("x")[1].substring(0, 6)
+                                    + ";");
+                        }
+
+                        apLst[day.value - 1].getChildren().add(element);
+                        apLst[day.value - 1].setTopAnchor(element, start - (START_TIME * MINUTES_IN_AN_HOUR) * 1.0);
+                        apLst[day.value - 1].setLeftAnchor(element, 4.0);
+                        apLst[day.value - 1].setRightAnchor(element, 0.0);
                     }
                 }
             }
-
-            // Insert empty panes for the rest of the day.
-            while (cursor < END_TIME * MINUTS_IN_AN_HOUR)
-            {
-                int nextPivot = MINUTS_IN_AN_HOUR - (cursor % MINUTS_IN_AN_HOUR);
-                element = schemeElement("", nextPivot * 1.0);
-                if (cursor % MINUTS_IN_AN_HOUR == 0)
-                {
-                    element.setStyle(element.getStyle() + "; -fx-border-color: " + DOTTED_BORDER_LINE_COLOR.toString().split("x")[1].substring(0, 6) + ";" + "-fx-border-style: dotted hidden hidden hidden;");
-                }
-                courseBox.getChildren().add(element);
-                cursor += nextPivot;
-            }
-
-            // Add course to GridPane/this.
-            this.add(courseBox, col, 2);
 
             // Addition to column counter.
             col++;
