@@ -10,8 +10,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import studentclient.be.ClassRoom;
 import studentclient.be.Course;
@@ -76,7 +73,6 @@ public class LoginWindowController implements Initializable
             MainWindowViewController cont = fxLoader.getController();
 
             List<Course> courses = new ArrayList<>();
-
             courses.add(new Course("SDE", "Peter", new SchoolClass("CS2017A"), new ClassRoom("C3"), ScheduleDay.MONDAY, 360, 450));
             courses.add(new Course("SCO", "Mads", new SchoolClass("CS2017A"), new ClassRoom("C3"), ScheduleDay.MONDAY, 540, 580));
             courses.add(new Course("SCO", "Mads", new SchoolClass("CS2017B"), new ClassRoom("C3"), ScheduleDay.WEDNESDAY, 600, 780));
@@ -94,6 +90,7 @@ public class LoginWindowController implements Initializable
             courses.add(new Course("SCO", "Mads", new SchoolClass("CS2017A"), new ClassRoom("C3"), ScheduleDay.THURSDAY, 540, 765));
             courses.add(new Course("SCO", "Mads", new SchoolClass("CS2017A"), new ClassRoom("C3"), ScheduleDay.FRIDAY, 540, 765));
             cont.updateSchedule(courses);
+
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -101,7 +98,6 @@ public class LoginWindowController implements Initializable
         }
         catch (IOException ex)
         {
-            Logger.getLogger(LoginWindowController.class.getName()).log(Level.SEVERE, null, ex);
             Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
