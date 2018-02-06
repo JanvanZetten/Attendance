@@ -7,6 +7,9 @@ package studentclient.gui.model;
 
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import studentclient.be.Course;
 
 /**
@@ -40,13 +43,15 @@ public class MainModel
     public void handlePresent(ActionEvent event)
     {
         //TODO make the program send an present notification
-        throw new UnsupportedOperationException("Not supported yet.");
+        Button button = (Button) event.getSource();
+        button.setDisable(true);
     }
 
     public void showAbsenceGraph()
     {
         //TODO make the progarm open a window with the students absence in a graph view
-        throw new UnsupportedOperationException("Not supported yet.");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "You have not been absent", ButtonType.OK);
+        alert.showAndWait();
     }
 
 }

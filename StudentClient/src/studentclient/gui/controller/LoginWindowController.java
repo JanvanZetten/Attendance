@@ -92,6 +92,7 @@ public class LoginWindowController implements Initializable
             cont.updateSchedule(courses);
 
             Scene scene = new Scene(root);
+            stage.setResizable(true);
             stage.setScene(scene);
             stage.show();
 

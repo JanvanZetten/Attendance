@@ -25,8 +25,10 @@ public class StudentClientStart extends Application
         Parent root;
         if (LoginIsRemember()) {
             root = FXMLLoader.load(getClass().getResource("gui/view/MainWindowView.fxml"));
+            stage.setResizable(true);
         } else {
             root = FXMLLoader.load(getClass().getResource("gui/view/LoginWindow.fxml"));
+            stage.setResizable(false);
         }
         
 

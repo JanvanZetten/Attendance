@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +35,8 @@ public class MainWindowViewController implements Initializable
     private AnchorPane scheduleAnchor;
 
     private MainModel mainModel;
+    
+    int weekNumber = 10;
 
     /**
      * Initializes the controller class.
@@ -66,16 +69,33 @@ public class MainWindowViewController implements Initializable
     private void handlePresent(ActionEvent event)
     {
         mainModel.handlePresent(event);
+        
     }
 
     @FXML
     private void handleNextWeek(MouseEvent event)
     {
+        if (weekNumber < 52){
+            weekNumber ++;
+        }
+        else{
+             weekNumber = 1;
+        }
+        
+        lblWeek.setText("Week " + weekNumber);
     }
 
     @FXML
     private void handlePreviousWeek(MouseEvent event)
     {
+        if (weekNumber > 1){
+            weekNumber --;
+        }
+        else{
+             weekNumber = 52;
+        }
+        
+        lblWeek.setText("Week " + weekNumber);
     }
 
 }
