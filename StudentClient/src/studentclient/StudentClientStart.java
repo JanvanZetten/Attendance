@@ -21,11 +21,12 @@ public class StudentClientStart extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root;
-        if (true) {
-            root = FXMLLoader.load(getClass().getResource("gui/view/LoginWindow.fxml"));
-        } else {
+        if (LoginIsRemember()) {
             root = FXMLLoader.load(getClass().getResource("gui/view/MainWindowView.fxml"));
+        } else {
+            root = FXMLLoader.load(getClass().getResource("gui/view/LoginWindow.fxml"));
         }
+        
 
         Scene scene = new Scene(root);
 
@@ -40,6 +41,11 @@ public class StudentClientStart extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    
+    private boolean LoginIsRemember() {
+        return false;
     }
 
 }
