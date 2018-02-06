@@ -70,9 +70,9 @@ public class HBoxCell extends HBox {
 
         label.setFont(Font.font("Helvetica Neue"));
         label.setFont(Font.font(29));
-        label.setTextFill(Paint.valueOf("White"));
+        label.setTextFill(Paint.valueOf("gray"));
         label.setAlignment(Pos.CENTER_LEFT);
-        label.setBackground(purplebackground);
+        //label.setBackground(purplebackground);
 
         button1.setText(buttonText1);
         button1.setOnAction(new EventHandler<ActionEvent>() {
