@@ -14,15 +14,17 @@ public class Course
     private String title;
     private String teacher;
     private SchoolClass schoolClass;
+    private ClassRoom classRoom;
     private ScheduleDay scheduleDay;
     private int startTime;
     private int endTime;
 
-    public Course(String title, String teacher, SchoolClass schoolClass, ScheduleDay scheduleDay, int startTime, int endTime)
+    public Course(String title, String teacher, SchoolClass schoolClass, ClassRoom classRoom, ScheduleDay scheduleDay, int startTime, int endTime)
     {
         this.title = title;
         this.teacher = teacher;
         this.schoolClass = schoolClass;
+        this.classRoom = classRoom;
         this.scheduleDay = scheduleDay;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -41,6 +43,11 @@ public class Course
     public SchoolClass getSchoolClass()
     {
         return schoolClass;
+    }
+
+    public ClassRoom getClassRoom()
+    {
+        return classRoom;
     }
 
     public ScheduleDay getScheduleDay()
