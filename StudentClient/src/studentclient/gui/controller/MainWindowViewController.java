@@ -16,7 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import studentclient.be.Course;
+import studentclient.be.ScheduleItem;
 import studentclient.be.ScheduleDay;
 import studentclient.be.SchoolClass;
 import studentclient.gui.model.MainModel;
@@ -54,7 +54,7 @@ public class MainWindowViewController implements Initializable
      * Setup schedule.
      * @param courses in schedule.
      */
-    public void updateSchedule(List<Course> courses)
+    public void updateSchedule(List<ScheduleItem> courses)
     {
         mainModel.updateSchedule(courses);
     }

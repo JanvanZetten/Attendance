@@ -7,10 +7,20 @@ package studentclient.gui.model;
 
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.geometry.Bounds;
+import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import studentclient.be.Course;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Polygon;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Popup;
+import studentclient.be.ScheduleItem;
 
 /**
  *
@@ -35,16 +45,16 @@ public class MainModel
      * Update courses in schedule.
      * @param courses in schedule.
      */
-    public void updateSchedule(List<Course> courses)
+    public void updateSchedule(List<ScheduleItem> courses)
     {
         schedule.setupCourses(courses);
     }
 
     public void handlePresent(ActionEvent event)
     {
-        //TODO make the program send an present notification
         Button button = (Button) event.getSource();
         button.setDisable(true);
+        PopUpBubble pub = new PopUpBubble(button, "Presence registred!");
     }
 
     public void showAbsenceGraph()

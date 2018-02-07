@@ -6,16 +6,16 @@ import java.util.Comparator;
  *
  * @author Asbamz
  */
-public class CourseComparator implements Comparator<Course>
+public class CourseComparator implements Comparator<ScheduleItem>
 {
     /**
-     * Comparator method. Sort Course by day and start time.
+     * Comparator method. Sort ScheduleItem by day and start time.
      * @param o1
      * @param o2
      * @return
      */
     @Override
-    public int compare(Course o1, Course o2)
+    public int compare(ScheduleItem o1, ScheduleItem o2)
     {
         // Check for null values.
         if (o1 == null && o2 == null)

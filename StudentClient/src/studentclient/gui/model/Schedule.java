@@ -14,7 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
-import studentclient.be.Course;
+import studentclient.be.ScheduleItem;
 import studentclient.be.CourseComparator;
 import studentclient.be.ScheduleDay;
 import studentclient.bll.TimeUtils;
@@ -163,7 +163,7 @@ public class Schedule extends GridPane
      * Adds courses to schedule.
      * @param courses
      */
-    public void setupCourses(List<Course> courses)
+    public void setupCourses(List<ScheduleItem> courses)
     {
         List<Node> toRemove = new ArrayList<>();
         for (int i = 0; i < apLst.length; i++)
@@ -194,7 +194,7 @@ public class Schedule extends GridPane
             StackPane element;
 
             // Check through all courses.
-            for (Course course : courses)
+            for (ScheduleItem course : courses)
             {
                 // If the course is on current day.
                 if (course.getScheduleDay() == day)
@@ -226,7 +226,25 @@ public class Schedule extends GridPane
                         }
 
                         // Insert course.
-                        element = schemeElement(tu.min2MinHourFormat(course.getStartTime()) + " - " + tu.min2MinHourFormat(course.getEndTime()) + "\n" + course.getTitle() + "\n" + course.getClassRoom().getName() + "\n" + course.getTeacher(), end - start * 1.0, DEFAULT_COURSE_COLOR);
+                        String courseTxt = course.getCourse().getName();
+                        int height = end - start;
+                        if (height >= 60)
+                        {
+                            courseTxt += "\n" + course.getClassRoom().getName();
+                        }
+                        if (height >= 80)
+                        {
+                            courseTxt += "\n" + course.getTeacher();
+                        }
+                        if (height >= 100)
+                        {
+                            courseTxt = tu.min2MinHourFormat(course.getStartTime()) + " - " + tu.min2MinHourFormat(course.getEndTime()) + "\n" + courseTxt;
+                        }
+                        if (height >= 120)
+                        {
+                            courseTxt += "\n" + (course.getNote() != null ? (course.getNote().length() > 0 ? course.getNote() : "") : "");
+                        }
+                        element = schemeElement(courseTxt, height * 1.0, DEFAULT_COURSE_COLOR);
                         element.setId(ID_COURSE);
 
                         if ((start - (START_TIME * MINUTES_IN_AN_HOUR)) % MINUTES_IN_AN_HOUR == 0)
