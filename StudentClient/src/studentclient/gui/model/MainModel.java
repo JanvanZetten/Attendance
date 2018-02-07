@@ -55,7 +55,7 @@ public class MainModel
     {
         Button button = (Button) event.getSource();
         button.setDisable(true);
-        PopUpBubble pub = new PopUpBubble(button, "Presence registred!", new Color(84.0 / 255, 173.0 / 255, 50.0 / 255, 255 / 255));
+        PopUpBubble pub = new PopUpBubble(button, "Presence registred!", true, new Color(84.0 / 255, 173.0 / 255, 50.0 / 255, 255 / 255));
     }
 
     public void showAbsenceGraph()

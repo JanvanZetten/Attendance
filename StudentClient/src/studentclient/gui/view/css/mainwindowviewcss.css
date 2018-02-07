@@ -16,7 +16,7 @@
     -fx-border-insets: 0;
     -fx-border-style: solid inside;
     -fx-border-radius: 2;
-    -fx-padding: -1 -1 0 0;
+    -fx-padding: 0 -1 0 0;
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical
