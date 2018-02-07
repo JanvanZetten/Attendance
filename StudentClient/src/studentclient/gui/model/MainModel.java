@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
@@ -54,7 +55,7 @@ public class MainModel
     {
         Button button = (Button) event.getSource();
         button.setDisable(true);
-        PopUpBubble pub = new PopUpBubble(button, "Presence registred!");
+        PopUpBubble pub = new PopUpBubble(button, "Presence registred!", new Color(84.0 / 255, 173.0 / 255, 50.0 / 255, 255 / 255));
     }
 
     public void showAbsenceGraph()
