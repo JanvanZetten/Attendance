@@ -23,15 +23,16 @@ import studentclient.bll.TimeUtils;
  *
  * @author Asbamz
  */
-public class Schedule extends GridPane
-{
+public class Schedule extends GridPane {
+
     private final int HEADER_HEIGHT = 20;
     private final int MINUTES_IN_AN_HOUR = 60;
     private final int START_TIME;
     private final int END_TIME;
     private final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
     private final Color DOTTED_BORDER_LINE_COLOR = Color.LIGHTGREY;
-    private final Color DEFAULT_COURSE_COLOR = Color.DEEPSKYBLUE;
+    private final Color DEFAULT_COURSE_COLOR = Color.web("#3176b5");
+    private final Color DEFUALT_COURSE_TEXT_COLOR = Color.WHITE;
     private final String ID_TIME_COLUMN = "timeCol";
     private final String ID_DAY_ROW = "dayRow";
     private final String ID_COURSE = "course";
@@ -42,28 +43,24 @@ public class Schedule extends GridPane
 
     /**
      * Creates schedule between given times.
+     *
      * @param startTime from 0-24
      * @param endTime from 0-24
      */
-    public Schedule(int startTime, int endTime) throws RuntimeException
-    {
+    public Schedule(int startTime, int endTime) throws RuntimeException {
         // construct GridPane.
         super();
 
         apLst = new AnchorPane[5];
-        for (int i = 0; i < apLst.length; i++)
-        {
+        for (int i = 0; i < apLst.length; i++) {
             apLst[i] = new AnchorPane();
         }
         tu = new TimeUtils();
 
         // Set restraints.
-        if (startTime > endTime)
-        {
+        if (startTime > endTime) {
             throw new RuntimeException("Start time cannot be larger than end time!");
-        }
-        else if (startTime < 0 || startTime > 23 || endTime < 1 || endTime > 24 || startTime == endTime)
-        {
+        } else if (startTime < 0 || startTime > 23 || endTime < 1 || endTime > 24 || startTime == endTime) {
             throw new RuntimeException("Start time and end time should be within 0-24 and they cannot be the same!");
         }
 
@@ -78,8 +75,7 @@ public class Schedule extends GridPane
     /**
      * Setup GridPane and adds times and days.
      */
-    private void setupSchedule()
-    {
+    private void setupSchedule() {
         // Set gap between elements.
         this.setHgap(0.0);
         this.setVgap(1.0);
@@ -106,8 +102,7 @@ public class Schedule extends GridPane
 
         // Add all days from ScheduleDay Enum.
         int col = 1;
-        for (ScheduleDay scheduleDay : ScheduleDay.values())
-        {
+        for (ScheduleDay scheduleDay : ScheduleDay.values()) {
             // Add day to GridPane/this.
             sp = schemeElement(scheduleDay.getDay());
             sp.setId(ID_DAY_ROW);
@@ -120,12 +115,10 @@ public class Schedule extends GridPane
             StackPane element;
 
             // Insert empty panes for the rest of the day.
-            while (cursor < END_TIME * MINUTES_IN_AN_HOUR)
-            {
+            while (cursor < END_TIME * MINUTES_IN_AN_HOUR) {
                 int nextPivot = MINUTES_IN_AN_HOUR - (cursor % MINUTES_IN_AN_HOUR);
                 element = schemeElement("", nextPivot * 1.0);
-                if (cursor % MINUTES_IN_AN_HOUR == 0)
-                {
+                if (cursor % MINUTES_IN_AN_HOUR == 0) {
                     element.setStyle(element.getStyle() + "; -fx-border-color: " + DOTTED_BORDER_LINE_COLOR.toString().split("x")[1].substring(0, 6) + ";" + "-fx-border-style: dotted hidden hidden hidden;");
                 }
                 courseBox.getChildren().add(element);
@@ -149,8 +142,7 @@ public class Schedule extends GridPane
         // Add a VBox with all the whole hours.
         VBox time = new VBox();
         time.setId(ID_TIME_COLUMN);
-        for (int i = START_TIME; i < END_TIME; i++)
-        {
+        for (int i = START_TIME; i < END_TIME; i++) {
             StackPane element = schemeElement(i + ":00", MINUTES_IN_AN_HOUR * 1.0);
             element.setAlignment(Pos.TOP_CENTER);
             element.setStyle(element.getStyle() + "; -fx-border-color: " + DOTTED_BORDER_LINE_COLOR.toString().split("x")[1].substring(0, 6) + ";" + "-fx-border-style: dotted hidden hidden hidden;");
@@ -161,22 +153,18 @@ public class Schedule extends GridPane
 
     /**
      * Adds courses to schedule.
+     *
      * @param courses
      */
-    public void setupCourses(List<ScheduleItem> courses)
-    {
+    public void setupCourses(List<ScheduleItem> courses) {
         List<Node> toRemove = new ArrayList<>();
-        for (int i = 0; i < apLst.length; i++)
-        {
+        for (int i = 0; i < apLst.length; i++) {
             toRemove.clear();
-            for (int j = 0; j < apLst[i].getChildren().size(); j++)
-            {
-                if (apLst[i].getChildren().get(j).getId() == null)
-                {
+            for (int j = 0; j < apLst[i].getChildren().size(); j++) {
+                if (apLst[i].getChildren().get(j).getId() == null) {
                     continue;
                 }
-                if (apLst[i].getChildren().get(j).getId().equalsIgnoreCase(ID_COURSE))
-                {
+                if (apLst[i].getChildren().get(j).getId().equalsIgnoreCase(ID_COURSE)) {
                     toRemove.add(apLst[i].getChildren().get(j));
                 }
             }
@@ -188,67 +176,51 @@ public class Schedule extends GridPane
 
         int col = 1;
         // Run through all days.
-        for (ScheduleDay day : ScheduleDay.values())
-        {
+        for (ScheduleDay day : ScheduleDay.values()) {
             // Set cursor.
             StackPane element;
 
             // Check through all courses.
-            for (ScheduleItem course : courses)
-            {
+            for (ScheduleItem course : courses) {
                 // If the course is on current day.
-                if (course.getScheduleDay() == day)
-                {
+                if (course.getScheduleDay() == day) {
                     // Do nothing in case the course is before given start time.
-                    if (START_TIME * MINUTES_IN_AN_HOUR > course.getEndTime())
-                    {
+                    if (START_TIME * MINUTES_IN_AN_HOUR > course.getEndTime()) {
                         // DO-NOTHING.
-                    }
-                    else
-                    {
+                    } else {
                         int start;
                         int end;
                         // If the start time is before the given start time. Print rest of course.
-                        if (course.getStartTime() < START_TIME * MINUTES_IN_AN_HOUR)
-                        {
+                        if (course.getStartTime() < START_TIME * MINUTES_IN_AN_HOUR) {
                             start = START_TIME * MINUTES_IN_AN_HOUR < course.getStartTime() ? course.getStartTime() : START_TIME * MINUTES_IN_AN_HOUR;
                             end = END_TIME * MINUTES_IN_AN_HOUR > course.getEndTime() ? course.getEndTime() : END_TIME * MINUTES_IN_AN_HOUR;
-                        }
-                        // If the course is within given time.
-                        else if (course.getEndTime() < END_TIME * MINUTES_IN_AN_HOUR)
-                        {
+                        } // If the course is within given time.
+                        else if (course.getEndTime() < END_TIME * MINUTES_IN_AN_HOUR) {
                             start = START_TIME * MINUTES_IN_AN_HOUR < course.getStartTime() ? course.getStartTime() : START_TIME * MINUTES_IN_AN_HOUR;
                             end = END_TIME * MINUTES_IN_AN_HOUR > course.getEndTime() ? course.getEndTime() : END_TIME * MINUTES_IN_AN_HOUR;
-                        }
-                        else
-                        {
+                        } else {
                             continue;
                         }
 
                         // Insert course.
                         String courseTxt = course.getCourse().getName();
                         int height = end - start;
-                        if (height >= 60)
-                        {
+                        if (height >= 60) {
                             courseTxt += "\n" + course.getClassRoom().getName();
                         }
-                        if (height >= 80)
-                        {
+                        if (height >= 80) {
                             courseTxt += "\n" + course.getTeacher();
                         }
-                        if (height >= 100)
-                        {
+                        if (height >= 100) {
                             courseTxt = tu.min2MinHourFormat(course.getStartTime()) + " - " + tu.min2MinHourFormat(course.getEndTime()) + "\n" + courseTxt;
                         }
-                        if (height >= 120)
-                        {
+                        if (height >= 120) {
                             courseTxt += "\n" + (course.getNote() != null ? (course.getNote().length() > 0 ? course.getNote() : "") : "");
                         }
-                        element = schemeElement(courseTxt, height * 1.0, DEFAULT_COURSE_COLOR);
+                        element = schemeElement(courseTxt, height * 1.0, DEFAULT_COURSE_COLOR, true);
                         element.setId(ID_COURSE);
 
-                        if ((start - (START_TIME * MINUTES_IN_AN_HOUR)) % MINUTES_IN_AN_HOUR == 0)
-                        {
+                        if ((start - (START_TIME * MINUTES_IN_AN_HOUR)) % MINUTES_IN_AN_HOUR == 0) {
                             element.setStyle(element.getStyle()
                                     + "; -fx-border-color: "
                                     + DEFAULT_BACKGROUND_COLOR.toString().split("x")[1].substring(0, 6)
@@ -256,9 +228,7 @@ public class Schedule extends GridPane
                                     + DOTTED_BORDER_LINE_COLOR.toString().split("x")[1].substring(0, 6)
                                     + ";"
                                     + "-fx-border-style: solid, dotted hidden hidden hidden;");
-                        }
-                        else
-                        {
+                        } else {
                             element.setStyle(element.getStyle()
                                     + "; -fx-border-color: "
                                     + DEFAULT_BACKGROUND_COLOR.toString().split("x")[1].substring(0, 6)
@@ -281,59 +251,61 @@ public class Schedule extends GridPane
     /**
      * Creates a StackPane with a white background. Adds a label to the
      * StackPane with given text.
+     *
      * @param text
      * @return
      */
-    private StackPane schemeElement(String text)
-    {
-        return schemeElement(text, null, DEFAULT_BACKGROUND_COLOR);
+    private StackPane schemeElement(String text) {
+        return schemeElement(text, null, DEFAULT_BACKGROUND_COLOR, false);
     }
 
     /**
      * Creates a StackPane with given color. Adds a label to the StackPane with
      * given text.
+     *
      * @param text
      * @param color
      * @return
      */
-    private StackPane schemeElement(String text, Color color)
-    {
-        return schemeElement(text, null, color);
+    private StackPane schemeElement(String text, Color color) {
+        return schemeElement(text, null, color, false);
     }
 
     /**
      * Creates a StackPane with given height and a white background. Adds a
      * label to the StackPane with given text.
+     *
      * @param text
      * @param height
      * @return
      */
-    private StackPane schemeElement(String text, Double height)
-    {
-        return schemeElement(text, height, DEFAULT_BACKGROUND_COLOR);
+    private StackPane schemeElement(String text, Double height) {
+        return schemeElement(text, height, DEFAULT_BACKGROUND_COLOR, false);
     }
 
     /**
      * Creates a StackPane with given height and color. Adds a label to the
      * StackPane with given text.
+     *
      * @param text
      * @param height
      * @param color
      * @return
      */
-    private StackPane schemeElement(String text, Double height, Color color)
-    {
+    private StackPane schemeElement(String text, Double height, Color color, boolean WhiteText) {
         StackPane sp = new StackPane();
         sp.setStyle("-fx-background-color: #" + color.toString().split("x")[1].substring(0, 6));
 
-        if (height != null)
-        {
+        if (height != null) {
             sp.setMinHeight(height);
             sp.setPrefHeight(height);
             sp.setMaxHeight(height);
         }
 
         Label lbl = new Label(text);
+        if (WhiteText){
+            lbl.setTextFill(DEFUALT_COURSE_TEXT_COLOR);
+        }
         lbl.setTextAlignment(TextAlignment.CENTER);
         sp.getChildren().add(lbl);
         return sp;

@@ -90,3 +90,8 @@ $RECYCLE.BIN/
 /JavaFXPreloader/nbproject/private/
 /StudentClient/nbproject/private/
 /TeacherClient/nbproject/private/
+
+
+#encrption jar
+!/StudentClient/lib/jasypt-1.9.2.jar
+!/StudentClient/libjasypt-1.9.2.jar
