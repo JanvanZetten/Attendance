@@ -9,3 +9,10 @@
 }
 
 
+.button:pressed{
+    -fx-background-color: #3176b5;
+}
+
+.button{
+    -fx-background-color: #46a2f8;
+}
