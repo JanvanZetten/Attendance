@@ -20,9 +20,9 @@
 
 .check-box .box {
 
--fx-background-color: white;
+-fx-background-color: #d9d9d9;
 -fx-border-color:#6c6c6c;
--fx-border-width: 0.5;
+-fx-border-width: 0.3;
 -fx-border-radius:3px; 
 
 }
@@ -30,13 +30,12 @@
 .check-box:selected .mark {
 
 -fx-background-color: white;
--fx-shape: "M 731 169 L 402 659 L 263 521 C 199.901 464.531 100.418 564.053 150 621 L 359 836 C 376.192 852.667 394.917 860.261 415.057 859.475 C 432.054 858.811 451.62 857.146 468 837 L 872 239 C 916.451 172.732 798.377 73.133 731 169 Z";
+-fx-shape: "M731,169L402,659L263,521C199.901,464.531 100.418,564.053 150,621L359,836C376.192,852.667 394.917,860.261 415.057,859.475C432.054,858.811 451.62,857.146 468,837L872,239C916.451,172.732 798.377,73.133 731,169Z";
 
 
 }
 
 .check-box:selected .box {
-
 -fx-background-color: #46a2f8;
 }
 
