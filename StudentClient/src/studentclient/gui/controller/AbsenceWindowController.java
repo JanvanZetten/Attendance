@@ -39,9 +39,10 @@ public class AbsenceWindowController implements Initializable {
         series1.getData().add(new XYChart.Data(sco, 20));
         series1.getData().add(new XYChart.Data(sde, 5));
         series1.getData().add(new XYChart.Data(ito, 35.5));
-        series1.getData().add(new XYChart.Data(dbos, 10.2));   
+        series1.getData().add(new XYChart.Data(dbos, 10.2)); 
         
         absenceChart.getData().add(series1);
+        absenceChart.getYAxis().setLabel("Absence in percentage");
     }    
     
 }
