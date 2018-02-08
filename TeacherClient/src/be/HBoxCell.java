@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -38,12 +37,10 @@ public class HBoxCell extends HBox {
      *
      * @param labelText
      * @param buttonText1
-     * @param fillerText
      * @param buttonText2
-     * @param movie
-     * @param mwm
+     * @param sentClass
      */
-    public HBoxCell(String labelText, String buttonText1, String buttonText2, Class sentClass) {
+    public HBoxCell(String labelText, Class sentClass) {
         super();
 
         label.setText(labelText);
@@ -72,9 +69,8 @@ public class HBoxCell extends HBox {
         label.setFont(Font.font(29));
         label.setTextFill(Paint.valueOf("gray"));
         label.setAlignment(Pos.CENTER_LEFT);
-        //label.setBackground(purplebackground);
 
-        button1.setText(buttonText1);
+        button1.setText("Absence");
         button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -94,7 +90,7 @@ public class HBoxCell extends HBox {
         });
 
 
-        button2.setText(buttonText2);
+        button2.setText("Schedule");
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

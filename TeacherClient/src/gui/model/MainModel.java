@@ -5,7 +5,6 @@
  */
 package gui.model;
 
-import be.Student;
 import be.Class;
 import be.HBoxCell;
 import data.MockData;
@@ -38,12 +37,13 @@ public class MainModel {
 
         for (int i = 0; i < classes.size(); i++)
         {
-            tbl.add(new HBoxCell(classes.get(i).getName(), "Absence", "Schedule", classes.get(i)));
+            tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i)));
         }
 
         ObservableList<HBoxCell> ol = FXCollections.observableArrayList();
         ol.addAll(tbl);
         listviewClasses.setItems(ol);
     }
+    
     
 }
