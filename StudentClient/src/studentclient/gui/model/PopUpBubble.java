@@ -93,11 +93,13 @@ public class PopUpBubble
         show();
         addListeners();
 
+        // Animations
         FadeTransition ft = new FadeTransition(Duration.millis(TRANSITION_TIME), vBox);
         ft.setFromValue(0.1);
         ft.setToValue(1.0);
         ft.play();
 
+        // Time showing
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(TIME_SHOWN), (event) ->
         {
@@ -111,12 +113,14 @@ public class PopUpBubble
      */
     public void remove()
     {
+        // Animations
         FadeTransition ft = new FadeTransition(Duration.millis(TRANSITION_TIME), vBox);
         ft.setFromValue(1.0);
         ft.setToValue(0.1);
         ft.play();
         ft.setOnFinished((event) ->
         {
+            // Remove after animation
             popup.hide();
             popup = null;
 

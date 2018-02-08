@@ -6,6 +6,14 @@
     -fx-font-family: "Helvetica Neue";
 }
 
+.button:hover {
+    -fx-cursor: hand;
+}
+
+#button:hover {
+    -fx-cursor: hand;
+}
+
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }

@@ -7,6 +7,7 @@ package gui.model;
 
 import be.Class;
 import be.HBoxCell;
+import data.CurrentData;
 import data.MockData;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,29 +21,40 @@ import javafx.scene.control.ListView;
  */
 public class MainModel {
     
-    private MockData data;
+    private MockData mData;
+    private static CurrentData instance;
+    private CurrentData cData;
 
     public void createMockData() {
-        data = new MockData();
-        data.createMockData();
+        mData = new MockData();
+        mData.createMockData();
+        currentData();
+        cData = instance;        
         
-        System.out.println(data.getAlex());
-        System.out.println(data.getAsbjørn());
-        System.out.println(data.getJan());
+        System.out.println(mData.getAlex());
+        System.out.println(mData.getAsbjørn());
+        System.out.println(mData.getJan());
     }
 
     public void setClassList(ListView<HBoxCell> listviewClasses) {
         List<HBoxCell> tbl = new ArrayList<>();
-        List<Class> classes = data.getListAllClasses();
+        List<Class> classes = mData.getListAllClasses();
 
         for (int i = 0; i < classes.size(); i++)
         {
-            tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i)));
+            tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), cData));
         }
 
         ObservableList<HBoxCell> ol = FXCollections.observableArrayList();
         ol.addAll(tbl);
         listviewClasses.setItems(ol);
+    }
+
+    private CurrentData currentData() {
+        if (instance == null) {
+            instance = new CurrentData();
+        }
+        return instance;
     }
     
     

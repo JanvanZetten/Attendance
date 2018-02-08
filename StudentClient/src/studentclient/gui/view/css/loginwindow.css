@@ -17,6 +17,14 @@
     -fx-background-color: #46a2f8;
 }
 
+.button:hover {
+    -fx-cursor: hand;
+}
+
+#button:hover {
+    -fx-cursor: hand;
+}
+
 
 .check-box .box {
 
