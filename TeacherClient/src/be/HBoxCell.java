@@ -1,20 +1,18 @@
 package be;
 
+import data.CurrentData;
+import gui.controller.AbsenceViewController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Paint;
@@ -31,6 +29,7 @@ public class HBoxCell extends HBox {
     private Button button1 = new Button();
     private Label filler = new Label();
     private Button button2 = new Button();
+    private Label middleString = new Label();
 
     /**
      * Creates HBox from super class. Sets JavaFX Nodes.
@@ -40,7 +39,7 @@ public class HBoxCell extends HBox {
      * @param buttonText2
      * @param sentClass
      */
-    public HBoxCell(String labelText, Class sentClass) {
+    public HBoxCell(String labelText, Class sentClass, CurrentData cData) {
         super();
 
         label.setText(labelText);
@@ -52,23 +51,13 @@ public class HBoxCell extends HBox {
         HBox.setHgrow(button2, Priority.ALWAYS);
 
         //styling
-        Background bluebackground = new Background(new BackgroundFill(Paint.valueOf("#46a2f8"), new CornerRadii(5), Insets.EMPTY));
-        Background purplebackground = new Background(new BackgroundFill(Paint.valueOf("#0d264d"), CornerRadii.EMPTY, Insets.EMPTY));
-
-        button1.setFont(Font.font("Helvetica Neue"));
-        button1.setFont(Font.font(18));
-        button1.setTextFill(Paint.valueOf("White"));
-        button1.setBackground(bluebackground);
-
-        button2.setFont(Font.font("Helvetica Neue"));
-        button2.setFont(Font.font(18));
-        button2.setTextFill(Paint.valueOf("White"));
-        button2.setBackground(bluebackground);
-
+        
         label.setFont(Font.font("Helvetica Neue"));
         label.setFont(Font.font(29));
         label.setTextFill(Paint.valueOf("gray"));
         label.setAlignment(Pos.CENTER_LEFT);
+        
+        middleString.setText(" ");
 
         button1.setText("Absence");
         button1.setOnAction(new EventHandler<ActionEvent>() {
@@ -82,7 +71,12 @@ public class HBoxCell extends HBox {
                     Scene scene = new Scene(root);
                     newStage.setTitle("Absence in " + sentClass.getName());
                     newStage.setScene(scene);
+                    
+                    AbsenceViewController cont = fxLoader.getController();
+                    cont.setCData(cData);
+                    
                     newStage.showAndWait();
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(HBoxCell.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -109,7 +103,7 @@ public class HBoxCell extends HBox {
             }
         });
 
-        this.getChildren().addAll(label, button1, button2);
+        this.getChildren().addAll(label, button1, middleString, button2);
     }
 
 }
