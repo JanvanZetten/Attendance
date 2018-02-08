@@ -5,6 +5,9 @@
  */
 package studentclient.gui.model;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
@@ -15,7 +18,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.Font;
 import javafx.stage.Popup;
+import javafx.util.Duration;
 
 /**
  *
@@ -23,7 +28,13 @@ import javafx.stage.Popup;
  */
 public class PopUpBubble
 {
+    private final double TRANSITION_TIME = 500;
+    private final double TIME_SHOWN = 2000;
+    private final Color BORDER_COLOR = new Color(84.0 / 255.0, 173.0 / 255.0, 50.0 / 255.0, 255.0 / 255.0);
+    private final Color TEXT_COLOR = new Color(255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0);
+
     private Popup popup = new Popup();
+    private VBox vBox = new VBox();
     private Node ownerNode;
     private Bounds boundsInScene;
 
@@ -37,20 +48,20 @@ public class PopUpBubble
      * Makes a popup text message above given node.
      * @param ownerNode node to bind popup to.
      * @param text text to write in label.
-     * @param autoHide rather or not the popup should hide automatically.
      * @param background color of background.
      */
-    public PopUpBubble(Node ownerNode, String text, boolean autoHide, Color background)
+    public PopUpBubble(Node ownerNode, String text, Color background)
     {
         this.ownerNode = ownerNode;
 
-        VBox vBox = new VBox();
         vBox.setSpacing(-1.0);
         vBox.setAlignment(Pos.CENTER);
 
         StackPane sp = new StackPane();
-        sp.setStyle("-fx-padding: 5; -fx-background-color: #" + background.toString().split("x")[1].substring(0, 6) + "; -fx-background-radius: 10; -fx-border-color: #000000; -fx-border-radius: 10;");
+        sp.setStyle("-fx-padding: 5; -fx-background-color: #" + background.toString().split("x")[1].substring(0, 6) + "; -fx-background-radius: 2; -fx-border-color: #" + BORDER_COLOR.toString().split("x")[1].substring(0, 6) + "; -fx-border-radius: 10;");
         Label lbl = new Label(text);
+        lbl.setTextFill(TEXT_COLOR);
+        lbl.setFont(new Font(18.0));
         sp.getChildren().add(lbl);
         vBox.getChildren().add(sp);
 
@@ -60,7 +71,7 @@ public class PopUpBubble
         {
             0.0, 0.0, 12.0, 0.0, 6.0, 6.0
         });
-        triangle.setFill(new Color(67.0 / 255.0, 67.0 / 255.0, 67.0 / 255.0, 255.0 / 255.0));
+        triangle.setFill(BORDER_COLOR);
 
         // Trangle merging to background.
         Polygon triangleTop = new Polygon();
@@ -77,17 +88,22 @@ public class PopUpBubble
         vBox.getChildren().add(sp);
 
         popup.getContent().add(vBox);
-        popup.setAutoHide(autoHide);
+        popup.setAutoHide(false);
 
         show();
         addListeners();
 
-        popup.setOnAutoHide((event) ->
-        {
-            popup = null;
+        FadeTransition ft = new FadeTransition(Duration.millis(TRANSITION_TIME), vBox);
+        ft.setFromValue(0.1);
+        ft.setToValue(1.0);
+        ft.play();
 
-            removeListeners();
-        });
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(TIME_SHOWN), (event) ->
+        {
+            remove();
+        }));
+        timeline.play();
     }
 
     /**
@@ -95,10 +111,17 @@ public class PopUpBubble
      */
     public void remove()
     {
-        popup.hide();
-        popup = null;
+        FadeTransition ft = new FadeTransition(Duration.millis(TRANSITION_TIME), vBox);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.1);
+        ft.play();
+        ft.setOnFinished((event) ->
+        {
+            popup.hide();
+            popup = null;
 
-        removeListeners();
+            removeListeners();
+        });
     }
 
     /**
