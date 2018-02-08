@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import studentclient.be.UserOptions;
 
 /**
  *
@@ -50,7 +51,7 @@ public class StudentClientStart extends Application
 
     
     private boolean LoginIsRemember() {
-        return false;
+        return new UserOptions().getRememberMe();
     }
 
 }
