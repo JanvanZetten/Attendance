@@ -6,21 +6,16 @@
 package studentclient.gui.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import studentclient.be.ScheduleItem;
-import studentclient.be.ScheduleDay;
-import studentclient.be.SchoolClass;
 import studentclient.gui.model.MainModel;
-import studentclient.gui.model.Schedule;
 
 /**
  * FXML Controller class

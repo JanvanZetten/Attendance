@@ -30,8 +30,8 @@ public class PopUpBubble
 {
     private final double TRANSITION_TIME = 500;
     private final double TIME_SHOWN = 2000;
-    private final Color BORDER_COLOR = new Color(84.0 / 255.0, 173.0 / 255.0, 50.0 / 255.0, 255.0 / 255.0);
-    private final Color TEXT_COLOR = new Color(255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0, 255.0 / 255.0);
+    private final Color BORDER_COLOR = Color.web("#54AD32");
+    private final Color TEXT_COLOR = Color.WHITE;
 
     private Popup popup = new Popup();
     private VBox vBox = new VBox();

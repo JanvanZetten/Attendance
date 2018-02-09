@@ -11,23 +11,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-import javafx.geometry.NodeOrientation;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import studentclient.be.ScheduleItem;
 
@@ -63,7 +51,7 @@ public class MainModel
     {
         Button button = (Button) event.getSource();
         button.setDisable(true);
-        PopUpBubble pub = new PopUpBubble(button, "Presence registred!", new Color(84.0 / 255.0, 173.0 / 255.0, 50.0 / 255.0, 255.0 / 255.0));
+        PopUpBubble pub = new PopUpBubble(button, "Presence registred!", Color.web("#54AD32"));
     }
 
     public void showAbsenceGraph()
