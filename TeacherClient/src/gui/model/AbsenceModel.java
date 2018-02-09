@@ -42,7 +42,9 @@ public class AbsenceModel {
                 }
             }
         }
-        
+        listviewStudents.setItems(ol);
+        for (Student student : ol) {
+        }
     }
 
     private void setBarChart(BarChart<?, ?> barchartAbsence) {
