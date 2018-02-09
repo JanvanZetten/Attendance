@@ -33,6 +33,7 @@ public class AbsenceController implements Initializable {
     private Label labelClass;
     
     private AbsenceModel model;
+    private Student selectedStudent;
 
     /**
      * Initializes the controller class.
@@ -49,7 +50,8 @@ public class AbsenceController implements Initializable {
     }
 
     private void studentSelected(MouseEvent event) {
-        if (listviewStudents.getSelectionModel().getSelectedItem() != null) {
+        if (listviewStudents.getSelectionModel().getSelectedItem() != null && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem()) {
+            selectedStudent = listviewStudents.getSelectionModel().getSelectedItem();
             System.out.println(listviewStudents.getSelectionModel().getSelectedItem());
             
         }
