@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data;
+package teacherclient.data;
 
-import be.Student;
-import be.Class;
+import teacherclient.be.Student;
+import teacherclient.be.Class;
 import java.util.ArrayList;
 import java.util.List;
 

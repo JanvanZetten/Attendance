@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.model;
+package teacherclient.gui.model;
 
-import be.Student;
-import data.CurrentData;
-import data.MockData;
-import java.util.ArrayList;
+import teacherclient.be.Student;
+import teacherclient.data.CurrentData;
+import teacherclient.data.MockData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  *
@@ -36,7 +34,7 @@ public class AbsenceModel {
     private void setStudentList(ListView<Student> listviewStudents) {
         ObservableList<Student> ol = FXCollections.observableArrayList();
         for (Student student : mData.getListAllStudents()) {
-            for (be.Class sClass : student.getClasses()) {
+            for (teacherclient.be.Class sClass : student.getClasses()) {
                 if (sClass.getName().equals(cData.getCurrentClass().getName())) {
                     ol.add(student);
                 }

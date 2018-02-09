@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.controller;
+package teacherclient.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +56,7 @@ public class LoginController implements Initializable {
         Stage stage = (Stage) button.getScene().getWindow();
         
         try {
-            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/gui/view/MainView.fxml"));
+            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/MainView.fxml"));
             Parent root = fxLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package teacherclient.main;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -22,7 +22,7 @@ public class TeacherClientStart extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/gui/view/LoginWindow.fxml"));
+        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/LoginWindow.fxml"));
         Parent root = fxLoader.load();
         scene = new Scene(root);
         stage.setScene(scene);

@@ -1,7 +1,7 @@
-package gui.controller;
+package teacherclient.gui.controller;
 
-import data.HBoxCell;
-import gui.model.MainModel;
+import teacherclient.data.HBoxCell;
+import teacherclient.gui.model.MainModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

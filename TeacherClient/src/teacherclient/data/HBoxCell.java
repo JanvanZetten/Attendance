@@ -1,8 +1,7 @@
-package data;
+package teacherclient.data;
 
-import be.Class;
-import data.CurrentData;
-import gui.controller.AbsenceController;
+import teacherclient.be.Class;
+import teacherclient.gui.controller.AbsenceController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +43,7 @@ public class HBoxCell extends HBox {
         super();
 
         label.setText(labelText);
-        label.setMaxWidth(100);
+        label.setMaxWidth(200);
         button1.setMaxWidth(Double.MAX_VALUE);
         button2.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(label, Priority.ALWAYS);
@@ -67,7 +66,7 @@ public class HBoxCell extends HBox {
                 try {
                     Stage newStage = new Stage();
                     newStage.initModality(Modality.APPLICATION_MODAL);
-                    FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/gui/view/AbsenceView.fxml"));
+                    FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/AbsenceView.fxml"));
                     Parent root = fxLoader.load();
                     Scene scene = new Scene(root);
                     newStage.setTitle("Absence in " + sentClass.getName());
@@ -93,7 +92,7 @@ public class HBoxCell extends HBox {
                 try {
                     Stage newStage = new Stage();
                     newStage.initModality(Modality.APPLICATION_MODAL);
-                    FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/gui/view/ScheduleView.fxml"));
+                    FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/ScheduleView.fxml"));
                     Parent root = fxLoader.load();
                     Scene scene = new Scene(root);
                     newStage.setTitle("Schedule for " + sentClass.getName());

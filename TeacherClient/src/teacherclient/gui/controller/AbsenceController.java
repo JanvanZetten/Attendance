@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.controller;
+package teacherclient.gui.controller;
 
-import be.Student;
-import data.CurrentData;
-import data.MockData;
-import gui.model.AbsenceModel;
+import teacherclient.be.Student;
+import teacherclient.data.CurrentData;
+import teacherclient.data.MockData;
+import teacherclient.gui.model.AbsenceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

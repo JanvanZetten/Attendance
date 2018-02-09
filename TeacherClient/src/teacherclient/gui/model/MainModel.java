@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.model;
+package teacherclient.gui.model;
 
-import be.Class;
-import data.HBoxCell;
-import data.CurrentData;
-import data.MockData;
+import teacherclient.be.Class;
+import teacherclient.data.HBoxCell;
+import teacherclient.data.CurrentData;
+import teacherclient.data.MockData;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
