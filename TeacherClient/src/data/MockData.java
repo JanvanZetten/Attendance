@@ -70,51 +70,8 @@ public class MockData {
     public List<Class> getListAllClasses() {
         return listAllClasses;
     }
-    
-    public List<Class> getListOne() {
-        return listOne;
-    }
-
-    public List<Class> getListTwo() {
-        return listTwo;
-    }
-
-    public List<Class> getListThree() {
-        return listThree;
-    }
-
-    public Class getCS2017A() {
-        return CS2017A;
-    }
-
-    public Class getCS2017B() {
-        return CS2017B;
-    }
-
-    public Class getCS2016A() {
-        return CS2016A;
-    }
-
-    public Class getCS2016B() {
-        return CS2016B;
-    }
 
     public List<Student> getListAllStudents() {
         return listAllStudents;
-    }
-    
-    public Student getAlex() {
-        return Alex;
-    }
-
-    public Student getAsbjørn() {
-        return Asbjørn;
-    }
-
-    public Student getJan() {
-        return Jan;
-    }
-    
-    
-    
+    } 
 }
