@@ -20,7 +20,7 @@
       <HBox prefHeight="530.0" prefWidth="890.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
          <children>
             <ListView fx:id="listviewStudents" focusTraversable="false" maxWidth="-Infinity" minWidth="250.0" prefHeight="500.0" prefWidth="250.0" />
-            <BarChart fx:id="barchartAbsence" maxWidth="1.7976931348623157E308" prefHeight="432.0">
+            <BarChart fx:id="barchartAbsence" maxWidth="1.7976931348623157E308" prefHeight="432.0" HBox.hgrow="ALWAYS">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
