@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -45,6 +46,14 @@ public class AbsenceController implements Initializable {
         model.setInformation(labelClass, listviewStudents, barchartAbsence, cData, mData);
         
         
+    }
+
+    @FXML
+    private void studentSelected(MouseEvent event) {
+        if (listviewStudents.getSelectionModel().getSelectedItem() != null) {
+            System.out.println(listviewStudents.getSelectionModel().getSelectedItem());
+            
+        }
     }
     
 }
