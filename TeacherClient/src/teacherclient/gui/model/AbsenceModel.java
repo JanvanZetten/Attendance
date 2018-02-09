@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
 /**
@@ -41,8 +42,18 @@ public class AbsenceModel {
             }
         }
         listviewStudents.setItems(ol);
-        for (Student student : ol) {
-        }
+        listviewStudents.setCellFactory(param -> new ListCell<Student>() {
+            @Override
+            protected void updateItem(Student item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null || item.getName()== null) {
+                    setText(null);
+                } else {
+                    setText(item.getName());
+                }
+            }
+        });
     }
 
     private void setBarChart(BarChart<?, ?> barchartAbsence) {
