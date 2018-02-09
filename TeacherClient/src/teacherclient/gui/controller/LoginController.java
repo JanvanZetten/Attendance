@@ -26,7 +26,8 @@ import javafx.stage.Stage;
  *
  * @author janvanzetten
  */
-public class LoginController implements Initializable {
+public class LoginController implements Initializable
+{
 
     @FXML
     private TextField UsernameField;
@@ -37,36 +38,43 @@ public class LoginController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         // TODO
-    }    
+    }
 
     @FXML
-    private void handleLogin(ActionEvent event) {
-        
+    private void handleLogin(ActionEvent event)
+    {
+
         //if the content is wrong
-        if (UsernameField.getText().isEmpty() && PaswordField.getText().isEmpty()){
+        if (UsernameField.getText().isEmpty() && PaswordField.getText().isEmpty())
+        {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a valid user and password", ButtonType.OK);
             alert.showAndWait();
             return;
         }
-        
+
         //open the main window
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
-        
-        try {
+
+        try
+        {
             FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/MainView.fxml"));
             Parent root = fxLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.centerOnScreen();
             stage.show();
 
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
 
         }
     }
-    
+
 }

@@ -5,7 +5,7 @@
  */
 package teacherclient.gui.model;
 
-import teacherclient.be.Class;
+import teacherclient.be.SchoolClass;
 import teacherclient.data.HBoxCell;
 import teacherclient.data.CurrentData;
 import teacherclient.data.MockData;
@@ -34,7 +34,7 @@ public class MainModel {
 
     public void setClassList(ListView<HBoxCell> listviewClasses) {
         List<HBoxCell> tbl = new ArrayList<>();
-        List<Class> classes = mData.getListAllClasses();
+        List<SchoolClass> classes = mData.getListAllClasses();
 
         for (int i = 0; i < classes.size(); i++)
         {

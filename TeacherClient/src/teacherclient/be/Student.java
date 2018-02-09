@@ -15,9 +15,9 @@ public class Student {
     
     private int id;
     private String name;
-    private List<Class> classes;
+    private List<SchoolClass> classes;
     
-    public Student (int id, String name, List<Class> classes) {
+    public Student (int id, String name, List<SchoolClass> classes) {
         this.id = id;
         this.name = name;
         this.classes = classes;
@@ -39,11 +39,11 @@ public class Student {
         this.name = name;
     }
 
-    public List<Class> getClasses() {
+    public List<SchoolClass> getClasses() {
         return classes;
     }
 
-    public void setClasses(List<Class> classes) {
+    public void setClasses(List<SchoolClass> classes) {
         this.classes = classes;
     }
 

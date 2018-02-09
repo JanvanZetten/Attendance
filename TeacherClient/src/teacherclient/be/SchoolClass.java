@@ -9,12 +9,12 @@ package teacherclient.be;
  *
  * @author alexl
  */
-public class Class {
+public class SchoolClass {
     
     private int id;
     private String name;
     
-    public Class (int id, String name) {
+    public SchoolClass (int id, String name) {
         this.id = id;
         this.name = name;
     }

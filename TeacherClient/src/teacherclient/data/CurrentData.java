@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package teacherclient.data;
-import teacherclient.be.Class;
+import teacherclient.be.SchoolClass;
 
 
 /**
@@ -13,13 +13,13 @@ import teacherclient.be.Class;
  */
 public class CurrentData {
     
-    private Class currentClass;
+    private SchoolClass currentClass;
 
-    public void setCurrentClass(Class sentClass) {
+    public void setCurrentClass(SchoolClass sentClass) {
         currentClass = sentClass;
     }
 
-    public Class getCurrentClass() {
+    public SchoolClass getCurrentClass() {
         return currentClass;
     }
     

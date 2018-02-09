@@ -35,7 +35,7 @@ public class AbsenceModel {
     private void setStudentList(ListView<Student> listviewStudents) {
         ObservableList<Student> ol = FXCollections.observableArrayList();
         for (Student student : mData.getListAllStudents()) {
-            for (teacherclient.be.Class sClass : student.getClasses()) {
+            for (teacherclient.be.SchoolClass sClass : student.getClasses()) {
                 if (sClass.getName().equals(cData.getCurrentClass().getName())) {
                     ol.add(student);
                 }
