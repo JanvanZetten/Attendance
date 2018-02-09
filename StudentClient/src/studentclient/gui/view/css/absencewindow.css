@@ -2,8 +2,16 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
+.root {
+    -fx-background-color: #FFFFFF;
+}
 
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
 }
 
 .default-color0.chart-series-line { -fx-stroke: #DB3B26; }
