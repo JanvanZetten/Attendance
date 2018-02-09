@@ -18,3 +18,17 @@ and open the template in the editor.
 .button:pressed{
     -fx-background-color: #3176b5;
 }
+
+.list-cell:even{
+    -fx-background-color: #ffffff;
+}
+
+.list-cell{
+    -fx-background-color: #d9d9d9;
+    -fx-cell-size: 50px;
+}
+
+.list-view {
+    -fx-background-insets: 0;
+    -fx-border-color: #d9d9d9;
+}
