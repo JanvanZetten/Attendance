@@ -40,7 +40,7 @@ public class HBoxCell extends HBox {
      * @param buttonText2
      * @param sentClass
      */
-    public HBoxCell(String labelText, Class sentClass, CurrentData cData) {
+    public HBoxCell(String labelText, Class sentClass, CurrentData cData, MockData mData) {
         super();
 
         label.setText(labelText);
@@ -75,7 +75,7 @@ public class HBoxCell extends HBox {
                     
                     cData.setCurrentClass(sentClass);
                     AbsenceController cont = fxLoader.getController();
-                    cont.setCData(cData);
+                    cont.setData(cData, mData);
                     
                     newStage.showAndWait();
                     

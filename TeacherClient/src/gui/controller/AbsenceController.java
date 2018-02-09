@@ -7,8 +7,9 @@ package gui.controller;
 
 import be.Student;
 import data.CurrentData;
+import data.MockData;
+import gui.model.AbsenceModel;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,24 +31,20 @@ public class AbsenceController implements Initializable {
     @FXML
     private Label labelClass;
     
-    private CurrentData cData;
-    private ArrayList studentList;
+    private AbsenceModel model;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        model = new AbsenceModel();
     }    
 
-    public void setCData(CurrentData cData) {
-        this.cData = cData;
-        labelClass.setText("Absence in " + cData.getCurrentClass().getName() + ":");
+    public void setData(CurrentData cData, MockData mData) {
+        model.setInformation(labelClass, listviewStudents, barchartAbsence, cData, mData);
         
-        for (Object object : ) {
-            
-        }
+        
     }
     
 }

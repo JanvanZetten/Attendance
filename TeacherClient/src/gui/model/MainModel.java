@@ -42,7 +42,7 @@ public class MainModel {
 
         for (int i = 0; i < classes.size(); i++)
         {
-            tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), cData));
+            tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), cData, mData));
         }
 
         ObservableList<HBoxCell> ol = FXCollections.observableArrayList();
