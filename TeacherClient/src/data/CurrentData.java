@@ -5,10 +5,24 @@
  */
 package data;
 
+import be.Class;
+
 /**
  *
  * @author alexl
  */
 public class CurrentData {
+    
+    private Class currentClass;
+
+    public void setCurrentClass(Class sentClass) {
+        currentClass = sentClass;
+    }
+
+    public Class getCurrentClass() {
+        return currentClass;
+    }
+    
+    
     
 }

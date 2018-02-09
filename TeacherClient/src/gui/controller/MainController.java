@@ -1,6 +1,6 @@
 package gui.controller;
 
-import be.HBoxCell;
+import data.HBoxCell;
 import gui.model.MainModel;
 import java.net.URL;
 import java.util.ResourceBundle;

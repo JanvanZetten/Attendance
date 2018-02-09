@@ -6,7 +6,7 @@
 package gui.model;
 
 import be.Class;
-import be.HBoxCell;
+import data.HBoxCell;
 import data.CurrentData;
 import data.MockData;
 import java.util.ArrayList;
