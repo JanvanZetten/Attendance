@@ -29,11 +29,7 @@ public class MainModel {
         mData = new MockData();
         mData.createMockData();
         currentData();
-        cData = instance;        
-        
-        System.out.println(mData.getAlex());
-        System.out.println(mData.getAsbjørn());
-        System.out.println(mData.getJan());
+        cData = instance;
     }
 
     public void setClassList(ListView<HBoxCell> listviewClasses) {

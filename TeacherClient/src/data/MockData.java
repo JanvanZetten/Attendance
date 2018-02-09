@@ -21,10 +21,10 @@ public class MockData {
     private ArrayList<Class> listTwo;
     private ArrayList<Class> listThree;
     
-    private Class SCO;
-    private Class SDE;
-    private Class ITO;
-    private Class Sløjd;
+    private Class CS2017A;
+    private Class CS2017B;
+    private Class CS2016A;
+    private Class CS2016B;
     
     private ArrayList<Student> listAllStudents;
     
@@ -33,29 +33,29 @@ public class MockData {
     private Student Jan;
     
     public void createMockData() {
-        SCO = new Class(1, "SCO");
-        SDE = new Class(2, "SDE");
-        ITO = new Class(3, "ITO");
-        Sløjd = new Class(4, "Sløjd");
+        CS2017A = new Class(1, "CS2017A");
+        CS2017B = new Class(2, "CS2017B");
+        CS2016A = new Class(3, "CS2016A");
+        CS2016B = new Class(4, "CS2016B");
         
         listAllClasses = new ArrayList<Class>();
-        listAllClasses.add(SCO);
-        listAllClasses.add(SDE);
-        listAllClasses.add(ITO);
-        listAllClasses.add(Sløjd);
+        listAllClasses.add(CS2017A);
+        listAllClasses.add(CS2017B);
+        listAllClasses.add(CS2016A);
+        listAllClasses.add(CS2016B);
         
         listOne = new ArrayList<Class>();
-        listOne.add(SCO);
-        listOne.add(ITO);
+        listOne.add(CS2017A);
+        listOne.add(CS2016A);
         
         listTwo = new ArrayList<Class>();
-        listTwo.add(SCO);
-        listTwo.add(SDE);
-        listTwo.add(ITO);
+        listTwo.add(CS2017A);
+        listTwo.add(CS2017B);
+        listTwo.add(CS2016A);
         
         listThree = new ArrayList<Class>();
-        listThree.add(SDE);
-        listThree.add(Sløjd);
+        listThree.add(CS2017B);
+        listThree.add(CS2016B);
         
         Alex = new Student(1, "Alex Tygesen", listOne);
         Asbjørn = new Student(2, "Asbjørn Mansa EtEllerAndet", listTwo);
@@ -83,20 +83,20 @@ public class MockData {
         return listThree;
     }
 
-    public Class getSCO() {
-        return SCO;
+    public Class getCS2017A() {
+        return CS2017A;
     }
 
-    public Class getSDE() {
-        return SDE;
+    public Class getCS2017B() {
+        return CS2017B;
     }
 
-    public Class getITO() {
-        return ITO;
+    public Class getCS2016A() {
+        return CS2016A;
     }
 
-    public Class getSløjd() {
-        return Sløjd;
+    public Class getCS2016B() {
+        return CS2016B;
     }
 
     public List<Student> getListAllStudents() {
