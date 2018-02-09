@@ -1,7 +1,8 @@
-package be;
+package data;
 
+import be.Class;
 import data.CurrentData;
-import gui.controller.AbsenceViewController;
+import gui.controller.AbsenceController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,7 +73,8 @@ public class HBoxCell extends HBox {
                     newStage.setTitle("Absence in " + sentClass.getName());
                     newStage.setScene(scene);
                     
-                    AbsenceViewController cont = fxLoader.getController();
+                    cData.setCurrentClass(sentClass);
+                    AbsenceController cont = fxLoader.getController();
                     cont.setCData(cData);
                     
                     newStage.showAndWait();

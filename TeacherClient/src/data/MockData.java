@@ -26,6 +26,8 @@ public class MockData {
     private Class ITO;
     private Class Sløjd;
     
+    private ArrayList<Student> listAllStudents;
+    
     private Student Alex;
     private Student Asbjørn;
     private Student Jan;
@@ -58,6 +60,11 @@ public class MockData {
         Alex = new Student(1, "Alex Tygesen", listOne);
         Asbjørn = new Student(2, "Asbjørn Mansa EtEllerAndet", listTwo);
         Jan = new Student(3, "JanvanZetten", listThree);
+        
+        listAllStudents = new ArrayList<Student>();
+        listAllStudents.add(Alex);
+        listAllStudents.add(Asbjørn);
+        listAllStudents.add(Jan);
     }
 
     public List<Class> getListAllClasses() {
@@ -92,6 +99,10 @@ public class MockData {
         return Sløjd;
     }
 
+    public List<Student> getListAllStudents() {
+        return listAllStudents;
+    }
+    
     public Student getAlex() {
         return Alex;
     }

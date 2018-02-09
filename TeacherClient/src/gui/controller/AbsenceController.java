@@ -21,7 +21,7 @@ import javafx.scene.control.ListView;
  *
  * @author alexl
  */
-public class AbsenceViewController implements Initializable {
+public class AbsenceController implements Initializable {
 
     @FXML
     private ListView<Student> listviewStudents;
@@ -38,13 +38,16 @@ public class AbsenceViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Initialize");
+        
     }    
 
     public void setCData(CurrentData cData) {
         this.cData = cData;
-        System.out.println("SetData");
+        labelClass.setText("Absence in " + cData.getCurrentClass().getName() + ":");
         
+        for (Object object : ) {
+            
+        }
     }
     
 }

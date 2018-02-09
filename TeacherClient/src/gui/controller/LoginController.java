@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  *
  * @author janvanzetten
  */
-public class LoginWindowController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
     private TextField UsernameField;

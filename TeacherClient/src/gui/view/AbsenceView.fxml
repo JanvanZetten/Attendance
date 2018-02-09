@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="gui.controller.AbsenceViewController">
+<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="gui.controller.AbsenceController">
    <children>
       <ListView fx:id="listviewStudents" focusTraversable="false" layoutX="42.0" layoutY="102.0" prefHeight="500.0" prefWidth="305.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="102.0" />
       <BarChart fx:id="barchartAbsence" layoutX="363.0" layoutY="102.0" prefHeight="500.0" prefWidth="505.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="102.0">
