@@ -34,7 +34,7 @@ public class LoginWindowController implements Initializable
     private TextField UsernameField;
     @FXML
     private PasswordField PaswordField;
-    
+
     private BllManager bll = new BllManager();
 
     /**
@@ -68,12 +68,13 @@ public class LoginWindowController implements Initializable
             Parent root = fxLoader.load();
 
             MainWindowViewController cont = fxLoader.getController();
-            
+
             cont.updateSchedule(bll.getScheduleItems());
 
             Scene scene = new Scene(root);
             stage.setResizable(true);
             stage.setScene(scene);
+            stage.centerOnScreen();
             stage.show();
 
         }

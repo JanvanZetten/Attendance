@@ -13,11 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import studentclient.be.ScheduleItem;
+import studentclient.gui.controller.AbsenceWindowController;
 
 /**
  *
@@ -56,16 +58,31 @@ public class MainModel
 
     public void showAbsenceGraph()
     {
-        try {
+        try
+        {
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/studentclient/gui/view/AbsenceWindow.fxml"));
             Parent root = fxLoader.load();
+
+            AbsenceWindowController awc = (AbsenceWindowController) fxLoader.getController();
+
+            // Some test value:
+            XYChart.Series<String, Number> series = new XYChart.Series();
+            series.getData().add(new XYChart.Data("Total", 25.1));
+            series.getData().add(new XYChart.Data("SCO", 5.0));
+            series.getData().add(new XYChart.Data("SDE", 46.1));
+            series.getData().add(new XYChart.Data("ITO", 35.5));
+            series.getData().add(new XYChart.Data("DBOS", 0.2));
+            awc.passData(series);
+
             Scene scene = new Scene(root);
             newStage.setTitle("Absence");
             newStage.setScene(scene);
             newStage.showAndWait();
-        } catch (IOException ex) {
+        }
+        catch (IOException ex)
+        {
             Logger.getLogger(MainModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
