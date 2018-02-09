@@ -9,5 +9,21 @@ and open the template in the editor.
 */
 
 .list-cell{
-    -fx-background-color: yellow;
+    -fx-text-fill: white;
+    -fx-background-color: #3176b5;
+    -fx-border-color: white;  
+    -fx-border-width: 0.3;
+    -fx-font-size: 16;
 }
+.list-cell:pressed{
+    -fx-background-color: #46a2f8;
+}
+
+.list-cell:selected{
+    -fx-background-color: #46a2f8;
+}
+
+.list-view {
+    -fx-background-insets: 0;
+}
+

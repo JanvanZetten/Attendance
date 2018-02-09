@@ -32,6 +32,6 @@
       </HBox>
    </children>
    <stylesheets>
-        <URL value="@MainCSS.css" />
+        <URL value="@AbsenceCSS.css" />
     </stylesheets>
 </AnchorPane>

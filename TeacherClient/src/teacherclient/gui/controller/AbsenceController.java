@@ -48,7 +48,6 @@ public class AbsenceController implements Initializable {
         
     }
 
-    @FXML
     private void studentSelected(MouseEvent event) {
         if (listviewStudents.getSelectionModel().getSelectedItem() != null) {
             System.out.println(listviewStudents.getSelectionModel().getSelectedItem());
