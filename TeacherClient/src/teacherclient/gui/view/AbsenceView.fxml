@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="487.0" prefWidth="811.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="teacherclient.gui.controller.AbsenceController">
+<AnchorPane id="AnchorPane" prefHeight="487.0" prefWidth="811.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="teacherclient.gui.controller.AbsenceController">
    <children>
       <Label fx:id="labelClass" layoutX="41.0" layoutY="30.0" text="Something went wrong :(" textFill="#54585e" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
          <font>
@@ -19,7 +19,7 @@
       </Label>
       <HBox prefHeight="530.0" prefWidth="890.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
          <children>
-            <ListView fx:id="listviewStudents" focusTraversable="false" maxWidth="-Infinity" minWidth="250.0" prefHeight="500.0" prefWidth="250.0" />
+            <ListView fx:id="listviewStudents" focusTraversable="false" maxWidth="-Infinity" minWidth="250.0" onMouseClicked="#studentSelected" prefHeight="500.0" prefWidth="250.0" />
             <BarChart fx:id="barchartAbsence" maxWidth="1.7976931348623157E308" prefHeight="432.0" HBox.hgrow="ALWAYS">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
