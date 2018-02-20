@@ -4,6 +4,7 @@ import teacherclient.data.HBoxCell;
 import teacherclient.gui.model.MainModel;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -28,5 +29,10 @@ public class MainController implements Initializable {
         model.createMockData();
         model.setClassList(listviewClasses);
     }    
+
+    @FXML
+    private void btnMyScheduele(ActionEvent event) {
+        //TODO open a scheduele window
+    }
     
 }

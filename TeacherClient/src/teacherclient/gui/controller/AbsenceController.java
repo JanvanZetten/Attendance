@@ -17,21 +17,23 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
  * @author alexl
  */
-public class AbsenceController implements Initializable {
+public class AbsenceController implements Initializable
+{
 
     @FXML
     private ListView<Student> listviewStudents;
     @FXML
-    private BarChart<?, ?> barchartAbsence;
-    @FXML
     private Label labelClass;
-    
+    @FXML
+    private AnchorPane chartPane;
+
     private AbsenceModel model;
     private Student selectedStudent;
 
@@ -39,22 +41,27 @@ public class AbsenceController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         model = new AbsenceModel();
-    }    
-
-    public void setData(CurrentData cData, MockData mData) {
-        model.setInformation(labelClass, listviewStudents, barchartAbsence, cData, mData);
-        
-        
     }
 
-    private void studentSelected(MouseEvent event) {
-        if (listviewStudents.getSelectionModel().getSelectedItem() != null && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem()) {
-            selectedStudent = listviewStudents.getSelectionModel().getSelectedItem();
-            System.out.println(listviewStudents.getSelectionModel().getSelectedItem());
-            
+    public void setData(CurrentData cData, MockData mData)
+    {
+        model.setInformation(labelClass, listviewStudents, chartPane, cData, mData);
+
+    }
+
+    @FXML
+    private void studentSelected(MouseEvent event)
+    {
+        {
+            if (listviewStudents.getSelectionModel().getSelectedItem() != null && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem())
+            {
+                selectedStudent = listviewStudents.getSelectionModel().getSelectedItem();
+                System.out.println(listviewStudents.getSelectionModel().getSelectedItem());
+
+            }
         }
     }
-    
 }
