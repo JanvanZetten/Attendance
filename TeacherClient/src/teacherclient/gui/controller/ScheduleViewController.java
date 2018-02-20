@@ -8,6 +8,7 @@ package teacherclient.gui.controller;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -45,5 +46,10 @@ public class ScheduleViewController implements Initializable
     public void updateSchedule(List<ScheduleItem> courses)
     {
         scheduleModel.updateSchedule(courses);
+    }
+
+    @FXML
+    private void handleScheduleCourse(ActionEvent event)
+    {
     }
 }

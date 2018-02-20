@@ -14,8 +14,9 @@ import javafx.scene.control.ListView;
  *
  * @author alexl
  */
-public class MainController implements Initializable {
-    
+public class MainController implements Initializable
+{
+
     private MainModel model;
     @FXML
     private ListView<HBoxCell> listviewClasses;
@@ -24,15 +25,17 @@ public class MainController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         model = new MainModel();
         model.createMockData();
         model.setClassList(listviewClasses);
-    }    
+    }
 
     @FXML
-    private void btnMyScheduele(ActionEvent event) {
-        //TODO open a scheduele window
+    private void btnMyScheduele(ActionEvent event)
+    {
+        model.openSchedule();
     }
-    
+
 }
