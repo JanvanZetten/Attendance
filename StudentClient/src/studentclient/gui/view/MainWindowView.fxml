@@ -11,19 +11,19 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="800.0" style="-fx-background-color: White;" styleClass="mainFxmlClass" stylesheets="@css/mainwindowviewcss.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentclient.gui.controller.MainWindowViewController">
+<AnchorPane id="AnchorPane" prefHeight="659.0" prefWidth="800.0" style="-fx-background-color: White;" styleClass="mainFxmlClass" stylesheets="@css/mainwindowviewcss.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentclient.gui.controller.MainWindowViewController">
     <children>
-        <Label layoutX="14.0" layoutY="14.0" text="Schedule:" textFill="#54585e" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <Label layoutX="14.0" layoutY="14.0" text="Schedule:" textFill="#54585e" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
             <font>
                 <Font name="Helvetica Neue Bold" size="36.0" />
             </font>
         </Label>
-        <Label fx:id="lblWeek" layoutX="408.0" layoutY="9.0" prefWidth="145.0" text="Week 10" textFill="#54585e" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="5.0">
+        <Label fx:id="lblWeek" layoutX="408.0" layoutY="9.0" prefWidth="145.0" text="Week 10" textFill="#54585e" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="30.0">
             <font>
                 <Font name="Helvetica Neue" size="36.0" />
             </font>
         </Label>
-        <Polygon id="button" fill="#46a2f8" layoutX="583.0" layoutY="41.0" onMouseReleased="#handleNextWeek" rotate="90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="-25.0" AnchorPane.topAnchor="-25.0">
+        <Polygon id="button" fill="#46a2f8" layoutX="583.0" layoutY="41.0" onMouseReleased="#handleNextWeek" rotate="90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="-25.0" AnchorPane.topAnchor="0.0">
             <points>
                 <Double fx:value="-50.0" />
                 <Double fx:value="40.0" />
@@ -33,7 +33,7 @@
                 <Double fx:value="-60.0" />
             </points>
         </Polygon>
-        <Polygon id="button" fill="#46a2f8" layoutX="380.0" layoutY="41.0" onMouseReleased="#handlePreviousWeek" rotate="-90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="-25.0">
+        <Polygon id="button" fill="#46a2f8" layoutX="380.0" layoutY="41.0" onMouseReleased="#handlePreviousWeek" rotate="-90.0" scaleX="0.4" scaleY="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="0.0">
             <points>
                 <Double fx:value="-50.0" />
                 <Double fx:value="40.0" />
@@ -65,10 +65,11 @@
                 </Button>
             </children>
         </GridPane>
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="75.0">
             <content>
                 <AnchorPane fx:id="scheduleAnchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" />
             </content>
         </ScrollPane>
+      <Label fx:id="lblUser" text="USER" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
     </children>
 </AnchorPane>

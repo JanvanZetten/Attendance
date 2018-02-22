@@ -1,7 +1,7 @@
 package studentclient.gui.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Calendar;
 import java.util.List;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -18,6 +18,7 @@ import javafx.scene.text.TextAlignment;
 import studentclient.be.ScheduleItem;
 import studentclient.be.CourseComparator;
 import studentclient.be.ScheduleDay;
+import studentclient.be.Student;
 import studentclient.bll.TimeUtils;
 
 /**
@@ -33,7 +34,12 @@ public class Schedule extends GridPane
     private final Color DEFAULT_BACKGROUND_COLOR = Color.web("#FFFFFF");
     private final Color DOTTED_BORDER_LINE_COLOR = Color.web("#D9D9D9");
     private final Color DEFAULT_COURSE_COLOR = Color.web("#3176b5");
+    private final Color DEFAULT_COURSE_ABSENCE_COLOR = Color.web("#DB3B26");
     private final Color DEFUALT_COURSE_TEXT_COLOR = Color.web("#FFFFFF");
+    private final int[] DEFAULT_DISPLAYED_CONTENT_HIGHTS =
+    {
+        60, 80, 100, 120
+    };
     private final String ID_TIME_COLUMN = "timeCol";
     private final String ID_DAY_ROW = "dayRow";
     private final String ID_COURSE = "course";
@@ -167,7 +173,7 @@ public class Schedule extends GridPane
      *
      * @param courses
      */
-    public void setupCourses(List<ScheduleItem> courses)
+    public void setupCourses(List<ScheduleItem> courses, Student student)
     {
         List<Node> toRemove = new ArrayList<>();
         for (int i = 0; i < apLst.length; i++)
@@ -200,11 +206,15 @@ public class Schedule extends GridPane
             // Check through all courses.
             for (ScheduleItem course : courses)
             {
+                int startTimeInMin = tu.minutesFromDate(course.getStartTime());
+                int endTimeInMin = tu.minutesFromDate(course.getEndTime());
+                System.out.println("Start: " + course.getStartTime() + " converted to " + startTimeInMin);
+                System.out.println("End: " + course.getEndTime() + " converted to " + endTimeInMin);
                 // If the course is on current day.
-                if (course.getScheduleDay() == day)
+                if (tu.dayFromDate(course.getStartTime()).equalsIgnoreCase(day.getDay()))
                 {
                     // Do nothing in case the course is before given start time.
-                    if (START_TIME * MINUTES_IN_AN_HOUR > course.getEndTime())
+                    if (START_TIME * MINUTES_IN_AN_HOUR > endTimeInMin)
                     {
                         // DO-NOTHING.
                     }
@@ -213,15 +223,15 @@ public class Schedule extends GridPane
                         int start;
                         int end;
                         // If the start time is before the given start time. Print rest of course.
-                        if (course.getStartTime() < START_TIME * MINUTES_IN_AN_HOUR)
+                        if (tu.minutesFromDate(course.getStartTime()) < START_TIME * MINUTES_IN_AN_HOUR)
                         {
-                            start = START_TIME * MINUTES_IN_AN_HOUR < course.getStartTime() ? course.getStartTime() : START_TIME * MINUTES_IN_AN_HOUR;
-                            end = END_TIME * MINUTES_IN_AN_HOUR > course.getEndTime() ? course.getEndTime() : END_TIME * MINUTES_IN_AN_HOUR;
+                            start = START_TIME * MINUTES_IN_AN_HOUR < startTimeInMin ? startTimeInMin : START_TIME * MINUTES_IN_AN_HOUR;
+                            end = END_TIME * MINUTES_IN_AN_HOUR > endTimeInMin ? endTimeInMin : END_TIME * MINUTES_IN_AN_HOUR;
                         } // If the course is within given time.
-                        else if (course.getEndTime() < END_TIME * MINUTES_IN_AN_HOUR)
+                        else if (endTimeInMin < END_TIME * MINUTES_IN_AN_HOUR)
                         {
-                            start = START_TIME * MINUTES_IN_AN_HOUR < course.getStartTime() ? course.getStartTime() : START_TIME * MINUTES_IN_AN_HOUR;
-                            end = END_TIME * MINUTES_IN_AN_HOUR > course.getEndTime() ? course.getEndTime() : END_TIME * MINUTES_IN_AN_HOUR;
+                            start = START_TIME * MINUTES_IN_AN_HOUR < startTimeInMin ? startTimeInMin : START_TIME * MINUTES_IN_AN_HOUR;
+                            end = END_TIME * MINUTES_IN_AN_HOUR > endTimeInMin ? endTimeInMin : END_TIME * MINUTES_IN_AN_HOUR;
                         }
                         else
                         {
@@ -231,23 +241,33 @@ public class Schedule extends GridPane
                         // Insert course.
                         String courseTxt = course.getCourse().getName();
                         int height = end - start;
-                        if (height >= 60)
+                        if (height >= DEFAULT_DISPLAYED_CONTENT_HIGHTS[0])
                         {
                             courseTxt += "\n" + course.getClassRoom().getName();
                         }
-                        if (height >= 80)
+                        if (height >= DEFAULT_DISPLAYED_CONTENT_HIGHTS[1])
                         {
                             courseTxt += "\n" + course.getTeacher();
                         }
-                        if (height >= 100)
+                        if (height >= DEFAULT_DISPLAYED_CONTENT_HIGHTS[2])
                         {
-                            courseTxt = tu.min2MinHourFormat(course.getStartTime()) + " - " + tu.min2MinHourFormat(course.getEndTime()) + "\n" + courseTxt;
+                            courseTxt = tu.minuteHourFormatFromDate(course.getStartTime()) + " - " + tu.minuteHourFormatFromDate(course.getEndTime()) + "\n" + courseTxt;
                         }
-                        if (height >= 120)
+                        if (height >= DEFAULT_DISPLAYED_CONTENT_HIGHTS[3])
                         {
                             courseTxt += "\n" + (course.getNote() != null ? (course.getNote().length() > 0 ? course.getNote() : "") : "");
                         }
-                        element = schemeElement(courseTxt, height * 1.0, DEFAULT_COURSE_COLOR, true);
+
+                        System.out.println(student);
+
+                        if (course.getAttended().contains(student) || course.getStartTime().after(Calendar.getInstance().getTime()))
+                        {
+                            element = schemeElement(courseTxt, height * 1.0, DEFAULT_COURSE_COLOR, true);
+                        }
+                        else
+                        {
+                            element = schemeElement(courseTxt, height * 1.0, DEFAULT_COURSE_ABSENCE_COLOR, true);
+                        }
                         element.setId(ID_COURSE);
 
                         if ((start - (START_TIME * MINUTES_IN_AN_HOUR)) % MINUTES_IN_AN_HOUR == 0)

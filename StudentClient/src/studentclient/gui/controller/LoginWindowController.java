@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -20,6 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import studentclient.be.Student;
 import studentclient.bll.BllManager;
 
 /**
@@ -50,39 +52,56 @@ public class LoginWindowController implements Initializable
     {
 
         //if the content is wrong
-        if (UsernameField.getText().isEmpty() && PaswordField.getText().isEmpty())
+        if (UsernameField.getText().isEmpty() || PaswordField.getText().isEmpty())
         {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a valid user and password", ButtonType.OK);
             alert.showAndWait();
             return;
         }
 
-        //open the main window
-        Button button = (Button) event.getSource();
-        Stage stage = (Stage) button.getScene().getWindow();
-
-        try
+        Student approvedUser = null;
+        for (Student student : bll.getStudents())
         {
-            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/studentclient/gui/view/MainWindowView.fxml"));
-            Parent root = fxLoader.load();
-
-            MainWindowViewController cont = fxLoader.getController();
-
-            cont.updateSchedule(bll.getScheduleItems());
-
-            Scene scene = new Scene(root);
-            stage.setResizable(true);
-            stage.setScene(scene);
-            stage.centerOnScreen();
-            stage.show();
-
+            if (student.getUsername().equalsIgnoreCase(UsernameField.getText()) && student.getPassword().equalsIgnoreCase(PaswordField.getText()))
+            {
+                approvedUser = student;
+            }
         }
-        catch (IOException ex)
+
+        if (approvedUser != null)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
+            //open the main window
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+
+            try
+            {
+                FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/studentclient/gui/view/MainWindowView.fxml"));
+                Parent root = fxLoader.load();
+
+                MainWindowViewController cont = fxLoader.getController();
+
+                cont.setUser(approvedUser);
+                cont.updateSchedule(bll.getScheduleItems());
+
+                Scene scene = new Scene(root);
+                stage.setResizable(true);
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.show();
+
+            }
+            catch (IOException ex)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "User not found", ButtonType.OK);
             alert.showAndWait();
         }
-
     }
 
 }

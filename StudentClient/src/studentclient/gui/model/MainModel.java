@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import studentclient.be.ScheduleItem;
+import studentclient.be.Student;
 import studentclient.bll.BllManager;
 import studentclient.gui.controller.AbsenceWindowController;
 
@@ -29,6 +30,7 @@ public class MainModel
 {
     private Schedule schedule;
     private BllManager bm;
+    private Student activeUser;
 
     public MainModel()
     {
@@ -47,7 +49,7 @@ public class MainModel
      */
     public void updateSchedule(List<ScheduleItem> courses)
     {
-        schedule.setupCourses(courses);
+        schedule.setupCourses(courses, activeUser);
     }
 
     public void handlePresent(ActionEvent event)
@@ -80,4 +82,13 @@ public class MainModel
         }
     }
 
+    public Student getActiveUser()
+    {
+        return activeUser;
+    }
+
+    public void setActiveUser(Student activeUser)
+    {
+        this.activeUser = activeUser;
+    }
 }

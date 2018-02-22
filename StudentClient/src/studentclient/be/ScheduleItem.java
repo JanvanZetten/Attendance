@@ -5,6 +5,10 @@
  */
 package studentclient.be;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author Asbamz
@@ -16,20 +20,20 @@ public class ScheduleItem
     private String note;
     private SchoolClass schoolClass;
     private ClassRoom classRoom;
-    private ScheduleDay scheduleDay;
-    private int startTime;
-    private int endTime;
+    private Date startTime;
+    private Date endTime;
+    private List<Student> attended;
 
-    public ScheduleItem(Course course, String teacher, String note, SchoolClass schoolClass, ClassRoom classRoom, ScheduleDay scheduleDay, int startTime, int endTime)
+    public ScheduleItem(Course course, String teacher, String note, SchoolClass schoolClass, ClassRoom classRoom, Date startTime, Date endTime)
     {
         this.course = course;
         this.teacher = teacher;
         this.note = note;
         this.schoolClass = schoolClass;
         this.classRoom = classRoom;
-        this.scheduleDay = scheduleDay;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.attended = new ArrayList();
     }
 
     public Course getCourse()
@@ -57,19 +61,23 @@ public class ScheduleItem
         return classRoom;
     }
 
-    public ScheduleDay getScheduleDay()
-    {
-        return scheduleDay;
-    }
-
-    public int getStartTime()
+    public Date getStartTime()
     {
         return startTime;
     }
 
-    public int getEndTime()
+    public Date getEndTime()
     {
         return endTime;
     }
 
+    public List<Student> getAttended()
+    {
+        return attended;
+    }
+
+    public void addParticipant(Student student)
+    {
+        attended.add(student);
+    }
 }

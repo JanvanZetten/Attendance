@@ -31,28 +31,16 @@ public class CourseComparator implements Comparator<ScheduleItem>
             return 1;
         }
 
-        // Compare on day.
-        if (o1.getScheduleDay().getValue() == o2.getScheduleDay().getValue())
+        // Compare on start time.
+        if (o1.getStartTime() == o2.getStartTime())
         {
-            // Compare on start time.
-            if (o1.getStartTime() == o2.getStartTime())
-            {
-                return 0;
-            }
-            if (o1.getStartTime() < o2.getStartTime())
-            {
-                return -1;
-            }
-            if (o1.getStartTime() > o2.getStartTime())
-            {
-                return 1;
-            }
+            return 0;
         }
-        if (o1.getScheduleDay().getValue() < o2.getScheduleDay().getValue())
+        if (o1.getStartTime().before(o2.getStartTime()))
         {
             return -1;
         }
-        if (o1.getScheduleDay().getValue() > o2.getScheduleDay().getValue())
+        if (o1.getStartTime().after(o2.getStartTime()))
         {
             return 1;
         }

@@ -8,6 +8,7 @@ package studentclient.bll;
 import java.util.List;
 import javafx.scene.chart.XYChart;
 import studentclient.be.ScheduleItem;
+import studentclient.be.Student;
 import studentclient.dal.MockDAO;
 
 /**
@@ -26,6 +27,11 @@ public class BllManager
     public XYChart.Series<String, Number> getChartSeries()
     {
         return mock.getChartSeries();
+    }
+
+    public List<Student> getStudents()
+    {
+        return mock.getStudents();
     }
 
 }

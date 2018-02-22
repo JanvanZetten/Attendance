@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import studentclient.be.ScheduleItem;
+import studentclient.be.Student;
 import studentclient.gui.model.MainModel;
 
 /**
@@ -25,7 +26,10 @@ import studentclient.gui.model.MainModel;
 public class MainWindowViewController implements Initializable
 {
     private final int WEEKS_IN_A_YEAR = 52;
+    private final String PRETEXT_USER = "Logged in as ";
 
+    @FXML
+    private Label lblUser;
     @FXML
     private Label lblWeek;
     @FXML
@@ -44,6 +48,12 @@ public class MainWindowViewController implements Initializable
         scheduleAnchor.getChildren().add(mainModel.getSchedule());
         mainModel.getSchedule().prefWidthProperty().bind(scheduleAnchor.widthProperty());
         mainModel.getSchedule().prefHeightProperty().bind(scheduleAnchor.heightProperty());
+    }
+
+    void setUser(Student student)
+    {
+        mainModel.setActiveUser(student);
+        lblUser.setText(PRETEXT_USER + student.getName());
     }
 
     /**
@@ -97,5 +107,4 @@ public class MainWindowViewController implements Initializable
 
         lblWeek.setText("Week " + weekNumber);
     }
-
 }

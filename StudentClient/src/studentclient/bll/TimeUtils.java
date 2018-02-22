@@ -5,6 +5,11 @@
  */
 package studentclient.bll;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
  * @author Asbamz
@@ -12,13 +17,22 @@ package studentclient.bll;
 public class TimeUtils
 {
     private final int MINUTES_IN_AN_HOUR = 60;
+    private final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
+    private final String DAY_FORMAT = "EEEE";
+    private final String HOUR_MINUTE_FORMAT = "HH:mm";
+    private final Calendar cal;
+
+    public TimeUtils()
+    {
+        cal = Calendar.getInstance();
+    }
 
     /**
      * Converts Integer to hour:minutes format (00:00).
      * @param minutes Integer.
      * @return
      */
-    public String min2MinHourFormat(int minutes)
+    public String minuteHourFormatFromMinutes(int minutes)
     {
         int min;
         int hour;
@@ -34,5 +48,42 @@ public class TimeUtils
         }
 
         return (hour < 10 ? "0" + hour : hour) + ":" + (min < 10 ? "0" + min : min);
+    }
+
+    public String minuteHourFormatFromDate(Date date)
+    {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(HOUR_MINUTE_FORMAT);
+        return simpleDateFormat.format(date);
+    }
+
+    public Date dateFromString(String stringDate) throws BLLException
+    {
+        Date date;
+        SimpleDateFormat ft = new SimpleDateFormat(DATE_FORMAT);
+
+        try
+        {
+            date = ft.parse(stringDate);
+        }
+        catch (ParseException ex)
+        {
+            throw new BLLException(ex.getMessage(), ex.getCause());
+        }
+
+        return date;
+    }
+
+    public String dayFromDate(Date date)
+    {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DAY_FORMAT);
+        return simpleDateFormat.format(date);
+    }
+
+    public int minutesFromDate(Date date)
+    {
+        cal.setTime(date);
+        int hours = cal.get(Calendar.HOUR_OF_DAY);
+        int min = cal.get(Calendar.MINUTE);
+        return (hours * MINUTES_IN_AN_HOUR) + min;
     }
 }
