@@ -1,7 +1,6 @@
 package teacherclient.gui.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -31,10 +30,10 @@ public class Schedule extends GridPane
     private final int MINUTES_IN_AN_HOUR = 60;
     private final int START_TIME;
     private final int END_TIME;
-    private final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
-    private final Color DOTTED_BORDER_LINE_COLOR = Color.LIGHTGREY;
+    private final Color DEFAULT_BACKGROUND_COLOR = Color.web("#FFFFFF");
+    private final Color DOTTED_BORDER_LINE_COLOR = Color.web("#D9D9D9");
     private final Color DEFAULT_COURSE_COLOR = Color.web("#3176b5");
-    private final Color DEFUALT_COURSE_TEXT_COLOR = Color.WHITE;
+    private final Color DEFUALT_COURSE_TEXT_COLOR = Color.web("#FFFFFF");
     private final String ID_TIME_COLUMN = "timeCol";
     private final String ID_DAY_ROW = "dayRow";
     private final String ID_COURSE = "course";

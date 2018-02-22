@@ -10,7 +10,6 @@ import teacherclient.data.CurrentData;
 import teacherclient.data.MockData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -34,14 +33,7 @@ public class AbsenceModel
         labelClass.setText("Absence in " + cData.getCurrentClass().getName() + ":");
         setStudentList(listviewStudents);
 
-        // Some test value:
-        XYChart.Series<String, Number> series = new XYChart.Series();
-        series.getData().add(new XYChart.Data("Total", 25.1));
-        series.getData().add(new XYChart.Data("SCO", 5.0));
-        series.getData().add(new XYChart.Data("SDE", 46.1));
-        series.getData().add(new XYChart.Data("ITO", 35.5));
-        series.getData().add(new XYChart.Data("DBOS", 0.2));
-        ag = new AbsenceGraph(chartPane, series);
+        ag = new AbsenceGraph(chartPane, mData.getChartSeries());
     }
 
     private void setStudentList(ListView<Student> listviewStudents)

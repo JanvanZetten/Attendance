@@ -9,6 +9,7 @@ import teacherclient.be.Student;
 import teacherclient.be.SchoolClass;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.chart.XYChart;
 import teacherclient.be.ClassRoom;
 import teacherclient.be.Course;
 import teacherclient.be.ScheduleDay;
@@ -114,5 +115,17 @@ public class MockData
         scheduleItems.add(new ScheduleItem(courses.get(1), teachers.get(1), null, schoolClasses.get(0), classRooms.get(0), ScheduleDay.FRIDAY, 540, 765));
 
         return scheduleItems;
+    }
+
+    public XYChart.Series<String, Number> getChartSeries()
+    {
+        // Some test value:
+        XYChart.Series<String, Number> series = new XYChart.Series();
+        series.getData().add(new XYChart.Data("Total", 25.1));
+        series.getData().add(new XYChart.Data("SCO", 5.0));
+        series.getData().add(new XYChart.Data("SDE", 46.1));
+        series.getData().add(new XYChart.Data("ITO", 35.5));
+        series.getData().add(new XYChart.Data("DBOS", 0.2));
+        return series;
     }
 }
