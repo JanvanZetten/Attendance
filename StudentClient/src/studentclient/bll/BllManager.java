@@ -6,6 +6,7 @@
 package studentclient.bll;
 
 import java.util.List;
+import javafx.scene.chart.XYChart;
 import studentclient.be.ScheduleItem;
 import studentclient.dal.MockDAO;
 
@@ -13,11 +14,18 @@ import studentclient.dal.MockDAO;
  *
  * @author janvanzetten
  */
-public class BllManager {
+public class BllManager
+{
     private MockDAO mock = new MockDAO();
 
-    public List<ScheduleItem> getScheduleItems() {
+    public List<ScheduleItem> getScheduleItems()
+    {
         return mock.getSchedueleItems();
     }
-    
+
+    public XYChart.Series<String, Number> getChartSeries()
+    {
+        return mock.getChartSeries();
+    }
+
 }

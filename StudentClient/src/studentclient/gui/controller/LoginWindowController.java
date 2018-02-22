@@ -29,7 +29,6 @@ import studentclient.bll.BllManager;
  */
 public class LoginWindowController implements Initializable
 {
-
     @FXML
     private TextField UsernameField;
     @FXML

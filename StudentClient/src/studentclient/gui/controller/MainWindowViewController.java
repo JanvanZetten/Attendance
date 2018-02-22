@@ -24,14 +24,15 @@ import studentclient.gui.model.MainModel;
  */
 public class MainWindowViewController implements Initializable
 {
+    private final int WEEKS_IN_A_YEAR = 52;
+
     @FXML
     private Label lblWeek;
     @FXML
     private AnchorPane scheduleAnchor;
 
     private MainModel mainModel;
-    
-    int weekNumber = 10;
+    private int weekNumber = 10;
 
     /**
      * Initializes the controller class.
@@ -64,32 +65,36 @@ public class MainWindowViewController implements Initializable
     private void handlePresent(ActionEvent event)
     {
         mainModel.handlePresent(event);
-        
+
     }
 
     @FXML
     private void handleNextWeek(MouseEvent event)
     {
-        if (weekNumber < 52){
-            weekNumber ++;
+        if (weekNumber < WEEKS_IN_A_YEAR)
+        {
+            weekNumber++;
         }
-        else{
-             weekNumber = 1;
+        else
+        {
+            weekNumber = 1;
         }
-        
+
         lblWeek.setText("Week " + weekNumber);
     }
 
     @FXML
     private void handlePreviousWeek(MouseEvent event)
     {
-        if (weekNumber > 1){
-            weekNumber --;
+        if (weekNumber > 1)
+        {
+            weekNumber--;
         }
-        else{
-             weekNumber = 52;
+        else
+        {
+            weekNumber = WEEKS_IN_A_YEAR;
         }
-        
+
         lblWeek.setText("Week " + weekNumber);
     }
 

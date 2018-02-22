@@ -13,12 +13,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import studentclient.be.ScheduleItem;
+import studentclient.bll.BllManager;
 import studentclient.gui.controller.AbsenceWindowController;
 
 /**
@@ -27,12 +27,13 @@ import studentclient.gui.controller.AbsenceWindowController;
  */
 public class MainModel
 {
-
     private Schedule schedule;
+    private BllManager bm;
 
     public MainModel()
     {
         schedule = new Schedule(8, 16);
+        bm = new BllManager();
     }
 
     public Schedule getSchedule()
@@ -66,15 +67,7 @@ public class MainModel
             Parent root = fxLoader.load();
 
             AbsenceWindowController awc = (AbsenceWindowController) fxLoader.getController();
-
-            // Some test value:
-            XYChart.Series<String, Number> series = new XYChart.Series();
-            series.getData().add(new XYChart.Data("Total", 25.1));
-            series.getData().add(new XYChart.Data("SCO", 5.0));
-            series.getData().add(new XYChart.Data("SDE", 46.1));
-            series.getData().add(new XYChart.Data("ITO", 35.5));
-            series.getData().add(new XYChart.Data("DBOS", 0.2));
-            awc.passData(series);
+            awc.passData(bm.getChartSeries());
 
             Scene scene = new Scene(root);
             newStage.setTitle("Absence");

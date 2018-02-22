@@ -7,6 +7,7 @@ package studentclient.dal;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.chart.XYChart;
 import studentclient.be.ClassRoom;
 import studentclient.be.Course;
 import studentclient.be.ScheduleDay;
@@ -17,11 +18,11 @@ import studentclient.be.SchoolClass;
  *
  * @author janvanzetten
  */
-public class MockDAO {
-    
-    
+public class MockDAO
+{
 
-    public List<ScheduleItem> getSchedueleItems() {
+    public List<ScheduleItem> getSchedueleItems()
+    {
         List<Course> courses = new ArrayList<>();
         courses.add(new Course("SDE"));
         courses.add(new Course("SCO"));
@@ -49,7 +50,19 @@ public class MockDAO {
         scheduleItems.add(new ScheduleItem(courses.get(3), teachers.get(3), "", schoolClasses.get(0), classRooms.get(0), ScheduleDay.WEDNESDAY, 540, 765));
         scheduleItems.add(new ScheduleItem(courses.get(1), teachers.get(1), "", schoolClasses.get(0), classRooms.get(0), ScheduleDay.THURSDAY, 540, 765));
         scheduleItems.add(new ScheduleItem(courses.get(1), teachers.get(1), null, schoolClasses.get(0), classRooms.get(0), ScheduleDay.FRIDAY, 540, 765));
-        
+
         return scheduleItems;
+    }
+
+    public XYChart.Series<String, Number> getChartSeries()
+    {
+        // Some test value:
+        XYChart.Series<String, Number> series = new XYChart.Series();
+        series.getData().add(new XYChart.Data("Total", 25.1));
+        series.getData().add(new XYChart.Data("SCO", 5.0));
+        series.getData().add(new XYChart.Data("SDE", 46.1));
+        series.getData().add(new XYChart.Data("ITO", 35.5));
+        series.getData().add(new XYChart.Data("DBOS", 0.2));
+        return series;
     }
 }
