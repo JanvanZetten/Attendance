@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import teacherclient.be.ScheduleItem;
 import teacherclient.be.CourseComparator;
@@ -341,6 +342,7 @@ public class Schedule extends GridPane
         }
 
         Label lbl = new Label(text);
+        lbl.setFont(new Font("Helvatica Neue", 14));
         if (WhiteText)
         {
             lbl.setTextFill(DEFUALT_COURSE_TEXT_COLOR);
