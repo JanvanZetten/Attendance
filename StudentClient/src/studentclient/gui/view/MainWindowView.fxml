@@ -58,7 +58,7 @@
                         <Font name="Helvetica Neue Bold" size="24.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#handlePresent" prefHeight="47.0" prefWidth="248.0" style="-fx-background-color: #54ad32;" text="Present" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                <Button fx:id="btnPresent" mnemonicParsing="false" onAction="#handlePresent" prefHeight="47.0" prefWidth="248.0" style="-fx-background-color: #54ad32;" text="Present" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                     <font>
                         <Font name="Helvetica Neue Bold" size="24.0" />
                     </font>

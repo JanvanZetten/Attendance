@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -37,6 +38,9 @@ public class MainWindowViewController implements Initializable
 
     private MainModel mainModel;
     private int weekNumber = 10;
+    
+    @FXML
+    private Button btnPresent;
 
     /**
      * Initializes the controller class.

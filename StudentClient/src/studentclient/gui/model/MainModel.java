@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import studentclient.be.ScheduleItem;
 import studentclient.be.Student;
 import studentclient.bll.BllManager;
@@ -57,6 +60,12 @@ public class MainModel
         Button button = (Button) event.getSource();
         button.setDisable(true);
         PopUpBubble pub = new PopUpBubble(button, "Presence registred!", Color.web("#54AD32"));
+        
+        Timeline timeline = new Timeline(new KeyFrame(
+            Duration.millis(2500),
+            ae -> button.setDisable(false)));
+        timeline.play();
+        
     }
 
     public void showAbsenceGraph()
