@@ -41,7 +41,7 @@ public class MockDAO
     /**
      * Creates mock data for use to test the GUI.
      */
-    public void MockDAO()
+    public MockDAO()
     {
         CS2017A = new SchoolClass(1, "CS2017A");
         CS2017B = new SchoolClass(2, "CS2017B");
