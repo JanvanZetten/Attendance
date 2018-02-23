@@ -99,7 +99,7 @@ public class LoginWindowController implements Initializable
         }
         else
         {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "User not found", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "User not found try applemelon:casper", ButtonType.OK);
             alert.showAndWait();
         }
     }
