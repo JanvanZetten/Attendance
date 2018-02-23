@@ -64,7 +64,11 @@ public class MainModel
         Timeline timeline = new Timeline(new KeyFrame(
             Duration.millis(2500),
             ae -> button.setDisable(false)));
+        
         timeline.play();
+    }
+    
+    private void changeButtonToRed(Button btn) {
         
     }
 
