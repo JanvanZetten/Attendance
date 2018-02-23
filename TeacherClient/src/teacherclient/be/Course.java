@@ -13,11 +13,19 @@ public class Course
 {
     private String name;
 
+    /**
+     * Contructor of Courses.
+     * @param name
+     */
     public Course(String name)
     {
         this.name = name;
     }
 
+    /**
+     * Getter of name.
+     * @return 
+     */
     public String getName()
     {
         return name;

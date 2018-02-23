@@ -13,11 +13,19 @@ public class ClassRoom
 {
     private String name;
 
+    /**
+     * Constructor for Class Rooms.
+     * @param name 
+     */
     public ClassRoom(String name)
     {
         this.name = name;
     }
 
+    /**
+     * Getter of name.
+     * @return
+     */
     public String getName()
     {
         return name;
