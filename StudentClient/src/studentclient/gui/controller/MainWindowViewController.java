@@ -27,10 +27,7 @@ import studentclient.gui.model.MainModel;
 public class MainWindowViewController implements Initializable
 {
     private final int WEEKS_IN_A_YEAR = 52;
-    private final String PRETEXT_USER = "Logged in as ";
-
-    @FXML
-    private Label lblUser;
+    
     @FXML
     private Label lblWeek;
     @FXML
@@ -57,7 +54,6 @@ public class MainWindowViewController implements Initializable
     void setUser(Student student)
     {
         mainModel.setActiveUser(student);
-        lblUser.setText(PRETEXT_USER + student.getName());
     }
 
     /**
