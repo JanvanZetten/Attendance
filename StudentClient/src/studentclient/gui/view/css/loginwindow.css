@@ -48,3 +48,11 @@
 -fx-background-color: #46a2f8;
 }
 
+@font-face {
+    src: url("HelveticaNeue-Bold.ttf");
+}
+
+@font-face {
+    src: url("HelveticaNeue-01.ttf");
+}
+
