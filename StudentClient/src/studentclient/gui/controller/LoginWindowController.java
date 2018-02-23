@@ -88,6 +88,7 @@ public class LoginWindowController implements Initializable
                 stage.setResizable(true);
                 stage.setScene(scene);
                 stage.centerOnScreen();
+                stage.setTitle("Logged in as " + approvedUser.getName());
                 stage.show();
 
             }
