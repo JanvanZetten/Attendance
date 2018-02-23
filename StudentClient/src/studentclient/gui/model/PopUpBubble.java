@@ -30,7 +30,7 @@ public class PopUpBubble
 {
     private final double TRANSITION_TIME = 500;
     private final double TIME_SHOWN = 2000;
-    private final Color BORDER_COLOR = Color.web("#54AD32");
+    private final Color BORDER_COLOR;
     private final Color TEXT_COLOR = Color.web("#FFFFFF");
 
     private Popup popup = new Popup();
@@ -52,6 +52,7 @@ public class PopUpBubble
      */
     public PopUpBubble(Node ownerNode, String text, Color background)
     {
+        BORDER_COLOR = background;
         this.ownerNode = ownerNode;
 
         vBox.setSpacing(-1.0);
