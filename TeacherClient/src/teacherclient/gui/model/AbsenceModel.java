@@ -26,6 +26,15 @@ public class AbsenceModel
     private MockData mData;
     private AbsenceGraph ag;
 
+    /**
+     * Sets data class instances to be the same as other classes and sets items
+     * from the view to be according to the mock data.
+     * @param labelClass
+     * @param listviewStudents
+     * @param chartPane
+     * @param cData
+     * @param mData 
+     */
     public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, CurrentData cData, MockData mData)
     {
         this.cData = cData;
@@ -36,6 +45,11 @@ public class AbsenceModel
         ag = new AbsenceGraph(chartPane, mData.getChartSeries());
     }
 
+    /**
+     * Sets the list view to be filled with relevant students that prticipate
+     * in that course.
+     * @param listviewStudents 
+     */
     private void setStudentList(ListView<Student> listviewStudents)
     {
         ObservableList<Student> ol = FXCollections.observableArrayList();

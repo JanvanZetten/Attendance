@@ -38,6 +38,9 @@ public class MockData
     private Student Asbjørn;
     private Student Jan;
 
+    /**
+     * Creates mock data for use to test the GUI.
+     */
     public void createMockData()
     {
         CS2017A = new SchoolClass(1, "CS2017A");
@@ -74,16 +77,28 @@ public class MockData
         listAllStudents.add(Jan);
     }
 
+    /**
+     * Gets all classes that exist.
+     * @return 
+     */
     public List<SchoolClass> getListAllClasses()
     {
         return listAllClasses;
     }
 
+    /**
+     * Gets all students that exist.
+     * @return 
+     */
     public List<Student> getListAllStudents()
     {
         return listAllStudents;
     }
 
+    /**
+     * Gets and creates all schedule items a user can see in a schedule for all teachers.
+     * @return 
+     */
     public List<ScheduleItem> getSchedueleItems()
     {
         List<Course> courses = new ArrayList<>();
@@ -117,6 +132,10 @@ public class MockData
         return scheduleItems;
     }
     
+    /**
+     * Gets and creates all schedule items a user can see in a schedule for a specific teacher.
+     * @return 
+     */
     public List<ScheduleItem> getSchedueleItemsTeacher()
     {
         List<Course> courses = new ArrayList<>();
@@ -154,6 +173,10 @@ public class MockData
         return scheduleItems;
     }
 
+    /**
+     * Gets and creates the absence bar chart items.
+     * @return 
+     */
     public XYChart.Series<String, Number> getChartSeries()
     {
         // Some test value:

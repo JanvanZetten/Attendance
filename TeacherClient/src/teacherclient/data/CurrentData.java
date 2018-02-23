@@ -14,11 +14,19 @@ import teacherclient.be.SchoolClass;
 public class CurrentData {
     
     private SchoolClass currentClass;
-
+    
+    /**
+     * Sets the currently selected class.
+     * @param sentClass 
+     */
     public void setCurrentClass(SchoolClass sentClass) {
         currentClass = sentClass;
     }
 
+    /**
+     * Gets the currently selected class.
+     * @return 
+     */
     public SchoolClass getCurrentClass() {
         return currentClass;
     }

@@ -32,17 +32,24 @@ public class MainModel
 {
 
     private MockData mData;
-    private static CurrentData instance;
     private CurrentData cData;
 
+    /**
+     * Sets data class instances to be the same as other classes and sets the
+     * data in the view.
+     */
     public void createMockData()
     {
         mData = new MockData();
         mData.createMockData();
-        currentData();
-        cData = instance;
+        cData = new CurrentData();
     }
 
+    /**
+     * Sets a list of courses with relevant Absence and Schedule buttons in
+     * the same list.
+     * @param listviewClasses 
+     */
     public void setClassList(ListView<HBoxCell> listviewClasses)
     {
         List<HBoxCell> tbl = new ArrayList<>();
@@ -58,15 +65,9 @@ public class MainModel
         listviewClasses.setItems(ol);
     }
 
-    private CurrentData currentData()
-    {
-        if (instance == null)
-        {
-            instance = new CurrentData();
-        }
-        return instance;
-    }
-
+    /**
+     * Opens a schedule which only shows classes for the logged in teacher.
+     */
     public void openSchedule()
     {
         try

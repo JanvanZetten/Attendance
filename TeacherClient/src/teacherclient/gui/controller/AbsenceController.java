@@ -45,12 +45,22 @@ public class AbsenceController implements Initializable
         model = new AbsenceModel();
     }
 
+    /**
+     * Sets the model to have the same data class instances as other classes and
+     * sends FXML items to be set in the model.
+     * @param cData
+     * @param mData 
+     */
     public void setData(CurrentData cData, MockData mData)
     {
         model.setInformation(labelClass, listviewStudents, chartPane, cData, mData);
 
     }
 
+    /**
+     * Activates when a student is selected in the list view.
+     * @param event 
+     */
     @FXML
     private void studentSelected(MouseEvent event)
     {

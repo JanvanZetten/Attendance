@@ -208,8 +208,6 @@ public class Schedule extends GridPane
             {
                 int startTimeInMin = tu.minutesFromDate(course.getStartTime());
                 int endTimeInMin = tu.minutesFromDate(course.getEndTime());
-                System.out.println("Start: " + course.getStartTime() + " converted to " + startTimeInMin);
-                System.out.println("End: " + course.getEndTime() + " converted to " + endTimeInMin);
                 // If the course is on current day.
                 if (tu.dayFromDate(course.getStartTime()).equalsIgnoreCase(day.getDay()))
                 {
@@ -257,8 +255,6 @@ public class Schedule extends GridPane
                         {
                             courseTxt += "\n" + (course.getNote() != null ? (course.getNote().length() > 0 ? course.getNote() : "") : "");
                         }
-
-                        System.out.println(student);
 
                         if (course.getAttended().contains(student) || course.getStartTime().after(Calendar.getInstance().getTime()))
                         {

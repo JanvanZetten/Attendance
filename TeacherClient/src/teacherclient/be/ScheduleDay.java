@@ -23,11 +23,19 @@ public enum ScheduleDay
         this.day = day;
     }
 
+    /**
+     * Getter of value.
+     * @return 
+     */
     public Integer getValue()
     {
         return this.value;
     }
 
+    /**
+     * Getter of day.
+     * @return 
+     */
     public String getDay()
     {
         return this.day;

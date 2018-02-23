@@ -48,6 +48,10 @@ public class ScheduleViewController implements Initializable
         scheduleModel.updateSchedule(courses);
     }
 
+    /**
+     * Planned feature that allows a teacher to create a course in a given time.
+     * @param event 
+     */
     @FXML
     private void handleScheduleCourse(ActionEvent event)
     {
