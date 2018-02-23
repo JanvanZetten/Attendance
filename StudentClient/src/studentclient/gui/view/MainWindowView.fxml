@@ -58,7 +58,7 @@
                         <Font name="Helvetica Neue Bold" size="24.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#handlePresent" prefHeight="47.0" prefWidth="248.0" style="-fx-background-color: #54ad32;" text="Present" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                <Button fx:id="btnPresent" mnemonicParsing="false" onAction="#handlePresent" prefHeight="47.0" prefWidth="248.0" style="-fx-background-color: #54ad32;" text="Present" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                     <font>
                         <Font name="Helvetica Neue Bold" size="24.0" />
                     </font>
@@ -70,6 +70,5 @@
                 <AnchorPane fx:id="scheduleAnchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" />
             </content>
         </ScrollPane>
-      <Label fx:id="lblUser" text="USER" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
     </children>
 </AnchorPane>
