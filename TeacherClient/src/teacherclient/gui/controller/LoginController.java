@@ -66,6 +66,7 @@ public class LoginController implements Initializable
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.centerOnScreen();
+            stage.setTitle("Logged in as " + UsernameField.getText());
             stage.show();
 
         }
