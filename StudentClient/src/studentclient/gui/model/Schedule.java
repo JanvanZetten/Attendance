@@ -362,6 +362,7 @@ public class Schedule extends GridPane
 
         Label lbl = new Label(text);
         lbl.setFont(new Font("Helvatica Neue", 14));
+        lbl.setWrapText(true);
         if (WhiteText)
         {
             lbl.setTextFill(DEFUALT_COURSE_TEXT_COLOR);

@@ -23,6 +23,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -94,7 +95,7 @@ public class AbsenceGraph
         absenceChart.getYAxis().setLabel("Absence in percentage");
         absenceChart.getData().add(series);
         absenceChart.setLegendVisible(false);
-        absenceChart.setAnimated(false);
+        absenceChart.setAnimated(false);        
 
         // Add to AnchorPane.
         chartPane.getChildren().add(absenceChart);
@@ -154,6 +155,7 @@ public class AbsenceGraph
     {
         final Node node = data.getNode();
         final Text dataText = new Text(data.getYValue() + "");
+        dataText.setFont(new Font("Helvatica Neue", 14));
         // When parent is set the dataText is set to parent.
         node.parentProperty().addListener(new ChangeListener<Parent>()
         {

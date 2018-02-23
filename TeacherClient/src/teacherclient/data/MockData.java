@@ -116,6 +116,43 @@ public class MockData
 
         return scheduleItems;
     }
+    
+    public List<ScheduleItem> getSchedueleItemsTeacher()
+    {
+        List<Course> courses = new ArrayList<>();
+        courses.add(new Course("SDE"));
+        courses.add(new Course("SCO"));
+        courses.add(new Course("ITO"));
+        courses.add(new Course("Teacher meeting"));
+
+        List<String> teachers = new ArrayList<>();
+        teachers.add("Mads");
+       
+
+        List<SchoolClass> schoolClasses = new ArrayList<>();
+        schoolClasses.add(new SchoolClass(1, "CS2017A"));
+        schoolClasses.add(new SchoolClass(2, "CS2017B"));
+        schoolClasses.add(new SchoolClass(3, "CS2016A"));
+        schoolClasses.add(new SchoolClass(4, ""));
+        
+
+        List<ClassRoom> classRooms = new ArrayList<>();
+        classRooms.add(new ClassRoom("C3"));
+        classRooms.add(new ClassRoom("Teacher room"));
+        classRooms.add(new ClassRoom("C1"));
+
+        List<ScheduleItem> scheduleItems = new ArrayList<>();
+
+        scheduleItems.add(new ScheduleItem(courses.get(1), teachers.get(0), "", schoolClasses.get(0), classRooms.get(0), ScheduleDay.MONDAY, 540, 645));
+        scheduleItems.add(new ScheduleItem(courses.get(0), teachers.get(0), "Read chapters 1-6", schoolClasses.get(1), classRooms.get(2), ScheduleDay.MONDAY, 645, 810));
+        scheduleItems.add(new ScheduleItem(courses.get(0), teachers.get(0), "", schoolClasses.get(1), classRooms.get(2), ScheduleDay.TUESDAY, 540, 690));
+        scheduleItems.add(new ScheduleItem(courses.get(2), teachers.get(0), "", schoolClasses.get(2), classRooms.get(2), ScheduleDay.TUESDAY, 720, 915));
+        scheduleItems.add(new ScheduleItem(courses.get(3), teachers.get(0), "", schoolClasses.get(3), classRooms.get(1), ScheduleDay.WEDNESDAY, 540, 765));
+        scheduleItems.add(new ScheduleItem(courses.get(1), teachers.get(0), "", schoolClasses.get(0), classRooms.get(0), ScheduleDay.THURSDAY, 540, 765));
+        scheduleItems.add(new ScheduleItem(courses.get(1), teachers.get(0), null, schoolClasses.get(0), classRooms.get(0), ScheduleDay.FRIDAY, 540, 765));
+
+        return scheduleItems;
+    }
 
     public XYChart.Series<String, Number> getChartSeries()
     {
