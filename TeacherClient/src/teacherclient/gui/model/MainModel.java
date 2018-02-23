@@ -79,7 +79,7 @@ public class MainModel
             ScheduleViewController cont = fxLoader.getController();
 
             mData.createMockData();
-            cont.updateSchedule(mData.getSchedueleItems());
+            cont.updateSchedule(mData.getSchedueleItemsTeacher());
 
             Scene scene = new Scene(root);
             newStage.setTitle("Schedule for Teacher");
