@@ -55,21 +55,57 @@ public class MainModel
         schedule.setupCourses(courses, activeUser);
     }
 
+    /**
+     * Handles the "Present" button actions and opens a popup to notify the user.
+     * @param event clicking the button.
+     */
     public void handlePresent(ActionEvent event)
     {
         Button button = (Button) event.getSource();
         button.setDisable(true);
-        PopUpBubble pub = new PopUpBubble(button, "Presence registred!", Color.web("#54AD32"));
         
-        Timeline timeline = new Timeline(new KeyFrame(
-            Duration.millis(2500),
-            ae -> button.setDisable(false)));
+        if (button.getText().equals("Present")) 
+        {
+            PopUpBubble pub = new PopUpBubble(button, "Presence registred!", Color.web("#54AD32"));
         
-        timeline.play();
+            Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(2500),
+                action -> changeButton(button, true)));
+            
+            timeline.play();
+        }
+        else if (button.getText().equals("Remove Prescence"))
+        {
+            PopUpBubble pub = new PopUpBubble(button, "Presence removed!", Color.web("#DB3b26"));
+        
+            Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(2500),
+                action -> changeButton(button, false)));
+            
+            timeline.play();
+        }
     }
     
-    private void changeButtonToRed(Button btn) {
+    /**
+     * Changes the button to Present or Remove Presence when clicking it 
+     * after a delay.
+     * @param button the Present button.
+     * @param trueOrFalse True = Pressed Present, False = Pressed Remove Presence.
+     */
+    private void changeButton(Button button, boolean trueOrFalse) 
+    {
+        button.setDisable(false);
         
+        if (trueOrFalse == true) 
+        {
+            button.setStyle("-fx-background-color: #DB3b26");
+            button.setText("Remove Prescence");
+        }
+        else if (trueOrFalse == false) 
+        {
+            button.setStyle("-fx-background-color: #54AD32");
+            button.setText("Present");
+        }
     }
 
     public void showAbsenceGraph()
