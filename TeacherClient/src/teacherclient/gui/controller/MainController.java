@@ -1,6 +1,6 @@
 package teacherclient.gui.controller;
 
-import teacherclient.data.HBoxCell;
+import teacherclient.dal.HBoxCell;
 import teacherclient.gui.model.MainModel;
 import java.net.URL;
 import java.util.ResourceBundle;

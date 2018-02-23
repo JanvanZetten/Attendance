@@ -6,14 +6,14 @@
 package teacherclient.gui.model;
 
 import teacherclient.be.Student;
-import teacherclient.data.CurrentData;
-import teacherclient.data.MockData;
+import teacherclient.dal.CurrentData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import teacherclient.bll.BllManager;
 
 /**
  *
@@ -23,7 +23,7 @@ public class AbsenceModel
 {
 
     private CurrentData cData;
-    private MockData mData;
+    private BllManager bll;
     private AbsenceGraph ag;
 
     /**
@@ -33,27 +33,27 @@ public class AbsenceModel
      * @param listviewStudents
      * @param chartPane
      * @param cData
-     * @param mData 
+     * @param bll
      */
-    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, CurrentData cData, MockData mData)
+    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, CurrentData cData, BllManager bll)
     {
         this.cData = cData;
-        this.mData = mData;
+        this.bll = bll;
         labelClass.setText("Absence in " + cData.getCurrentClass().getName() + ":");
         setStudentList(listviewStudents);
 
-        ag = new AbsenceGraph(chartPane, mData.getChartSeries());
+        ag = new AbsenceGraph(chartPane, bll.getChartSeries());
     }
 
     /**
-     * Sets the list view to be filled with relevant students that prticipate
-     * in that course.
-     * @param listviewStudents 
+     * Sets the list view to be filled with relevant students that prticipate in
+     * that course.
+     * @param listviewStudents
      */
     private void setStudentList(ListView<Student> listviewStudents)
     {
         ObservableList<Student> ol = FXCollections.observableArrayList();
-        for (Student student : mData.getListAllStudents())
+        for (Student student : bll.getListAllStudents())
         {
             for (teacherclient.be.SchoolClass sClass : student.getClasses())
             {

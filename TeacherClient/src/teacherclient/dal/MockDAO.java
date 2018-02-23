@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package teacherclient.data;
+package teacherclient.dal;
 
 import teacherclient.be.Student;
 import teacherclient.be.SchoolClass;
@@ -19,7 +19,7 @@ import teacherclient.be.ScheduleItem;
  *
  * @author alexl
  */
-public class MockData
+public class MockDAO
 {
 
     private ArrayList<SchoolClass> listAllClasses;
@@ -41,7 +41,7 @@ public class MockData
     /**
      * Creates mock data for use to test the GUI.
      */
-    public void createMockData()
+    public void MockDAO()
     {
         CS2017A = new SchoolClass(1, "CS2017A");
         CS2017B = new SchoolClass(2, "CS2017B");
@@ -79,7 +79,7 @@ public class MockData
 
     /**
      * Gets all classes that exist.
-     * @return 
+     * @return
      */
     public List<SchoolClass> getListAllClasses()
     {
@@ -88,7 +88,7 @@ public class MockData
 
     /**
      * Gets all students that exist.
-     * @return 
+     * @return
      */
     public List<Student> getListAllStudents()
     {
@@ -96,8 +96,9 @@ public class MockData
     }
 
     /**
-     * Gets and creates all schedule items a user can see in a schedule for all teachers.
-     * @return 
+     * Gets and creates all schedule items a user can see in a schedule for all
+     * teachers.
+     * @return
      */
     public List<ScheduleItem> getSchedueleItems()
     {
@@ -131,10 +132,11 @@ public class MockData
 
         return scheduleItems;
     }
-    
+
     /**
-     * Gets and creates all schedule items a user can see in a schedule for a specific teacher.
-     * @return 
+     * Gets and creates all schedule items a user can see in a schedule for a
+     * specific teacher.
+     * @return
      */
     public List<ScheduleItem> getSchedueleItemsTeacher()
     {
@@ -146,14 +148,12 @@ public class MockData
 
         List<String> teachers = new ArrayList<>();
         teachers.add("Mads");
-       
 
         List<SchoolClass> schoolClasses = new ArrayList<>();
         schoolClasses.add(new SchoolClass(1, "CS2017A"));
         schoolClasses.add(new SchoolClass(2, "CS2017B"));
         schoolClasses.add(new SchoolClass(3, "CS2016A"));
         schoolClasses.add(new SchoolClass(4, ""));
-        
 
         List<ClassRoom> classRooms = new ArrayList<>();
         classRooms.add(new ClassRoom("C3"));
@@ -175,7 +175,7 @@ public class MockData
 
     /**
      * Gets and creates the absence bar chart items.
-     * @return 
+     * @return
      */
     public XYChart.Series<String, Number> getChartSeries()
     {

@@ -6,8 +6,7 @@
 package teacherclient.gui.controller;
 
 import teacherclient.be.Student;
-import teacherclient.data.CurrentData;
-import teacherclient.data.MockData;
+import teacherclient.dal.CurrentData;
 import teacherclient.gui.model.AbsenceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import teacherclient.bll.BllManager;
 
 /**
  * FXML Controller class
@@ -49,17 +49,17 @@ public class AbsenceController implements Initializable
      * Sets the model to have the same data class instances as other classes and
      * sends FXML items to be set in the model.
      * @param cData
-     * @param mData 
+     * @param mData
      */
-    public void setData(CurrentData cData, MockData mData)
+    public void setData(CurrentData cData, BllManager bll)
     {
-        model.setInformation(labelClass, listviewStudents, chartPane, cData, mData);
+        model.setInformation(labelClass, listviewStudents, chartPane, cData, bll);
 
     }
 
     /**
      * Activates when a student is selected in the list view.
-     * @param event 
+     * @param event
      */
     @FXML
     private void studentSelected(MouseEvent event)

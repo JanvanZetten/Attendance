@@ -1,4 +1,4 @@
-package teacherclient.data;
+package teacherclient.dal;
 
 import teacherclient.be.SchoolClass;
 import teacherclient.gui.controller.AbsenceController;
@@ -19,6 +19,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import teacherclient.bll.BllManager;
 import teacherclient.gui.controller.ScheduleViewController;
 
 /**
@@ -41,7 +42,7 @@ public class HBoxCell extends HBox
      * @param buttonText2
      * @param sentClass
      */
-    public HBoxCell(String labelText, SchoolClass sentClass, CurrentData cData, MockData mData)
+    public HBoxCell(String labelText, SchoolClass sentClass, CurrentData cData, BllManager bll)
     {
         super();
 
@@ -79,7 +80,7 @@ public class HBoxCell extends HBox
 
                     cData.setCurrentClass(sentClass);
                     AbsenceController cont = fxLoader.getController();
-                    cont.setData(cData, mData);
+                    cont.setData(cData, bll);
 
                     newStage.showAndWait();
 
@@ -106,9 +107,8 @@ public class HBoxCell extends HBox
 
                     ScheduleViewController cont = fxLoader.getController();
 
-                    MockData mData = new MockData();
-                    mData.createMockData();
-                    cont.updateSchedule(mData.getSchedueleItems());
+                    BllManager bll = new BllManager();
+                    cont.updateSchedule(bll.getScheduleItems());
 
                     Scene scene = new Scene(root);
                     newStage.setTitle("Schedule for " + sentClass.getName());

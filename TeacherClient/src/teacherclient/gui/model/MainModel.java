@@ -7,9 +7,8 @@ package teacherclient.gui.model;
 
 import java.io.IOException;
 import teacherclient.be.SchoolClass;
-import teacherclient.data.HBoxCell;
-import teacherclient.data.CurrentData;
-import teacherclient.data.MockData;
+import teacherclient.dal.HBoxCell;
+import teacherclient.dal.CurrentData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import teacherclient.bll.BllManager;
 import teacherclient.gui.controller.ScheduleViewController;
 
 /**
@@ -31,7 +31,7 @@ import teacherclient.gui.controller.ScheduleViewController;
 public class MainModel
 {
 
-    private MockData mData;
+    private BllManager bll;
     private CurrentData cData;
 
     /**
@@ -40,24 +40,23 @@ public class MainModel
      */
     public void createMockData()
     {
-        mData = new MockData();
-        mData.createMockData();
+        bll = new BllManager();
         cData = new CurrentData();
     }
 
     /**
-     * Sets a list of courses with relevant Absence and Schedule buttons in
-     * the same list.
-     * @param listviewClasses 
+     * Sets a list of courses with relevant Absence and Schedule buttons in the
+     * same list.
+     * @param listviewClasses
      */
     public void setClassList(ListView<HBoxCell> listviewClasses)
     {
         List<HBoxCell> tbl = new ArrayList<>();
-        List<SchoolClass> classes = mData.getListAllClasses();
+        List<SchoolClass> classes = bll.getListAllClasses();
 
         for (int i = 0; i < classes.size(); i++)
         {
-            tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), cData, mData));
+            tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), cData, bll));
         }
 
         ObservableList<HBoxCell> ol = FXCollections.observableArrayList();
@@ -79,8 +78,7 @@ public class MainModel
 
             ScheduleViewController cont = fxLoader.getController();
 
-            mData.createMockData();
-            cont.updateSchedule(mData.getSchedueleItemsTeacher());
+            cont.updateSchedule(bll.getSchedueleItemsTeacher());
 
             Scene scene = new Scene(root);
             newStage.setTitle("Schedule for Teacher");
