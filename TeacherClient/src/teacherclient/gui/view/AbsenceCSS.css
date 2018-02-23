@@ -3,7 +3,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : 09-02-2018, 12:14:29
     Author     : janvanzetten
 */
@@ -11,7 +11,7 @@ and open the template in the editor.
 .list-cell{
     -fx-text-fill: white;
     -fx-background-color: #3176b5;
-    -fx-border-color: white;  
+    -fx-border-color: white;
     -fx-border-width: 0.3;
     -fx-font-size: 16;
 }
@@ -26,4 +26,14 @@ and open the template in the editor.
 .list-view {
     -fx-background-insets: 0;
 }
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #DB3B26; }
 
