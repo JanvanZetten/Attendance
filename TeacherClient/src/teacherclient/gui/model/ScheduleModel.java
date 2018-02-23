@@ -15,12 +15,16 @@ import teacherclient.be.ScheduleItem;
 public class ScheduleModel
 {
     private Schedule schedule;
-
+    
     public ScheduleModel()
     {
         schedule = new Schedule(8, 16);
     }
 
+    /**
+     * Getter for schedule.
+     * @return 
+     */
     public Schedule getSchedule()
     {
         return schedule;

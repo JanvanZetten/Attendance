@@ -43,6 +43,10 @@ public class LoginController implements Initializable
         // TODO
     }
 
+    /**
+     * Handles the button to log in.
+     * @param event 
+     */
     @FXML
     private void handleLogin(ActionEvent event)
     {
