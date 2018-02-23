@@ -70,6 +70,5 @@
                 <AnchorPane fx:id="scheduleAnchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" />
             </content>
         </ScrollPane>
-      <Label fx:id="lblUser" text="USER" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
     </children>
 </AnchorPane>
