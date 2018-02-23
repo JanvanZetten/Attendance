@@ -53,14 +53,3 @@ and open the template in the editor.
 .check-box:selected .box {
 -fx-background-color: #46a2f8;
 }
-
-@font-face {
-    src: url("HelveticaNeue-Bold-02.ttf");
-}
-
-@font-face {
-    src: url("HelveticaNeue-01.ttf");
-}
-
-
-
