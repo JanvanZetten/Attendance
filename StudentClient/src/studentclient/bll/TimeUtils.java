@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -24,7 +25,7 @@ public class TimeUtils
 
     public TimeUtils()
     {
-        cal = Calendar.getInstance();
+        cal = Calendar.getInstance(Locale.ENGLISH);
     }
 
     /**
@@ -52,14 +53,14 @@ public class TimeUtils
 
     public String minuteHourFormatFromDate(Date date)
     {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(HOUR_MINUTE_FORMAT);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(HOUR_MINUTE_FORMAT, Locale.ENGLISH);
         return simpleDateFormat.format(date);
     }
 
     public Date dateFromString(String stringDate) throws BLLException
     {
         Date date;
-        SimpleDateFormat ft = new SimpleDateFormat(DATE_FORMAT);
+        SimpleDateFormat ft = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
 
         try
         {
@@ -75,7 +76,7 @@ public class TimeUtils
 
     public String dayFromDate(Date date)
     {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DAY_FORMAT);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DAY_FORMAT, Locale.ENGLISH);
         return simpleDateFormat.format(date);
     }
 

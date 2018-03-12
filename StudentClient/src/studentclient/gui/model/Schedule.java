@@ -3,6 +3,7 @@ package studentclient.gui.model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -256,7 +257,7 @@ public class Schedule extends GridPane
                             courseTxt += "\n" + (course.getNote() != null ? (course.getNote().length() > 0 ? course.getNote() : "") : "");
                         }
 
-                        if (course.getAttended().contains(student) || course.getStartTime().after(Calendar.getInstance().getTime()))
+                        if (course.getAttended().contains(student) || course.getStartTime().after(Calendar.getInstance(Locale.ENGLISH).getTime()))
                         {
                             element = schemeElement(courseTxt, height * 1.0, DEFAULT_COURSE_COLOR, true);
                         }
