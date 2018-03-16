@@ -91,6 +91,7 @@ $RECYCLE.BIN/
 /SharedClasses/nbproject/private/
 /StudentClient/nbproject/private/
 /TeacherClient/nbproject/private/
+!/SharedClasses/lib/*.jar
 
 
 #encrption jar
