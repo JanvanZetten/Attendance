@@ -75,7 +75,6 @@ public class MainWindowViewController implements Initializable
     private void handlePresent(ActionEvent event)
     {
         mainModel.handlePresent(event);
-
     }
 
     @FXML

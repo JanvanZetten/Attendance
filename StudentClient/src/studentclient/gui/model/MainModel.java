@@ -70,7 +70,12 @@ public class MainModel
         if (button.getText().equals("Present"))
         {
             PopUpBubble pub = new PopUpBubble(button, "Presence registred!", Color.web("#54AD32"));
+<<<<<<< HEAD
 
+=======
+            bm.setPresent(true);
+        
+>>>>>>> 007ce3383779d7c15f58c310b4a25cd3d251a8b1
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.millis(2500),
                     action -> changeButton(button, true)));
@@ -80,7 +85,12 @@ public class MainModel
         else if (button.getText().equals("Remove Prescence"))
         {
             PopUpBubble pub = new PopUpBubble(button, "Presence removed!", Color.web("#DB3b26"));
+<<<<<<< HEAD
 
+=======
+            bm.setPresent(false);
+        
+>>>>>>> 007ce3383779d7c15f58c310b4a25cd3d251a8b1
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.millis(2500),
                     action -> changeButton(button, false)));
