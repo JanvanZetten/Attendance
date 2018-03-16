@@ -5,7 +5,7 @@
  */
 package teacherclient.gui.model;
 
-import teacherclient.be.Student;
+import sharedclasses.be.Student;
 import teacherclient.dal.CurrentData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import sharedclasses.gui.model.AbsenceGraph;
 import teacherclient.bll.BllManager;
 
 /**
@@ -55,7 +56,7 @@ public class AbsenceModel
         ObservableList<Student> ol = FXCollections.observableArrayList();
         for (Student student : bll.getListAllStudents())
         {
-            for (teacherclient.be.SchoolClass sClass : student.getClasses())
+            for (sharedclasses.be.SchoolClass sClass : student.getClasses())
             {
                 if (sClass.getName().equals(cData.getCurrentClass().getName()))
                 {

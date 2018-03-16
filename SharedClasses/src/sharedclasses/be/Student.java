@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package studentclient.be;
+package sharedclasses.be;
+
+import java.util.List;
 
 /**
  *
@@ -15,6 +17,7 @@ public class Student
     private String name;
     private String username;
     private String password;
+    private List<SchoolClass> classes;
 
     public Student(int id, String name, String username, String password)
     {
@@ -22,6 +25,19 @@ public class Student
         this.name = name;
         this.username = username;
         this.password = password;
+    }
+
+    /**
+     * Constructor of Student.
+     * @param id
+     * @param name
+     * @param classes
+     */
+    public Student(int id, String name, List<SchoolClass> classes)
+    {
+        this.id = id;
+        this.name = name;
+        this.classes = classes;
     }
 
     public int getId()
@@ -65,6 +81,24 @@ public class Student
             return false;
         }
         return true;
+    }
+
+    /**
+     * Getter of classes.
+     * @return
+     */
+    public List<SchoolClass> getClasses()
+    {
+        return classes;
+    }
+
+    /**
+     * Setter of classes.
+     * @param classes
+     */
+    public void setClasses(List<SchoolClass> classes)
+    {
+        this.classes = classes;
     }
 
     @Override

@@ -12,7 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
-import teacherclient.be.ScheduleItem;
+import sharedclasses.be.ScheduleItem;
 import teacherclient.gui.model.ScheduleModel;
 
 /**
@@ -50,7 +50,7 @@ public class ScheduleViewController implements Initializable
 
     /**
      * Planned feature that allows a teacher to create a course in a given time.
-     * @param event 
+     * @param event
      */
     @FXML
     private void handleScheduleCourse(ActionEvent event)

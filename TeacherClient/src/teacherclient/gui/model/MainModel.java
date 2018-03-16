@@ -6,7 +6,7 @@
 package teacherclient.gui.model;
 
 import java.io.IOException;
-import teacherclient.be.SchoolClass;
+import sharedclasses.be.SchoolClass;
 import teacherclient.dal.HBoxCell;
 import teacherclient.dal.CurrentData;
 import java.util.ArrayList;

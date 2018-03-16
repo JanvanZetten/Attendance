@@ -1,4 +1,4 @@
-package studentclient.gui.model;
+package sharedclasses.gui.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,11 +16,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-import studentclient.be.ScheduleItem;
-import studentclient.be.CourseComparator;
-import studentclient.be.ScheduleDay;
-import studentclient.be.Student;
-import studentclient.bll.TimeUtils;
+import sharedclasses.be.ScheduleItem;
+import sharedclasses.be.CourseComparator;
+import sharedclasses.be.ScheduleDay;
+import sharedclasses.be.Student;
+import sharedclasses.bll.TimeUtils;
 
 /**
  *

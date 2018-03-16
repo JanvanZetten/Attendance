@@ -7,8 +7,8 @@ package studentclient.bll;
 
 import java.util.List;
 import javafx.scene.chart.XYChart;
-import studentclient.be.ScheduleItem;
-import studentclient.be.Student;
+import sharedclasses.be.ScheduleItem;
+import sharedclasses.be.Student;
 import studentclient.dal.MockDAO;
 
 /**

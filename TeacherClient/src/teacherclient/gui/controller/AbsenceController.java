@@ -5,7 +5,7 @@
  */
 package teacherclient.gui.controller;
 
-import teacherclient.be.Student;
+import sharedclasses.be.Student;
 import teacherclient.dal.CurrentData;
 import teacherclient.gui.model.AbsenceModel;
 import java.net.URL;

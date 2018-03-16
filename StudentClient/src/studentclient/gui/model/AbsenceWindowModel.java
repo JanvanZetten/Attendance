@@ -5,6 +5,7 @@
  */
 package studentclient.gui.model;
 
+import sharedclasses.gui.model.AbsenceGraph;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
 

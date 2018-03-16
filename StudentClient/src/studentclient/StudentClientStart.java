@@ -11,7 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import studentclient.be.UserOptions;
+import sharedclasses.be.UserOptions;
 
 /**
  *
@@ -24,14 +24,16 @@ public class StudentClientStart extends Application
     public void start(Stage stage) throws Exception
     {
         Parent root;
-        if (LoginIsRemember()) {
+        if (LoginIsRemember())
+        {
             root = FXMLLoader.load(getClass().getResource("gui/view/MainWindowView.fxml"));
             stage.setResizable(true);
-        } else {
+        }
+        else
+        {
             root = FXMLLoader.load(getClass().getResource("gui/view/LoginWindow.fxml"));
             stage.setResizable(false);
         }
-        
 
         Scene scene = new Scene(root);
 
@@ -49,8 +51,8 @@ public class StudentClientStart extends Application
         launch(args);
     }
 
-    
-    private boolean LoginIsRemember() {
+    private boolean LoginIsRemember()
+    {
         return new UserOptions().getRememberMe();
     }
 
