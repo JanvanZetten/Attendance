@@ -1,6 +1,6 @@
 package teacherclient.dal;
 
-import teacherclient.be.SchoolClass;
+import sharedclasses.be.SchoolClass;
 import teacherclient.gui.controller.AbsenceController;
 import java.io.IOException;
 import java.util.logging.Level;

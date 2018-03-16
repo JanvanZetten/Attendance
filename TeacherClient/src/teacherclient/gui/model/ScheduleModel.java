@@ -6,7 +6,9 @@
 package teacherclient.gui.model;
 
 import java.util.List;
-import teacherclient.be.ScheduleItem;
+import sharedclasses.be.ScheduleItem;
+import sharedclasses.be.Student;
+import sharedclasses.gui.model.Schedule;
 
 /**
  *
@@ -15,7 +17,7 @@ import teacherclient.be.ScheduleItem;
 public class ScheduleModel
 {
     private Schedule schedule;
-    
+
     public ScheduleModel()
     {
         schedule = new Schedule(8, 16);
@@ -23,7 +25,7 @@ public class ScheduleModel
 
     /**
      * Getter for schedule.
-     * @return 
+     * @return
      */
     public Schedule getSchedule()
     {
@@ -36,6 +38,6 @@ public class ScheduleModel
      */
     public void updateSchedule(List<ScheduleItem> courses)
     {
-        schedule.setupCourses(courses);
+        schedule.setupCourses(courses, new Student(0, "ge", "ge", "GE"));
     }
 }

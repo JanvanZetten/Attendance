@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.chart.XYChart;
-import studentclient.be.ClassRoom;
-import studentclient.be.Course;
-import studentclient.be.ScheduleItem;
-import studentclient.be.SchoolClass;
-import studentclient.be.Student;
-import studentclient.bll.BLLException;
-import studentclient.bll.TimeUtils;
+import sharedclasses.be.ClassRoom;
+import sharedclasses.be.Course;
+import sharedclasses.be.ScheduleItem;
+import sharedclasses.be.SchoolClass;
+import sharedclasses.be.Student;
+import sharedclasses.bll.BLLException;
+import sharedclasses.bll.TimeUtils;
 
 /**
  *
@@ -49,7 +49,7 @@ public class MockDAO
         teachers.add("Bent");
 
         List<SchoolClass> schoolClasses = new ArrayList<>();
-        schoolClasses.add(new SchoolClass("CS2017A"));
+        schoolClasses.add(new SchoolClass(1, "CS2017A"));
 
         List<ClassRoom> classRooms = new ArrayList<>();
         classRooms.add(new ClassRoom("C3"));

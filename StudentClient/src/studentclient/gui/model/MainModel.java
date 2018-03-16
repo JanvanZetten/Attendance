@@ -5,6 +5,8 @@
  */
 package studentclient.gui.model;
 
+import sharedclasses.gui.model.Schedule;
+import sharedclasses.gui.model.PopUpBubble;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,8 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import studentclient.be.ScheduleItem;
-import studentclient.be.Student;
+import sharedclasses.be.ScheduleItem;
+import sharedclasses.be.Student;
 import studentclient.bll.BllManager;
 import studentclient.gui.controller.AbsenceWindowController;
 
@@ -56,54 +58,54 @@ public class MainModel
     }
 
     /**
-     * Handles the "Present" button actions and opens a popup to notify the user.
+     * Handles the "Present" button actions and opens a popup to notify the
+     * user.
      * @param event clicking the button.
      */
     public void handlePresent(ActionEvent event)
     {
         Button button = (Button) event.getSource();
         button.setDisable(true);
-        
-        if (button.getText().equals("Present")) 
+
+        if (button.getText().equals("Present"))
         {
             PopUpBubble pub = new PopUpBubble(button, "Presence registred!", Color.web("#54AD32"));
             bm.setPresent(true);
-        
             Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(2500),
-                action -> changeButton(button, true)));
-            
+                    Duration.millis(2500),
+                    action -> changeButton(button, true)));
+
             timeline.play();
         }
         else if (button.getText().equals("Remove Prescence"))
         {
             PopUpBubble pub = new PopUpBubble(button, "Presence removed!", Color.web("#DB3b26"));
             bm.setPresent(false);
-        
             Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(2500),
-                action -> changeButton(button, false)));
-            
+                    Duration.millis(2500),
+                    action -> changeButton(button, false)));
+
             timeline.play();
         }
     }
-    
+
     /**
-     * Changes the button to Present or Remove Presence when clicking it 
-     * after a delay.
+     * Changes the button to Present or Remove Presence when clicking it after a
+     * delay.
      * @param button the Present button.
-     * @param trueOrFalse True = Pressed Present, False = Pressed Remove Presence.
+     * @param trueOrFalse True = Pressed Present, False = Pressed Remove
+     * Presence.
      */
-    private void changeButton(Button button, boolean trueOrFalse) 
+    private void changeButton(Button button, boolean trueOrFalse)
     {
         button.setDisable(false);
-        
-        if (trueOrFalse == true) 
+
+        if (trueOrFalse == true)
         {
             button.setStyle("-fx-background-color: #DB3b26");
             button.setText("Remove Prescence");
         }
-        else if (trueOrFalse == false) 
+        else if (trueOrFalse == false)
         {
             button.setStyle("-fx-background-color: #54AD32");
             button.setText("Present");

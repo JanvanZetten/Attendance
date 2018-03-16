@@ -21,7 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import studentclient.be.Student;
+import sharedclasses.be.Student;
 import studentclient.bll.BllManager;
 
 /**

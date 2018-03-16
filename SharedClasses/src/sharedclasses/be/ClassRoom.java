@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package studentclient.be;
+package sharedclasses.be;
 
 /**
  *
  * @author Asbamz
  */
-public class Course
+public class ClassRoom
 {
     private String name;
 
-    public Course(String name)
+    public ClassRoom(String name)
     {
         this.name = name;
     }

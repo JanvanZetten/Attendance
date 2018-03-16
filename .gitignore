@@ -88,10 +88,13 @@ $RECYCLE.BIN/
 # Local DB
 /MyTunes/localDB/
 /JavaFXPreloader/nbproject/private/
+/SharedClasses/nbproject/private/
 /StudentClient/nbproject/private/
 /TeacherClient/nbproject/private/
+!/SharedClasses/lib/*.jar
 
 
 #encrption jar
 !/StudentClient/lib/*
 !/StudentClient/lib/*
+/SharedClasses/nbproject/private/

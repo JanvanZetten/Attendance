@@ -3,29 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package teacherclient.be;
+package sharedclasses.be;
 
 /**
  *
  * @author Asbamz
  */
-public class ClassRoom
+public class Course
 {
     private String name;
 
-    /**
-     * Constructor for Class Rooms.
-     * @param name 
-     */
-    public ClassRoom(String name)
+    public Course(String name)
     {
         this.name = name;
     }
 
-    /**
-     * Getter of name.
-     * @return
-     */
     public String getName()
     {
         return name;

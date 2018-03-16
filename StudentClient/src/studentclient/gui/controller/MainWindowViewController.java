@@ -15,8 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import studentclient.be.ScheduleItem;
-import studentclient.be.Student;
+import sharedclasses.be.ScheduleItem;
+import sharedclasses.be.Student;
 import studentclient.gui.model.MainModel;
 
 /**
@@ -27,7 +27,7 @@ import studentclient.gui.model.MainModel;
 public class MainWindowViewController implements Initializable
 {
     private final int WEEKS_IN_A_YEAR = 52;
-    
+
     @FXML
     private Label lblWeek;
     @FXML
@@ -35,7 +35,7 @@ public class MainWindowViewController implements Initializable
 
     private MainModel mainModel;
     private int weekNumber = 10;
-    
+
     @FXML
     private Button btnPresent;
 
