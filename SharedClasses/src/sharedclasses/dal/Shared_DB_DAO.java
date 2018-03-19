@@ -42,7 +42,7 @@ public class Shared_DB_DAO {
      */
     public ResultSet CommonLogin(Connection con, String sql, String username, String encryptedPassword) throws SQLException{
             
-            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = con.prepareStatement(sql);
             
             statement.setString(1, username);
             statement.setString(2, encryptedPassword);
