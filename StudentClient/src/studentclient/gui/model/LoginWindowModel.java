@@ -50,7 +50,32 @@ public class LoginWindowModel
         }
         
         try {
-            bll.login(username.getText(), encryptedPassword);
+            Student approvedUser = bll.login(username.getText(), encryptedPassword);
+            
+            
+            Stage stage = (Stage) username.getScene().getWindow();
+
+            try
+            {
+                FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/studentclient/gui/view/MainWindowView.fxml"));
+                Parent root = fxLoader.load();
+
+                MainWindowViewController cont = fxLoader.getController();
+
+                cont.setUser(approvedUser);
+                cont.updateSchedule(bll.getScheduleItems());
+
+                Scene scene = new Scene(root);
+                stage.setResizable(true);
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.setTitle("Logged in as " + approvedUser.getName());
+                stage.show();
+            }catch (IOException ex)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
         } catch (BLLException ex) {
             Alert alert = new Alert(Alert.AlertType.WARNING, ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
