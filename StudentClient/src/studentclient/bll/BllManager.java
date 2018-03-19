@@ -40,9 +40,7 @@ public class BllManager
         
     }
     
-    public Student login (username, password){
-        //encrypt
-        
+    public Student login(String username, String encryptedPassword){
         
         return dal.login(username, encryptedPassword);
     }

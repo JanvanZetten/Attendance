@@ -21,5 +21,7 @@ public interface DALFacade {
     public XYChart.Series<String, Number> getChartSeries();
 
     public List<Student> getStudents();
+
+    public Student login(String username, String encryptedPassword);
     
 }
