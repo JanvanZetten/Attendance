@@ -6,8 +6,6 @@
 package studentclient.bll;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.chart.XYChart;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
@@ -15,7 +13,6 @@ import sharedclasses.bll.BLLException;
 import sharedclasses.dal.DALException;
 import studentclient.dal.DALFacade;
 import studentclient.dal.DalManager;
-import studentclient.dal.MockDAO;
 
 /**
  *
