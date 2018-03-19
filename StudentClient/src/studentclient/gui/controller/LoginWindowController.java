@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sharedclasses.be.Student;
 import studentclient.bll.BllManager;
+import studentclient.gui.model.LoginWindowModel;
 
 /**
  * FXML Controller class
@@ -36,7 +37,7 @@ public class LoginWindowController implements Initializable
     @FXML
     private PasswordField PaswordField;
 
-    private BllManager bll = new BllManager();
+    LoginWindowModel lwm = new LoginWindowModel();
 
     /**
      * Initializes the controller class.
@@ -50,59 +51,7 @@ public class LoginWindowController implements Initializable
     @FXML
     private void handleLogin(ActionEvent event)
     {
-
-        //if the content is wrong
-        if (UsernameField.getText().isEmpty() || PaswordField.getText().isEmpty())
-        {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a valid user and password", ButtonType.OK);
-            alert.showAndWait();
-            return;
-        }
-
-        Student approvedUser = null;
-        for (Student student : bll.getStudents())
-        {
-            if (student.getUsername().equalsIgnoreCase(UsernameField.getText()) && student.getPassword().equalsIgnoreCase(PaswordField.getText()))
-            {
-                approvedUser = student;
-            }
-        }
-
-        if (approvedUser != null)
-        {
-            //open the main window
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-
-            try
-            {
-                FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/studentclient/gui/view/MainWindowView.fxml"));
-                Parent root = fxLoader.load();
-
-                MainWindowViewController cont = fxLoader.getController();
-
-                cont.setUser(approvedUser);
-                cont.updateSchedule(bll.getScheduleItems());
-
-                Scene scene = new Scene(root);
-                stage.setResizable(true);
-                stage.setScene(scene);
-                stage.centerOnScreen();
-                stage.setTitle("Logged in as " + approvedUser.getName());
-                stage.show();
-
-            }
-            catch (IOException ex)
-            {
-                Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
-                alert.showAndWait();
-            }
-        }
-        else
-        {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "User not found try applemelon:casper", ButtonType.OK);
-            alert.showAndWait();
-        }
+        lwm.handleLogin(UsernameField, PaswordField);
     }
 
 }

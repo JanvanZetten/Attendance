@@ -5,25 +5,25 @@
  */
 package sharedclasses.be;
 
-import org.jasypt.util.text.StrongTextEncryptor;
-
 /**
  *
  * @author janvanzetten
  */
 public class UserOptions
 {
-
-    static private boolean rememberMe = false;
-    static private String user;
-    static private String pass;
-    StrongTextEncryptor textEncryptor;
+    private static boolean rememberMe;
+    private static String user;
+    private static String pass;
 
     public UserOptions()
     {
-        //password encryption setup:
-        textEncryptor = new StrongTextEncryptor();
-        textEncryptor.setPassword("anfopnu 83945gpÄNSU JVEWNIUVOÅAs dvuis nIEOV678NÅ AVASND* DSJV y768¨´´#dmsal ævpewui");
+    }
+
+    public UserOptions(String user, String password, boolean remember)
+    {
+        this.user = user;
+        this.pass = password;
+        this.rememberMe = remember;
     }
 
     public String getUsername()
@@ -33,20 +33,12 @@ public class UserOptions
 
     public String getPassword()
     {
-        return textEncryptor.decrypt(pass);
+        return pass;
     }
 
     public boolean getRememberMe()
     {
         return rememberMe;
-    }
-
-    public void rememberMe(String UserName, String Password)
-    {
-        rememberMe = true;
-        user = UserName;
-        String encryptedString = textEncryptor.encrypt(Password);
-        pass = encryptedString;
     }
 
     public void dontRememberMe()

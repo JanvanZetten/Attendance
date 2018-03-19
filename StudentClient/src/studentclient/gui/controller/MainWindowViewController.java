@@ -51,7 +51,7 @@ public class MainWindowViewController implements Initializable
         mainModel.getSchedule().prefHeightProperty().bind(scheduleAnchor.heightProperty());
     }
 
-    void setUser(Student student)
+    public void setUser(Student student)
     {
         mainModel.setActiveUser(student);
     }
