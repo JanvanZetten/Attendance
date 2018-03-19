@@ -46,9 +46,9 @@ public class Shared_DB_DAO {
             
             statement.setString(1, username);
             statement.setString(2, encryptedPassword);
-            
-            statement.execute();
-            return statement.getGeneratedKeys();
+           
+            return statement.executeQuery();
+         
     }
              
 

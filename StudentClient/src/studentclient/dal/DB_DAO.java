@@ -67,7 +67,7 @@ public class DB_DAO
                 String fName = rs.getString("fName");
                 String lName = rs.getString("lName");
                 
-                Student student = new Student(id, fName + lName, username, encryptedPassword);
+                Student student = new Student(1, fName + lName, username, encryptedPassword);
                 return student;
             }
             else{
