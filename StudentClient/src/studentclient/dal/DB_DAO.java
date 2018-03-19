@@ -1,12 +1,16 @@
 
 package studentclient.dal;
 
+import sharedclasses.dal.DALException;
+import sharedclasses.dal.DBConnecter;
+import sharedclasses.dal.Shared_DB_DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import studentclient.be.Student;
+import sharedclasses.be.Student;
+
 
 /**
  *
@@ -16,10 +20,12 @@ public class DB_DAO
 {
 
     DBConnecter connecter;
+    Shared_DB_DAO shared;
 
     public DB_DAO()
     {
         connecter = new DBConnecter();
+        shared = new Shared_DB_DAO(false);
     }
     
     public void SOMEMETHOD() throws DALException
@@ -42,7 +48,7 @@ public class DB_DAO
     
     
     /**
-     * Get student the student with this login
+     * Get the student with this login
      * @param username
      * @param encryptedPassword
      * @return
@@ -54,13 +60,7 @@ public class DB_DAO
             
             String sql = "SELECT * FROM Student WHERE username = ? AND password = ?;";
             
-            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-            statement.setString(1, username);
-            statement.setString(2, encryptedPassword);
-            
-            statement.execute();
-            ResultSet rs = statement.getGeneratedKeys();
+            ResultSet rs = shared.CommonLogin(con, sql, username, encryptedPassword);
             
             if (rs.next()){
                 int id = rs.getInt("id");

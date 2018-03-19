@@ -9,6 +9,8 @@ import java.util.List;
 import javafx.scene.chart.XYChart;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
+import studentclient.dal.DALFacade;
+import studentclient.dal.DalManager;
 import studentclient.dal.MockDAO;
 
 /**
@@ -17,25 +19,32 @@ import studentclient.dal.MockDAO;
  */
 public class BllManager
 {
-    private MockDAO mock = new MockDAO();
+    private DALFacade dal = new DalManager();
 
     public List<ScheduleItem> getScheduleItems()
     {
-        return mock.getSchedueleItems();
+        return dal.getSchedueleItems();
     }
 
     public XYChart.Series<String, Number> getChartSeries()
     {
-        return mock.getChartSeries();
+        return dal.getChartSeries();
     }
 
     public List<Student> getStudents()
     {
-        return mock.getStudents();
+        return dal.getStudents();
     }
 
     public void setPresent(boolean b) {
         
+    }
+    
+    public Student login (username, password){
+        //encrypt
+        
+        
+        return dal.login(username, encryptedPassword);
     }
 
 }
