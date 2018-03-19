@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.scene.chart.XYChart;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
+import sharedclasses.dal.DALException;
 
 /**
  *
@@ -22,6 +23,12 @@ public interface DALFacade {
 
     public List<Student> getStudents();
 
-    public Student login(String username, String encryptedPassword);
+    /**
+     * if the login information is valid return the student with this login if not send exeption
+     * @param username
+     * @param encryptedPassword
+     * @return 
+     */
+    public Student login(String username, String encryptedPassword) throws DALException;
     
 }
