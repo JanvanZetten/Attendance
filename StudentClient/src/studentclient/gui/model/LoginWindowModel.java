@@ -72,7 +72,7 @@ public class LoginWindowModel
                 stage.setResizable(true);
                 stage.setScene(scene);
                 stage.centerOnScreen();
-                stage.setTitle("Logged in as " + approvedUser.getName());
+                stage.setTitle("EASV - Student Client");
             }
             catch (IOException ex)
             {

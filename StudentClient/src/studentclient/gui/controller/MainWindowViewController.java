@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +35,8 @@ public class MainWindowViewController implements Initializable
     private AnchorPane mainAnchorPane;
     @FXML
     private MenuBar menuBar;
+    @FXML
+    private Menu loginLbl;
     @FXML
     private Label lblWeek;
     @FXML
@@ -60,6 +63,7 @@ public class MainWindowViewController implements Initializable
             public void run()
             {
                 mainModel.changeMenubarForMac(menuBar, mainAnchorPane);
+                loginLbl.textProperty().bind(mainModel.getLoginLabel());
             }
         });
     }

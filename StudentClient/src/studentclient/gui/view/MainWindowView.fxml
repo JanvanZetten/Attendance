@@ -23,6 +23,7 @@
               <MenuItem mnemonicParsing="false" onAction="#handleLogOut" text="Log out" />
             </items>
           </Menu>
+            <Menu fx:id="loginLbl" disable="true" mnemonicParsing="false" text="Logged in as USER" />
         </menus>
       </MenuBar>
         <Label layoutX="14.0" layoutY="14.0" text="Schedule:" textFill="#54585e" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="25.0">
