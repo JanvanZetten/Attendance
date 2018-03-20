@@ -43,23 +43,14 @@ import studentclient.gui.controller.AbsenceWindowController;
  */
 public class MainModel
 {
-    private final String LOGIN_PRETEXT = "Logged in as ";
-
     private Schedule schedule;
     private BllManager bm;
     private Student activeUser;
-    private StringProperty loginLabel;
 
     public MainModel()
     {
         schedule = new Schedule(8, 16);
         bm = new BllManager();
-        loginLabel = new SimpleStringProperty();
-    }
-
-    public StringProperty getLoginLabel()
-    {
-        return loginLabel;
     }
 
     public Schedule getSchedule()
@@ -161,7 +152,6 @@ public class MainModel
 
     public void setActiveUser(Student activeUser)
     {
-        loginLabel.set(LOGIN_PRETEXT + activeUser.getName());
         this.activeUser = activeUser;
     }
 
