@@ -80,4 +80,13 @@ public class DB_DAO
             throw new DALException(ex.getMessage(), ex.getCause());
         }
     }
+    
+    
+    /**
+     * set Prensence 
+     * @param currentStudent 
+     */
+    public void setPresence(Student currentStudent){
+        
+    }
 }

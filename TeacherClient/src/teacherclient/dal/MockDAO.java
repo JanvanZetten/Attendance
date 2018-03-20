@@ -42,7 +42,7 @@ public class MockDAO
     private Student Asbjørn;
     private Student Jan;
 
-    TimeUtils tu;
+    TimeUtils tu = new TimeUtils();
     Student one = new Student(1, "Jan van Zetten", "janx", "abc");
     Student two = new Student(2, "Alex Tygesen", "applemelon", "casper");
     Student three = new Student(3, "Asbjørn Mansa Jensen", "asbamse", "123");
