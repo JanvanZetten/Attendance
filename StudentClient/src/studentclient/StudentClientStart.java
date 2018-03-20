@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sharedclasses.be.UserOptions;
+import studentclient.gui.controller.LoginWindowController;
 
 /**
  *
@@ -33,7 +34,11 @@ public class StudentClientStart extends Application
         }
         else
         {
-            root = FXMLLoader.load(getClass().getResource("gui/view/LoginWindow.fxml"));
+            File file = new File("../SharedClasses/src/sharedclasses/gui/view/LoginWindow.fxml");
+            System.out.println(file.getCanonicalFile().toURI().toString());
+            FXMLLoader fxLoader = new FXMLLoader(file.getCanonicalFile().toURI().toURL());
+            fxLoader.setController(new LoginWindowController());
+            root = fxLoader.load();
             stage.setResizable(false);
         }
 
@@ -42,7 +47,7 @@ public class StudentClientStart extends Application
         stage.setScene(scene);
         stage.setTitle("EASV - Student");
         File file = new File("../SharedClasses/src/sharedclasses/Resources/EASVLogo.png");
-        stage.getIcons().add(new Image(file.toURI().toString()));
+        stage.getIcons().add(new Image(file.getCanonicalFile().toURI().toString()));
         stage.show();
     }
 

@@ -5,6 +5,7 @@
  */
 package studentclient.gui.model;
 
+import java.io.File;
 import sharedclasses.gui.model.Schedule;
 import sharedclasses.gui.model.PopUpBubble;
 import java.io.IOException;
@@ -37,6 +38,7 @@ import sharedclasses.be.Student;
 import sharedclasses.bll.BLLException;
 import studentclient.bll.BllManager;
 import studentclient.gui.controller.AbsenceWindowController;
+import studentclient.gui.controller.LoginWindowController;
 
 /**
  *
@@ -80,30 +82,36 @@ public class MainModel
 
         if (button.getText().equals("Present"))
         {
-            try {
+            try
+            {
                 PopUpBubble pub = new PopUpBubble(button, "Presence registred!", Color.web("#54AD32"));
                 bm.setPresent(true, activeUser);
                 Timeline timeline = new Timeline(new KeyFrame(
                         Duration.millis(2500),
                         action -> changeButton(button, true)));
-                
+
                 timeline.play();
-            } catch (BLLException ex) {
+            }
+            catch (BLLException ex)
+            {
                 Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
                 alert.showAndWait();
             }
         }
         else if (button.getText().equals("Remove Prescence"))
         {
-            try {
+            try
+            {
                 PopUpBubble pub = new PopUpBubble(button, "Presence removed!", Color.web("#DB3b26"));
                 bm.setPresent(false, activeUser);
                 Timeline timeline = new Timeline(new KeyFrame(
                         Duration.millis(2500),
                         action -> changeButton(button, false)));
-                
+
                 timeline.play();
-            } catch (BLLException ex) {
+            }
+            catch (BLLException ex)
+            {
                 Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
                 alert.showAndWait();
             }
@@ -172,7 +180,10 @@ public class MainModel
 
         try
         {
-            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/studentclient/gui/view/LoginWindow.fxml"));
+            File file = new File("../SharedClasses/src/sharedclasses/gui/view/LoginWindow.fxml");
+            System.out.println(file.getCanonicalFile().toURI().toString());
+            FXMLLoader fxLoader = new FXMLLoader(file.getCanonicalFile().toURI().toURL());
+            fxLoader.setController(new LoginWindowController());
             Parent root = fxLoader.load();
 
             Scene scene = new Scene(root);
