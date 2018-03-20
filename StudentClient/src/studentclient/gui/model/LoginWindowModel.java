@@ -43,16 +43,19 @@ public class LoginWindowModel
         }
 
         String encryptedPassword = null;
-        try {
+        try
+        {
             encryptedPassword = Encrypter.encrypt(password.getText());
-        } catch (BLLException ex) {
+        }
+        catch (BLLException ex)
+        {
             Logger.getLogger(LoginWindowModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        try {
+
+        try
+        {
             Student approvedUser = bll.login(username.getText(), encryptedPassword);
-            
-            
+
             Stage stage = (Stage) username.getScene().getWindow();
 
             try
@@ -70,17 +73,19 @@ public class LoginWindowModel
                 stage.setScene(scene);
                 stage.centerOnScreen();
                 stage.setTitle("Logged in as " + approvedUser.getName());
-                stage.show();
-            }catch (IOException ex)
+            }
+            catch (IOException ex)
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
                 alert.showAndWait();
             }
-        } catch (BLLException ex) {
+        }
+        catch (BLLException ex)
+        {
             Alert alert = new Alert(Alert.AlertType.WARNING, ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
-        
+
     }
 
 }

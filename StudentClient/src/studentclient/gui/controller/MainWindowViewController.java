@@ -8,11 +8,13 @@ package studentclient.gui.controller;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import sharedclasses.be.ScheduleItem;
@@ -29,15 +31,18 @@ public class MainWindowViewController implements Initializable
     private final int WEEKS_IN_A_YEAR = 52;
 
     @FXML
+    private AnchorPane mainAnchorPane;
+    @FXML
+    private MenuBar menuBar;
+    @FXML
     private Label lblWeek;
     @FXML
     private AnchorPane scheduleAnchor;
+    @FXML
+    private Button btnPresent;
 
     private MainModel mainModel;
     private int weekNumber = 10;
-
-    @FXML
-    private Button btnPresent;
 
     /**
      * Initializes the controller class.
@@ -49,6 +54,14 @@ public class MainWindowViewController implements Initializable
         scheduleAnchor.getChildren().add(mainModel.getSchedule());
         mainModel.getSchedule().prefWidthProperty().bind(scheduleAnchor.widthProperty());
         mainModel.getSchedule().prefHeightProperty().bind(scheduleAnchor.heightProperty());
+        Platform.runLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mainModel.changeMenubarForMac(menuBar, mainAnchorPane);
+            }
+        });
     }
 
     public void setUser(Student student)
@@ -105,5 +118,11 @@ public class MainWindowViewController implements Initializable
         }
 
         lblWeek.setText("Week " + weekNumber);
+    }
+
+    @FXML
+    private void handleLogOut(ActionEvent event)
+    {
+        mainModel.logOut(lblWeek);
     }
 }

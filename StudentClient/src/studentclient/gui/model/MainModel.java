@@ -15,9 +15,17 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -143,5 +151,46 @@ public class MainModel
     public void setActiveUser(Student activeUser)
     {
         this.activeUser = activeUser;
+    }
+
+    public void logOut(Node anyNode)
+    {
+        Stage stage = (Stage) anyNode.getScene().getWindow();
+
+        try
+        {
+            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/studentclient/gui/view/LoginWindow.fxml"));
+            Parent root = fxLoader.load();
+
+            Scene scene = new Scene(root);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.setTitle("EASV - Student");
+        }
+        catch (IOException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Makes the Menubar look nice on Mac. if it is a Mac the Menubar is placed
+     * on the where top of the screen where it normally is placed on a Mac.
+     *
+     * @param menubar
+     * @param mainPane
+     */
+    public void changeMenubarForMac(MenuBar menubar, AnchorPane mainPane)
+    {
+        if (System.getProperty("os.name").startsWith("Mac"))
+        {
+            menubar.useSystemMenuBarProperty().set(true);
+            menubar.setMinHeight(0.0);
+            menubar.setPrefHeight(0.0);
+            menubar.setMaxHeight(0.0);
+            mainPane.setPadding(new Insets(-25, 0, 0, 0));
+        }
     }
 }
