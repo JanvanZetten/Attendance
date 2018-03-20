@@ -5,6 +5,8 @@
  */
 package studentclient;
 
+import java.io.File;
+import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,7 +41,8 @@ public class StudentClientStart extends Application
 
         stage.setScene(scene);
         stage.setTitle("EASV - Student");
-        stage.getIcons().add(new Image("studentclient/Resources/EASVLogo.png"));
+        File file = new File("../SharedClasses/src/sharedclasses/Resources/EASVLogo.png");
+        stage.getIcons().add(new Image(file.toURI().toString()));
         stage.show();
     }
 
