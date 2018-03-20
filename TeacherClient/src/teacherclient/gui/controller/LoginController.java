@@ -20,6 +20,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import teacherclient.gui.model.LoginModel;
 
 /**
  * FXML Controller class
@@ -33,6 +34,7 @@ public class LoginController implements Initializable
     private TextField UsernameField;
     @FXML
     private PasswordField PaswordField;
+    private LoginModel model;
 
     /**
      * Initializes the controller class.
@@ -40,7 +42,7 @@ public class LoginController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        model = new LoginModel();
     }
 
     /**
@@ -50,36 +52,7 @@ public class LoginController implements Initializable
     @FXML
     private void handleLogin(ActionEvent event)
     {
-
-        //if the content is wrong
-        if (UsernameField.getText().isEmpty() && PaswordField.getText().isEmpty())
-        {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a valid user and password", ButtonType.OK);
-            alert.showAndWait();
-            return;
-        }
-
-        //open the main window
-        Button button = (Button) event.getSource();
-        Stage stage = (Stage) button.getScene().getWindow();
-
-        try
-        {
-            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/MainView.fxml"));
-            Parent root = fxLoader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.centerOnScreen();
-            stage.setTitle("Logged in as " + UsernameField.getText());
-            stage.show();
-
-        }
-        catch (IOException ex)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
-            alert.showAndWait();
-
-        }
+        model.handleLogin(UsernameField, PaswordField);
     }
 
 }

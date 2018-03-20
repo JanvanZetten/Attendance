@@ -6,10 +6,16 @@
 package teacherclient.bll;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.chart.XYChart;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.SchoolClass;
 import sharedclasses.be.Student;
+import sharedclasses.be.Teacher;
+import sharedclasses.bll.BLLException;
+import sharedclasses.dal.DALException;
+import teacherclient.dal.DalManager;
 import teacherclient.dal.MockDAO;
 
 /**
@@ -19,6 +25,7 @@ import teacherclient.dal.MockDAO;
 public class BllManager
 {
     private MockDAO mock = new MockDAO();
+    private DalManager dal = new DalManager();
 
     /**
      * Gets all classes that exist.
@@ -51,5 +58,13 @@ public class BllManager
     public XYChart.Series<String, Number> getChartSeries()
     {
         return mock.getChartSeries();
+    }
+
+    public Teacher login(String text, String encryptedPassword) throws BLLException {
+        try {
+            return dal.login(text, encryptedPassword);
+        } catch (DALException ex) {
+            throw new BLLException(ex.getMessage(), ex.getCause());
+        }
     }
 }
