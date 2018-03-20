@@ -80,7 +80,7 @@ public class DB_DAO {
 
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, currentStudent.getId());
-            java.util.Date date = new Date();
+            Date date = new Date();
             Object param = new java.sql.Timestamp(date.getTime());
             statement.setObject(2, param);
             
