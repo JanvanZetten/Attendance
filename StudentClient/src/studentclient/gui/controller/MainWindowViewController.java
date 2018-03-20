@@ -29,6 +29,7 @@ import studentclient.gui.model.MainModel;
  */
 public class MainWindowViewController implements Initializable
 {
+    private final String LOGIN_PRETEXT = "Logged in as ";
     private final int WEEKS_IN_A_YEAR = 52;
 
     @FXML
@@ -67,8 +68,8 @@ public class MainWindowViewController implements Initializable
             @Override
             public void run()
             {
+                loginLbl.setText(LOGIN_PRETEXT + student.getName());
                 mainModel.changeMenubarForMac(menuBar, mainAnchorPane);
-                loginLbl.textProperty().bind(mainModel.getLoginLabel());
             }
         });
     }
