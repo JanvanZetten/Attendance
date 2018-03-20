@@ -57,6 +57,11 @@ public class MainWindowViewController implements Initializable
         scheduleAnchor.getChildren().add(mainModel.getSchedule());
         mainModel.getSchedule().prefWidthProperty().bind(scheduleAnchor.widthProperty());
         mainModel.getSchedule().prefHeightProperty().bind(scheduleAnchor.heightProperty());
+    }
+
+    public void setUser(Student student)
+    {
+        mainModel.setActiveUser(student);
         Platform.runLater(new Runnable()
         {
             @Override
@@ -66,11 +71,6 @@ public class MainWindowViewController implements Initializable
                 loginLbl.textProperty().bind(mainModel.getLoginLabel());
             }
         });
-    }
-
-    public void setUser(Student student)
-    {
-        mainModel.setActiveUser(student);
     }
 
     /**
