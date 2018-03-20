@@ -63,15 +63,9 @@ public class MainWindowViewController implements Initializable
     public void setUser(Student student)
     {
         mainModel.setActiveUser(student);
-        Platform.runLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                loginLbl.setText(LOGIN_PRETEXT + student.getName());
-                mainModel.changeMenubarForMac(menuBar, mainAnchorPane);
-            }
-        });
+        loginLbl.setText(LOGIN_PRETEXT + student.getName());
+        mainModel.changeMenubarForMac(menuBar, mainAnchorPane);
+
     }
 
     /**
