@@ -6,6 +6,8 @@
 package studentclient.bll;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.chart.XYChart;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
@@ -37,8 +39,10 @@ public class BllManager
         return dal.getStudents();
     }
 
-    public void setPresent(boolean b) {
-        
+    public void setPresent(boolean b, Student activeUser) throws BLLException {
+        if (b){
+            setPresence(activeUser);
+        }
     }
     
     
@@ -51,6 +55,19 @@ public class BllManager
     public Student login(String username, String encryptedPassword) throws BLLException{
         try {
             return dal.login(username, encryptedPassword);
+        } catch (DALException ex) {
+            throw new BLLException(ex.getMessage(),ex.getCause());
+        }
+    }
+    
+    
+    /**
+     * set currentStudent as Present 
+     * @throws BLLException 
+     */
+    private void setPresence(Student activeUser) throws BLLException{
+        try {
+            dal.setPresence(activeUser);
         } catch (DALException ex) {
             throw new BLLException(ex.getMessage(),ex.getCause());
         }

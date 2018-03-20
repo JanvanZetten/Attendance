@@ -48,5 +48,10 @@ public class DalManager implements DALFacade {
     public Student login(String username, String encryptedPassword) throws DALException {
         return studentDB.login(username, encryptedPassword);
     }
+
+    @Override
+    public void setPresence(Student activeUser) throws DALException {
+        studentDB.setPresence(activeUser);
+    }
     
 }
