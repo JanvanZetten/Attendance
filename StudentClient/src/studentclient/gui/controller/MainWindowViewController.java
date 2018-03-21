@@ -122,6 +122,6 @@ public class MainWindowViewController implements Initializable
     @FXML
     private void handleLogOut(ActionEvent event)
     {
-        mainModel.logOut(lblWeek);
+        mainModel.logOut(mainAnchorPane);
     }
 }

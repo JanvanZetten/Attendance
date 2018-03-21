@@ -20,6 +20,7 @@ import sharedclasses.be.Teacher;
 import sharedclasses.bll.BLLException;
 import sharedclasses.bll.Encrypter;
 import teacherclient.bll.BllManager;
+import teacherclient.gui.controller.MainController;
 
 /**
  *
@@ -62,12 +63,16 @@ public class LoginWindowModel
             {
                 FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/MainView.fxml"));
                 Parent root = fxLoader.load();
+
+                MainController cont = fxLoader.getController();
+
+                cont.setUser(approvedUser);
+
                 Scene scene = new Scene(root);
+                stage.setResizable(true);
                 stage.setScene(scene);
                 stage.centerOnScreen();
-                stage.setTitle("Logged in as " + approvedUser.getName());
-                stage.show();
-
+                stage.setTitle("EASV - Teacher Client");
             }
             catch (IOException ex)
             {

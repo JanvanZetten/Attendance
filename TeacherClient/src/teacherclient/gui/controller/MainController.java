@@ -8,6 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.layout.AnchorPane;
+import sharedclasses.be.Teacher;
 
 /**
  * FXML Controller class
@@ -16,10 +20,18 @@ import javafx.scene.control.ListView;
  */
 public class MainController implements Initializable
 {
+    private final String LOGIN_PRETEXT = "Logged in as ";
 
-    private MainModel model;
+    @FXML
+    private AnchorPane mainAnchorPane;
+    @FXML
+    private MenuBar menuBar;
+    @FXML
+    private Menu loginLbl;
     @FXML
     private ListView<HBoxCell> listviewClasses;
+
+    private MainModel model;
 
     /**
      * Initializes the controller class.
@@ -32,14 +44,27 @@ public class MainController implements Initializable
         model.setClassList(listviewClasses);
     }
 
+    public void setUser(Teacher teacher)
+    {
+        model.setActiveUser(teacher);
+        loginLbl.setText(LOGIN_PRETEXT + teacher.getName());
+        model.changeMenubarForMac(menuBar, mainAnchorPane);
+    }
+
     /**
      * Sends the My Schedule button over to the model.
-     * @param event 
+     * @param event
      */
     @FXML
     private void btnMyScheduele(ActionEvent event)
     {
         model.openSchedule();
+    }
+
+    @FXML
+    private void handleLogOut(ActionEvent event)
+    {
+        model.logOut(mainAnchorPane);
     }
 
 }
