@@ -58,7 +58,7 @@ public class DB_DAO {
                 String fName = rs.getString("fName");
                 String lName = rs.getString("lName");
 
-                Student student = new Student(1, fName + " " + lName, username, encryptedPassword);
+                Student student = new Student(id, fName + " " + lName, username);
                 return student;
             } else {
                 throw new DALException("Check your Username and password");

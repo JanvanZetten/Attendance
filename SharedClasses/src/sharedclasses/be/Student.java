@@ -16,15 +16,13 @@ public class Student
     private int id;
     private String name;
     private String username;
-    private String password;
     private List<SchoolClass> classes;
 
-    public Student(int id, String name, String username, String password)
+    public Student(int id, String name, String username)
     {
         this.id = id;
         this.name = name;
         this.username = username;
-        this.password = password;
     }
 
     /**
@@ -55,10 +53,6 @@ public class Student
         return username;
     }
 
-    public String getPassword()
-    {
-        return password;
-    }
 
     @Override
     public boolean equals(Object obj)

@@ -14,13 +14,11 @@ public class Teacher {
     private int id;
     private String name;
     private String username;
-    private String password;
 
-    public Teacher(int id, String name, String username, String password) {
+    public Teacher(int id, String name, String username) {
         this.id = id;
         this.name = name;
         this.username = username;
-        this.password = password;
     }
 
     public int getId() {
@@ -35,9 +33,6 @@ public class Teacher {
         return username;
     }
 
-    public String getPassword() {
-        return password;
-    }
     
     
     
