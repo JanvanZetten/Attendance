@@ -38,6 +38,6 @@ public class ScheduleModel
      */
     public void updateSchedule(List<ScheduleItem> courses)
     {
-        schedule.setupCourses(courses, new Student(0, "ge", "ge", "GE"));
+        schedule.setupCourses(courses, new Student(0, "ge", "ge"));
     }
 }

@@ -43,9 +43,9 @@ public class MockDAO
     private Student Jan;
 
     TimeUtils tu = new TimeUtils();
-    Student one = new Student(1, "Jan van Zetten", "janx", "abc");
-    Student two = new Student(2, "Alex Tygesen", "applemelon", "casper");
-    Student three = new Student(3, "Asbjørn Mansa Jensen", "asbamse", "123");
+    Student one = new Student(1, "Jan van Zetten", "janx");
+    Student two = new Student(2, "Alex Tygesen", "applemelon");
+    Student three = new Student(3, "Asbjørn Mansa Jensen", "asbamse");
 
     /**
      * Creates mock data for use to test the GUI.
