@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="230.0" style="-fx-background-color: White;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@/studentclient/gui/view/css/loginwindow.css" />
+        <URL value="@../../../../../SharedClasses/src/sharedclasses/gui/css/loginwindow.css" />
     </stylesheets>
     <children>
         <Label layoutX="5.0" layoutY="46.0" text="Username:" textFill="#6c6c6c" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="46.0">

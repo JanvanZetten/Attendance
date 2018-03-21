@@ -35,7 +35,6 @@ public class StudentClientStart extends Application
         else
         {
             File file = new File("../SharedClasses/src/sharedclasses/gui/view/LoginWindow.fxml");
-            System.out.println(file.getCanonicalFile().toURI().toString());
             FXMLLoader fxLoader = new FXMLLoader(file.getCanonicalFile().toURI().toURL());
             fxLoader.setController(new LoginWindowController());
             root = fxLoader.load();
