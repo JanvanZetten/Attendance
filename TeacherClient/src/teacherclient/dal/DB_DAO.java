@@ -73,7 +73,7 @@ public class DB_DAO {
      */
     public List<SchoolClass> getClasses(Teacher currentTeacher)throws DALException{
         try (Connection con = connecter.getConnection()) {
-             String sql = "SELECT cl.* FROM Class cl JOIN StudentsInCLass sc ON cl.id = sc.classId WHERE sc.studentId = ?";
+             String sql = "SELECT cl.* FROM Class cl JOIN TeacherOfClass tc ON cl.id = tc.classId WHERE tc.teacherId = ?";
              
               PreparedStatement statement = con.prepareStatement(sql);
             
