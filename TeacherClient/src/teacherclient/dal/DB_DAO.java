@@ -8,6 +8,9 @@ package teacherclient.dal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+import sharedclasses.be.Student;
 import sharedclasses.be.Teacher;
 import sharedclasses.dal.DALException;
 import sharedclasses.dal.DBConnecter;
@@ -57,5 +60,40 @@ public class DB_DAO {
         } catch (SQLException ex) {
             throw new DALException(ex.getMessage(), ex.getCause());
         }
+    }
+    
+    /**
+     * Get a list of the classes that the given teacher has
+     * @param currentTeacher
+     * @return a list of classes
+     * @throws DALException 
+     */
+    public List<Class> getClasses(Teacher currentTeacher)throws DALException{
+        return null;
+    }
+    
+    
+    /**
+     * Get a list of all the students in a class
+     * @param schoolClass
+     * @return list of students
+     * @throws DALException 
+     */
+    public List<Student> getStudentsInClass(Class schoolClass) throws DALException{
+        return null;
+    }
+    
+    /**
+     * Get all the days where the Student has pressed present
+     * @param student the student to check for
+     * @return a list og date objects where the student was present
+     * @throws DALException 
+     */
+    public List<Date> getPresentDays(Student student) throws DALException{
+        
+        
+        return null;
+        
+        
     }
 }
