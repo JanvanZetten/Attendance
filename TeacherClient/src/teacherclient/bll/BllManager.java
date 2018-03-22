@@ -6,8 +6,6 @@
 package teacherclient.bll;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.chart.XYChart;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.SchoolClass;
@@ -60,10 +58,32 @@ public class BllManager
         return mock.getChartSeries();
     }
 
-    public Teacher login(String text, String encryptedPassword) throws BLLException {
-        try {
+    public Teacher login(String text, String encryptedPassword) throws BLLException
+    {
+        try
+        {
             return dal.login(text, encryptedPassword);
-        } catch (DALException ex) {
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getMessage(), ex.getCause());
+        }
+    }
+
+    /**
+     * Get a list of all the students in a class
+     * @param schoolClass
+     * @return list of students
+     * @throws DALException
+     */
+    public List<Student> getStudentsInClass(SchoolClass schoolClass) throws BLLException
+    {
+        try
+        {
+            return dal.getStudentsInClass(schoolClass);
+        }
+        catch (DALException ex)
+        {
             throw new BLLException(ex.getMessage(), ex.getCause());
         }
     }

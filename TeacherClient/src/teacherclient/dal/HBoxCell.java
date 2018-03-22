@@ -38,11 +38,8 @@ public class HBoxCell extends HBox
      * Creates HBox from super class. Sets JavaFX Nodes.
      *
      * @param labelText
-     * @param buttonText1
-     * @param buttonText2
-     * @param sentClass
      */
-    public HBoxCell(String labelText, SchoolClass sentClass, CurrentData cData, BllManager bll)
+    public HBoxCell(String labelText, SchoolClass schoolClass, BllManager bll)
     {
         super();
 
@@ -75,12 +72,11 @@ public class HBoxCell extends HBox
                     FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/AbsenceView.fxml"));
                     Parent root = fxLoader.load();
                     Scene scene = new Scene(root);
-                    newStage.setTitle("Absence in " + sentClass.getName());
+                    newStage.setTitle("Absence in " + schoolClass.getName());
                     newStage.setScene(scene);
 
-                    cData.setCurrentClass(sentClass);
                     AbsenceController cont = fxLoader.getController();
-                    cont.setData(cData, bll);
+                    cont.setData(schoolClass, bll);
 
                     newStage.showAndWait();
 
@@ -111,7 +107,7 @@ public class HBoxCell extends HBox
                     cont.updateSchedule(bll.getScheduleItems());
 
                     Scene scene = new Scene(root);
-                    newStage.setTitle("Schedule for " + sentClass.getName());
+                    newStage.setTitle("Schedule for " + schoolClass.getName());
                     newStage.setScene(scene);
                     newStage.showAndWait();
                 }

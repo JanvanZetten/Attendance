@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import sharedclasses.be.SchoolClass;
 import teacherclient.dal.HBoxCell;
-import teacherclient.dal.CurrentData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,7 +41,6 @@ public class MainModel
 {
 
     private BllManager bll;
-    private CurrentData cData;
     private Teacher activeUser;
 
     /**
@@ -52,7 +50,6 @@ public class MainModel
     public void createMockData()
     {
         bll = new BllManager();
-        cData = new CurrentData();
     }
 
     /**
@@ -62,17 +59,24 @@ public class MainModel
      */
     public void setClassList(ListView<HBoxCell> listviewClasses)
     {
-        List<HBoxCell> tbl = new ArrayList<>();
-        List<SchoolClass> classes = bll.getListAllClasses();
-
-        for (int i = 0; i < classes.size(); i++)
+        if (activeUser != null)
         {
-            tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), cData, bll));
-        }
+            List<HBoxCell> tbl = new ArrayList<>();
+            List<SchoolClass> classes = activeUser.getClasses();
 
-        ObservableList<HBoxCell> ol = FXCollections.observableArrayList();
-        ol.addAll(tbl);
-        listviewClasses.setItems(ol);
+            for (int i = 0; i < classes.size(); i++)
+            {
+                tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), bll));
+            }
+
+            ObservableList<HBoxCell> ol = FXCollections.observableArrayList();
+            ol.addAll(tbl);
+            listviewClasses.setItems(ol);
+        }
+        else
+        {
+            System.out.println("ActiveUser is null");
+        }
     }
 
     /**
@@ -104,7 +108,7 @@ public class MainModel
 
     public void setActiveUser(Teacher teacher)
     {
-        this.activeUser = activeUser;
+        this.activeUser = teacher;
     }
 
     public void changeMenubarForMac(MenuBar menubar, AnchorPane mainPane)

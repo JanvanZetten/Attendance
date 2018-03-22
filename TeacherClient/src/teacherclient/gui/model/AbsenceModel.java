@@ -5,14 +5,18 @@
  */
 package teacherclient.gui.model;
 
+import java.util.List;
 import sharedclasses.be.Student;
-import teacherclient.dal.CurrentData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import sharedclasses.be.SchoolClass;
+import sharedclasses.bll.BLLException;
 import sharedclasses.gui.model.AbsenceGraph;
 import teacherclient.bll.BllManager;
 
@@ -22,10 +26,15 @@ import teacherclient.bll.BllManager;
  */
 public class AbsenceModel
 {
+    private final String PRETEXT = "Absence in ";
+    private final String MIDDLETEXT = " for ";
+    private final String POSTTEXT = ":";
 
-    private CurrentData cData;
+    private SchoolClass schoolClass;
     private BllManager bll;
     private AbsenceGraph ag;
+    private AnchorPane chartPane;
+    private Label labelClass;
 
     /**
      * Sets data class instances to be the same as other classes and sets items
@@ -36,14 +45,21 @@ public class AbsenceModel
      * @param cData
      * @param bll
      */
-    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, CurrentData cData, BllManager bll)
+    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll)
     {
-        this.cData = cData;
+        this.schoolClass = schoolClass;
+        this.chartPane = chartPane;
         this.bll = bll;
-        labelClass.setText("Absence in " + cData.getCurrentClass().getName() + ":");
-        setStudentList(listviewStudents);
-
-        ag = new AbsenceGraph(chartPane, bll.getChartSeries());
+        labelClass.setText(PRETEXT + schoolClass.getName() + POSTTEXT);
+        try
+        {
+            setStudentList(listviewStudents);
+        }
+        catch (BLLException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Getting students: " + ex.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
     /**
@@ -51,36 +67,54 @@ public class AbsenceModel
      * that course.
      * @param listviewStudents
      */
-    private void setStudentList(ListView<Student> listviewStudents)
+    private void setStudentList(ListView<Student> listviewStudents) throws BLLException
     {
         ObservableList<Student> ol = FXCollections.observableArrayList();
-        for (Student student : bll.getListAllStudents())
+        List<Student> studentsInClass = bll.getStudentsInClass(schoolClass);
+        if (studentsInClass != null)
         {
-            for (sharedclasses.be.SchoolClass sClass : student.getClasses())
+            for (Student student : bll.getStudentsInClass(schoolClass))
             {
-                if (sClass.getName().equals(cData.getCurrentClass().getName()))
+                for (sharedclasses.be.SchoolClass sClass : student.getClasses())
                 {
-                    ol.add(student);
+                    if (sClass.getName().equals(schoolClass.getName()))
+                    {
+                        ol.add(student);
+                    }
                 }
+            }
+            listviewStudents.setItems(ol);
+            listviewStudents.setCellFactory(param -> new ListCell<Student>()
+            {
+                @Override
+                protected void updateItem(Student item, boolean empty)
+                {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null || item.getName() == null)
+                    {
+                        setText(null);
+                    }
+                    else
+                    {
+                        setText(item.getName());
+                    }
+                }
+            });
+            if (ol.size() > 0)
+            {
+                selectStudent(ol.get(0));
             }
         }
-        listviewStudents.setItems(ol);
-        listviewStudents.setCellFactory(param -> new ListCell<Student>()
+        else
         {
-            @Override
-            protected void updateItem(Student item, boolean empty)
-            {
-                super.updateItem(item, empty);
+            System.out.println("StudentInClass is null");
+        }
+    }
 
-                if (empty || item == null || item.getName() == null)
-                {
-                    setText(null);
-                }
-                else
-                {
-                    setText(item.getName());
-                }
-            }
-        });
+    public void selectStudent(Student student)
+    {
+        labelClass.setText(PRETEXT + schoolClass.getName() + MIDDLETEXT + student.getName() + POSTTEXT);
+        ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(student));
     }
 }

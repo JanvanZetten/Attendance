@@ -7,6 +7,7 @@ package sharedclasses.gui.model;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
@@ -25,6 +26,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import sharedclasses.be.ScheduleDay;
+import sharedclasses.be.Student;
 
 /**
  *
@@ -208,5 +211,16 @@ public class AbsenceGraph
                 dataText.setText(formatter.format(Number.doubleValue()) + "%");
             }
         });
+    }
+
+    public static XYChart.Series<String, Number> getChartSeriesFromStudentAbsenceInWeekDays(Student student)
+    {
+        // Some test value:
+        XYChart.Series<String, Number> series = new XYChart.Series();
+        for (ScheduleDay day : ScheduleDay.values())
+        {
+            series.getData().add(new XYChart.Data(day.getDay(), (new Random()).nextInt(100)));
+        }
+        return series;
     }
 }

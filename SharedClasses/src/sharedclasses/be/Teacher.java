@@ -5,35 +5,109 @@
  */
 package sharedclasses.be;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author janvanzetten
  */
-public class Teacher {
-    
+public class Teacher
+{
     private int id;
     private String name;
     private String username;
+    private List<SchoolClass> classes;
 
-    public Teacher(int id, String name, String username) {
+    /**
+     * Teacher
+     * @param id teacher id from database.
+     * @param name teacher name.
+     * @param username teacher username.
+     */
+    public Teacher(int id, String name, String username)
+    {
         this.id = id;
         this.name = name;
         this.username = username;
+        this.classes = new ArrayList<>();
     }
 
-    public int getId() {
+    /**
+     * Get id.
+     * @return id.
+     */
+    public int getId()
+    {
         return id;
     }
 
-    public String getName() {
+    /**
+     * Get name.
+     * @return name.
+     */
+    public String getName()
+    {
         return name;
     }
 
-    public String getUsername() {
+    /**
+     * Get username.
+     * @return username.
+     */
+    public String getUsername()
+    {
         return username;
     }
 
-    
-    
-    
+    /**
+     * Compare on id.
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final Teacher other = (Teacher) obj;
+        if (this.id != other.id)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Getter of classes.
+     * @return
+     */
+    public List<SchoolClass> getClasses()
+    {
+        return classes;
+    }
+
+    /**
+     * Setter of classes.
+     * @param classes
+     */
+    public void setClasses(List<SchoolClass> classes)
+    {
+        this.classes.clear();
+        if (classes != null)
+        {
+            this.classes.addAll(classes);
+        }
+    }
+
 }

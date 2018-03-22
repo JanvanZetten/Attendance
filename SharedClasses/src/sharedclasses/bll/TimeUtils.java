@@ -13,7 +13,7 @@ import java.util.Locale;
 import sharedclasses.bll.BLLException;
 
 /**
- *
+ * To convert time.
  * @author Asbamz
  */
 public class TimeUtils
@@ -24,6 +24,9 @@ public class TimeUtils
     private final String HOUR_MINUTE_FORMAT = "HH:mm";
     private final Calendar cal;
 
+    /**
+     * Creates calendar on construction.
+     */
     public TimeUtils()
     {
         cal = Calendar.getInstance(Locale.ENGLISH);
@@ -52,12 +55,23 @@ public class TimeUtils
         return (hour < 10 ? "0" + hour : hour) + ":" + (min < 10 ? "0" + min : min);
     }
 
+    /**
+     * Converts Date to hour:minutes format (00:00).
+     * @param date
+     * @return
+     */
     public String minuteHourFormatFromDate(Date date)
     {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(HOUR_MINUTE_FORMAT, Locale.ENGLISH);
         return simpleDateFormat.format(date);
     }
 
+    /**
+     * Converts string to date. Given the String is formated as DATE_FORMAT.
+     * @param stringDate
+     * @return
+     * @throws BLLException
+     */
     public Date dateFromString(String stringDate) throws BLLException
     {
         Date date;
@@ -75,12 +89,22 @@ public class TimeUtils
         return date;
     }
 
+    /**
+     * Converts Date to the day as String.
+     * @param date
+     * @return
+     */
     public String dayFromDate(Date date)
     {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DAY_FORMAT, Locale.ENGLISH);
         return simpleDateFormat.format(date);
     }
 
+    /**
+     * Converts Date to minutes from 00:00 of that day.
+     * @param date
+     * @return
+     */
     public int minutesFromDate(Date date)
     {
         cal.setTime(date);

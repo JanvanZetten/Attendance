@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 public class EncrypterTest
 {
     /**
+     * Test to see if the result is always the same.
      * @param args the command line arguments
      */
     public static void main(String[] args)

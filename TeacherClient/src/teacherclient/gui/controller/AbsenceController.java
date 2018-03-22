@@ -6,7 +6,6 @@
 package teacherclient.gui.controller;
 
 import sharedclasses.be.Student;
-import teacherclient.dal.CurrentData;
 import teacherclient.gui.model.AbsenceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import sharedclasses.be.SchoolClass;
 import teacherclient.bll.BllManager;
 
 /**
@@ -51,10 +51,9 @@ public class AbsenceController implements Initializable
      * @param cData
      * @param mData
      */
-    public void setData(CurrentData cData, BllManager bll)
+    public void setData(SchoolClass schoolClass, BllManager bll)
     {
-        model.setInformation(labelClass, listviewStudents, chartPane, cData, bll);
-
+        model.setInformation(labelClass, listviewStudents, chartPane, schoolClass, bll);
     }
 
     /**
@@ -67,9 +66,8 @@ public class AbsenceController implements Initializable
         {
             if (listviewStudents.getSelectionModel().getSelectedItem() != null && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem())
             {
-                selectedStudent = listviewStudents.getSelectionModel().getSelectedItem();
+                model.selectStudent(listviewStudents.getSelectionModel().getSelectedItem());
                 System.out.println(listviewStudents.getSelectionModel().getSelectedItem());
-
             }
         }
     }
