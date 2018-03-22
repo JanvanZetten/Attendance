@@ -15,15 +15,8 @@ import sharedclasses.dal.DALException;
  *
  * @author janvanzetten
  */
-public class DalManager implements DalFacade
-{
-    DB_DAO db;
-
-    public DalManager()
-    {
-        this.db = new DB_DAO();
-    }
-
+public interface DalFacade {
+    
     /**
      * login the Teacher if it exists return object
      * @param username
@@ -32,22 +25,14 @@ public class DalManager implements DalFacade
      * @throws DALException if something went wrong like that the teacher is not
      * in the database
      */
-    public Teacher login(String username, String encryptedPassword) throws DALException
-    {
-        Teacher teacher = db.login(username, encryptedPassword);
-        teacher.setClasses(db.getClasses(teacher));
-        return teacher;
-    }
-
+    public Teacher login(String username, String encryptedPassword) throws DALException;
+    
     /**
      * Get a list of all the students in a class
      * @param schoolClass
      * @return list of students
      * @throws DALException
      */
-    public List<Student> getStudentsInClass(SchoolClass schoolClass) throws DALException
-    {
-        return db.getStudentsInClass(schoolClass);
-    }
-
+    public List<Student> getStudentsInClass(SchoolClass schoolClass) throws DALException;
+    
 }

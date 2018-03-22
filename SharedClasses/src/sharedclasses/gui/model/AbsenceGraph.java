@@ -89,11 +89,14 @@ public class AbsenceGraph
         yAxis.setTickLabelFormatter(
                 new NumberAxis.DefaultFormatter(yAxis, null, "%")
         );
+        yAxis.setAutoRanging(false);
+        yAxis.setUpperBound(100);
+        yAxis.setLowerBound(0);
 
         // Creating BarChart.
         BarChart<String, Number> absenceChart = new BarChart<>(xAxis, yAxis);
         absenceChart.setTitle("Absence Chart");
-        absenceChart.getXAxis().setLabel("Class");
+        absenceChart.getXAxis().setLabel("Day of the week");
         absenceChart.getYAxis().setLabel("Absence in percentage");
         absenceChart.getData().add(series);
         absenceChart.setLegendVisible(false);

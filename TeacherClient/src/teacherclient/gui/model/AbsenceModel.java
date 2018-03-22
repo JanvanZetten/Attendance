@@ -27,14 +27,12 @@ import teacherclient.bll.BllManager;
 public class AbsenceModel
 {
     private final String PRETEXT = "Absence in ";
-    private final String MIDDLETEXT = " for ";
     private final String POSTTEXT = ":";
 
     private SchoolClass schoolClass;
     private BllManager bll;
     private AbsenceGraph ag;
     private AnchorPane chartPane;
-    private Label labelClass;
 
     /**
      * Sets data class instances to be the same as other classes and sets items
@@ -42,7 +40,7 @@ public class AbsenceModel
      * @param labelClass
      * @param listviewStudents
      * @param chartPane
-     * @param cData
+     * @param schoolClass
      * @param bll
      */
     public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll)
@@ -73,15 +71,9 @@ public class AbsenceModel
         List<Student> studentsInClass = bll.getStudentsInClass(schoolClass);
         if (studentsInClass != null)
         {
-            for (Student student : bll.getStudentsInClass(schoolClass))
+            for (Student student : studentsInClass)
             {
-                for (sharedclasses.be.SchoolClass sClass : student.getClasses())
-                {
-                    if (sClass.getName().equals(schoolClass.getName()))
-                    {
-                        ol.add(student);
-                    }
-                }
+                ol.add(student);
             }
             listviewStudents.setItems(ol);
             listviewStudents.setCellFactory(param -> new ListCell<Student>()
@@ -114,7 +106,7 @@ public class AbsenceModel
 
     public void selectStudent(Student student)
     {
-        labelClass.setText(PRETEXT + schoolClass.getName() + MIDDLETEXT + student.getName() + POSTTEXT);
+        chartPane.getChildren().clear();
         ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(student));
     }
 }
