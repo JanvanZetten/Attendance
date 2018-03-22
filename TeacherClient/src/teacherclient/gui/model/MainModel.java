@@ -41,7 +41,6 @@ public class MainModel
 {
 
     private BllManager bll;
-    private SchoolClass schoolClass;
     private Teacher activeUser;
 
     /**
@@ -67,7 +66,7 @@ public class MainModel
 
             for (int i = 0; i < classes.size(); i++)
             {
-                tbl.add(new HBoxCell(classes.get(i).getName(), schoolClass, bll));
+                tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), bll));
             }
 
             ObservableList<HBoxCell> ol = FXCollections.observableArrayList();
@@ -105,7 +104,7 @@ public class MainModel
 
     public void setActiveUser(Teacher teacher)
     {
-        this.activeUser = activeUser;
+        this.activeUser = teacher;
     }
 
     public void changeMenubarForMac(MenuBar menubar, AnchorPane mainPane)

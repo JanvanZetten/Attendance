@@ -38,9 +38,6 @@ public class HBoxCell extends HBox
      * Creates HBox from super class. Sets JavaFX Nodes.
      *
      * @param labelText
-     * @param buttonText1
-     * @param buttonText2
-     * @param sentClass
      */
     public HBoxCell(String labelText, SchoolClass schoolClass, BllManager bll)
     {

@@ -5,14 +5,18 @@
  */
 package teacherclient.gui.model;
 
+import java.util.List;
 import sharedclasses.be.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import sharedclasses.be.SchoolClass;
+import sharedclasses.bll.BLLException;
 import sharedclasses.gui.model.AbsenceGraph;
 import teacherclient.bll.BllManager;
 
@@ -41,7 +45,15 @@ public class AbsenceModel
         this.schoolClass = schoolClass;
         this.bll = bll;
         labelClass.setText("Absence in " + schoolClass.getName() + ":");
-        setStudentList(listviewStudents);
+        try
+        {
+            setStudentList(listviewStudents);
+        }
+        catch (BLLException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Getting students: " + ex.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
 
         ag = new AbsenceGraph(chartPane, bll.getChartSeries());
     }
@@ -51,36 +63,40 @@ public class AbsenceModel
      * that course.
      * @param listviewStudents
      */
-    private void setStudentList(ListView<Student> listviewStudents)
+    private void setStudentList(ListView<Student> listviewStudents) throws BLLException
     {
         ObservableList<Student> ol = FXCollections.observableArrayList();
-        for (Student student : bll.getListAllStudents())
+        List<Student> studentsInClass = bll.getStudentsInClass(schoolClass);
+        if (studentsInClass != null)
         {
-            for (sharedclasses.be.SchoolClass sClass : student.getClasses())
+            for (Student student : bll.getStudentsInClass(schoolClass))
             {
-                if (sClass.getName().equals(schoolClass.getName()))
+                for (sharedclasses.be.SchoolClass sClass : student.getClasses())
                 {
-                    ol.add(student);
+                    if (sClass.getName().equals(schoolClass.getName()))
+                    {
+                        ol.add(student);
+                    }
                 }
             }
-        }
-        listviewStudents.setItems(ol);
-        listviewStudents.setCellFactory(param -> new ListCell<Student>()
-        {
-            @Override
-            protected void updateItem(Student item, boolean empty)
+            listviewStudents.setItems(ol);
+            listviewStudents.setCellFactory(param -> new ListCell<Student>()
             {
-                super.updateItem(item, empty);
+                @Override
+                protected void updateItem(Student item, boolean empty)
+                {
+                    super.updateItem(item, empty);
 
-                if (empty || item == null || item.getName() == null)
-                {
-                    setText(null);
+                    if (empty || item == null || item.getName() == null)
+                    {
+                        setText(null);
+                    }
+                    else
+                    {
+                        setText(item.getName());
+                    }
                 }
-                else
-                {
-                    setText(item.getName());
-                }
-            }
-        });
+            });
+        }
     }
 }
