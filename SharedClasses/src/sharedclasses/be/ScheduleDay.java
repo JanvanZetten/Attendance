@@ -16,18 +16,30 @@ public enum ScheduleDay
     public int value;
     public String day;
 
-    // Enum constructor to contain order and name.
+    /**
+     * Enum constructor to contain order and name.
+     * @param value Order as integer. 1, 2, 3, 4 and so forth.
+     * @param day Day of the week.
+     */
     ScheduleDay(int value, String day)
     {
         this.value = value;
         this.day = day;
     }
 
+    /**
+     * Gets order value.
+     * @return order value.
+     */
     public Integer getValue()
     {
         return this.value;
     }
 
+    /**
+     * Gets day of the week.
+     * @return day of the week.
+     */
     public String getDay()
     {
         return this.day;

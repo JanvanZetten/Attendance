@@ -15,36 +15,60 @@ public class UserOptions
     private static String user;
     private static String pass;
 
+    /**
+     * User Options.
+     */
     public UserOptions()
     {
     }
 
+    /**
+     * User Options with information.
+     * @param user username.
+     * @param password password.
+     * @param remember remember.
+     */
     public UserOptions(String user, String password, boolean remember)
     {
-        this.user = user;
-        this.pass = password;
-        this.rememberMe = remember;
+        UserOptions.user = user;
+        UserOptions.pass = password;
+        UserOptions.rememberMe = remember;
     }
 
+    /**
+     * Get username.
+     * @return username.
+     */
     public String getUsername()
     {
-        return user;
+        return UserOptions.user;
     }
 
+    /**
+     * Get password.
+     * @return password.
+     */
     public String getPassword()
     {
-        return pass;
+        return UserOptions.pass;
     }
 
+    /**
+     * Get remember me.
+     * @return remember me.
+     */
     public boolean getRememberMe()
     {
-        return rememberMe;
+        return UserOptions.rememberMe;
     }
 
+    /**
+     * Reset object.
+     */
     public void dontRememberMe()
     {
-        rememberMe = false;
-        user = null;
-        pass = null;
+        UserOptions.rememberMe = false;
+        UserOptions.user = null;
+        UserOptions.pass = null;
     }
 }

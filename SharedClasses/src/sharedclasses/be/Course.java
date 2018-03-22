@@ -13,11 +13,19 @@ public class Course
 {
     private String name;
 
+    /**
+     * A Course.
+     * @param name the name of the course.
+     */
     public Course(String name)
     {
         this.name = name;
     }
 
+    /**
+     * The name of the Course.
+     * @return the name of the Course.
+     */
     public String getName()
     {
         return name;
