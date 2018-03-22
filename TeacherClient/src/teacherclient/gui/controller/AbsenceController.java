@@ -52,6 +52,7 @@ public class AbsenceController implements Initializable
     public void setData(SchoolClass schoolClass, BllManager bll)
     {
         model.setInformation(labelClass, listviewStudents, chartPane, schoolClass, bll);
+        listviewStudents.getSelectionModel().selectFirst();
     }
 
     /**

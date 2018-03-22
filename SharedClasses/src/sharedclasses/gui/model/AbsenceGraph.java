@@ -7,6 +7,10 @@ package sharedclasses.gui.model;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -28,6 +32,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import sharedclasses.be.ScheduleDay;
 import sharedclasses.be.Student;
+import sharedclasses.bll.TimeUtils;
 
 /**
  *
@@ -216,13 +221,90 @@ public class AbsenceGraph
         });
     }
 
-    public static XYChart.Series<String, Number> getChartSeriesFromStudentAbsenceInWeekDays(Student student)
+    /**
+     * Calculates average absence and creates a XYChart series.
+     * @param presence
+     * @return
+     */
+    public static XYChart.Series<String, Number> getChartSeriesFromStudentAbsenceInWeekDays(List<Date> presence)
     {
-        // Some test value:
+        TimeUtils tu = new TimeUtils();
         XYChart.Series<String, Number> series = new XYChart.Series();
-        for (ScheduleDay day : ScheduleDay.values())
+
+        Date startDate = null;
+        for (Date date : presence)
         {
-            series.getData().add(new XYChart.Data(day.getDay(), (new Random()).nextInt(100)));
+            if (startDate == null)
+            {
+                startDate = date;
+            }
+            if (startDate.after(date))
+            {
+                startDate = date;
+            }
+        }
+
+        if (startDate != null)
+        {
+            Calendar today = Calendar.getInstance();
+            Calendar c = Calendar.getInstance();
+            c.setTime(startDate);
+            List<Double> schoolDays = new ArrayList<>();
+            for (int i = 0; i < ScheduleDay.values().length; i++)
+            {
+                schoolDays.add(0.0);
+            }
+            while (c.getTime().before(today.getTime()))
+            {
+                for (int i = 0; i < ScheduleDay.values().length; i++)
+                {
+                    if (tu.dayFromDate(c.getTime()).equalsIgnoreCase(ScheduleDay.values()[i].getDay()))
+                    {
+                        schoolDays.set(i, schoolDays.get(i) + 1.0);
+                    }
+                }
+                c.add(Calendar.DATE, 1);
+            }
+
+            List<Double> presentDays = new ArrayList<>();
+            for (int i = 0; i < ScheduleDay.values().length; i++)
+            {
+                presentDays.add(0.0);
+            }
+            for (Date date : presence)
+            {
+                for (int i = 0; i < ScheduleDay.values().length; i++)
+                {
+                    if (tu.dayFromDate(date).equalsIgnoreCase(ScheduleDay.values()[i].getDay()))
+                    {
+                        presentDays.set(i, presentDays.get(i) + 1.0);
+                    }
+                }
+            }
+
+            for (int i = 0; i < ScheduleDay.values().length; i++)
+            {
+                if (schoolDays.get(i) == 0.0)
+                {
+                    series.getData().add(new XYChart.Data(ScheduleDay.values()[i].getDay(), 0.0));
+                }
+                else
+                {
+                    double result = 100 - ((presentDays.get(i) / schoolDays.get(i)) * 100);
+                    result = result < 0.0 ? 0.0 : result;
+                    result = result > 100.0 ? 100.0 : result;
+                    series.getData().add(new XYChart.Data(ScheduleDay.values()[i].getDay(), result));
+                }
+            }
+        }
+        else
+        {
+            System.out.println("Present dates for absence graph is null");
+
+            for (int i = 0; i < ScheduleDay.values().length; i++)
+            {
+                series.getData().add(new XYChart.Data(ScheduleDay.values()[i].getDay(), Double.NaN));
+            }
         }
         return series;
     }

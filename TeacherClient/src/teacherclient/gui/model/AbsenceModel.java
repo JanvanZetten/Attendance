@@ -6,6 +6,8 @@
 package teacherclient.gui.model;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sharedclasses.be.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -107,6 +109,14 @@ public class AbsenceModel
     public void selectStudent(Student student)
     {
         chartPane.getChildren().clear();
-        ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(student));
+        try
+        {
+            ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(bll.getPresentDays(student)));
+        }
+        catch (BLLException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Selecting student: " + ex.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 }

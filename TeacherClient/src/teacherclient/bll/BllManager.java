@@ -5,6 +5,7 @@
  */
 package teacherclient.bll;
 
+import java.util.Date;
 import java.util.List;
 import javafx.scene.chart.XYChart;
 import sharedclasses.be.ScheduleItem;
@@ -82,6 +83,24 @@ public class BllManager
         try
         {
             return dal.getStudentsInClass(schoolClass);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getMessage(), ex.getCause());
+        }
+    }
+
+    /**
+     * Get all the days where the Student has pressed present
+     * @param student the date to check for
+     * @return a list og date objects where the date was present
+     * @throws BLLException
+     */
+    public List<Date> getPresentDays(Student student) throws BLLException
+    {
+        try
+        {
+            return dal.getPresentDays(student);
         }
         catch (DALException ex)
         {

@@ -5,6 +5,7 @@
  */
 package teacherclient.dal;
 
+import java.util.Date;
 import java.util.List;
 import sharedclasses.be.SchoolClass;
 import sharedclasses.be.Student;
@@ -15,8 +16,9 @@ import sharedclasses.dal.DALException;
  *
  * @author janvanzetten
  */
-public interface DalFacade {
-    
+public interface DalFacade
+{
+
     /**
      * login the Teacher if it exists return object
      * @param username
@@ -26,7 +28,7 @@ public interface DalFacade {
      * in the database
      */
     public Teacher login(String username, String encryptedPassword) throws DALException;
-    
+
     /**
      * Get a list of all the students in a class
      * @param schoolClass
@@ -34,5 +36,12 @@ public interface DalFacade {
      * @throws DALException
      */
     public List<Student> getStudentsInClass(SchoolClass schoolClass) throws DALException;
-    
+
+    /**
+     * Get all the days where the Student has pressed present
+     * @param student the date to check for
+     * @return a list og date objects where the date was present
+     * @throws DALException
+     */
+    public List<Date> getPresentDays(Student student) throws DALException;
 }
