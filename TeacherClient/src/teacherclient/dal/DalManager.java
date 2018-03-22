@@ -15,7 +15,7 @@ import sharedclasses.dal.DALException;
  *
  * @author janvanzetten
  */
-public class DalManager
+public class DalManager implements DalFacade
 {
     DB_DAO db;
 

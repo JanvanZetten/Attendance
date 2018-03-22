@@ -5,10 +5,34 @@
  */
 package teacherclient.dal;
 
+import java.util.List;
+import sharedclasses.be.SchoolClass;
+import sharedclasses.be.Student;
+import sharedclasses.be.Teacher;
+import sharedclasses.dal.DALException;
+
 /**
  *
  * @author janvanzetten
  */
 public interface DalFacade {
+    
+    /**
+     * login the Teacher if it exists return object
+     * @param username
+     * @param encryptedPassword
+     * @return
+     * @throws DALException if something went wrong like that the teacher is not
+     * in the database
+     */
+    public Teacher login(String username, String encryptedPassword) throws DALException;
+    
+    /**
+     * Get a list of all the students in a class
+     * @param schoolClass
+     * @return list of students
+     * @throws DALException
+     */
+    public List<Student> getStudentsInClass(SchoolClass schoolClass) throws DALException;
     
 }

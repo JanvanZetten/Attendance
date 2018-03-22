@@ -13,6 +13,7 @@ import sharedclasses.be.Student;
 import sharedclasses.be.Teacher;
 import sharedclasses.bll.BLLException;
 import sharedclasses.dal.DALException;
+import teacherclient.dal.DalFacade;
 import teacherclient.dal.DalManager;
 import teacherclient.dal.MockDAO;
 
@@ -23,7 +24,7 @@ import teacherclient.dal.MockDAO;
 public class BllManager
 {
     private MockDAO mock = new MockDAO();
-    private DalManager dal = new DalManager();
+    private DalFacade dal = new DalManager();
 
     /**
      * Gets all classes that exist.
