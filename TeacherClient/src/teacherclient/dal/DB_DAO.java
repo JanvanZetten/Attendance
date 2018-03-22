@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import sharedclasses.be.SchoolClass;
 import sharedclasses.be.Student;
 import sharedclasses.be.Teacher;
 import sharedclasses.dal.DALException;
@@ -68,7 +69,13 @@ public class DB_DAO {
      * @return a list of classes
      * @throws DALException 
      */
-    public List<Class> getClasses(Teacher currentTeacher)throws DALException{
+    public List<SchoolClass> getClasses(Teacher currentTeacher)throws DALException{
+        try (Connection con = connecter.getConnection()) {
+             String sql = "SELECT * FROM Class";
+            
+        } catch (SQLException ex) {
+            throw new DALException(ex.getMessage(), ex.getCause());
+        }
         return null;
     }
     
@@ -79,7 +86,7 @@ public class DB_DAO {
      * @return list of students
      * @throws DALException 
      */
-    public List<Student> getStudentsInClass(Class schoolClass) throws DALException{
+    public List<Student> getStudentsInClass(SchoolClass schoolClass) throws DALException{
         return null;
     }
     
