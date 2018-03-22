@@ -16,6 +16,13 @@ public class Encrypter
 {
     private static MessageDigest digester;
 
+    /**
+     * Static method for SHA-256 encryption so that it is not necessary to
+     * create a Encrypter object.
+     * @param str String to encrypt.
+     * @return Encrypted string.
+     * @throws BLLException on NoSuchAlgorithmException.
+     */
     public static String encrypt(String str) throws BLLException
     {
         if (digester == null)
