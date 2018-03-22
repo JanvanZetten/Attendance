@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import sharedclasses.be.SchoolClass;
 import teacherclient.dal.HBoxCell;
-import teacherclient.dal.CurrentData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,7 +41,7 @@ public class MainModel
 {
 
     private BllManager bll;
-    private CurrentData cData;
+    private SchoolClass schoolClass;
     private Teacher activeUser;
 
     /**
@@ -52,7 +51,6 @@ public class MainModel
     public void createMockData()
     {
         bll = new BllManager();
-        cData = new CurrentData();
     }
 
     /**
@@ -69,7 +67,7 @@ public class MainModel
 
             for (int i = 0; i < classes.size(); i++)
             {
-                tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), cData, bll));
+                tbl.add(new HBoxCell(classes.get(i).getName(), schoolClass, bll));
             }
 
             ObservableList<HBoxCell> ol = FXCollections.observableArrayList();

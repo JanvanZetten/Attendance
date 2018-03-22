@@ -6,13 +6,13 @@
 package teacherclient.gui.model;
 
 import sharedclasses.be.Student;
-import teacherclient.dal.CurrentData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import sharedclasses.be.SchoolClass;
 import sharedclasses.gui.model.AbsenceGraph;
 import teacherclient.bll.BllManager;
 
@@ -23,7 +23,7 @@ import teacherclient.bll.BllManager;
 public class AbsenceModel
 {
 
-    private CurrentData cData;
+    private SchoolClass schoolClass;
     private BllManager bll;
     private AbsenceGraph ag;
 
@@ -36,11 +36,11 @@ public class AbsenceModel
      * @param cData
      * @param bll
      */
-    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, CurrentData cData, BllManager bll)
+    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll)
     {
-        this.cData = cData;
+        this.schoolClass = schoolClass;
         this.bll = bll;
-        labelClass.setText("Absence in " + cData.getCurrentClass().getName() + ":");
+        labelClass.setText("Absence in " + schoolClass.getName() + ":");
         setStudentList(listviewStudents);
 
         ag = new AbsenceGraph(chartPane, bll.getChartSeries());
@@ -58,7 +58,7 @@ public class AbsenceModel
         {
             for (sharedclasses.be.SchoolClass sClass : student.getClasses())
             {
-                if (sClass.getName().equals(cData.getCurrentClass().getName()))
+                if (sClass.getName().equals(schoolClass.getName()))
                 {
                     ol.add(student);
                 }

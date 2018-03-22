@@ -117,7 +117,10 @@ public class Student
     public void setClasses(List<SchoolClass> classes)
     {
         this.classes.clear();
-        this.classes.addAll(classes);
+        if (classes != null)
+        {
+            this.classes.addAll(classes);
+        }
     }
 
     /**
