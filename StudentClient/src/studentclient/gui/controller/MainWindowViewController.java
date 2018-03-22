@@ -8,6 +8,8 @@ package studentclient.gui.controller;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
+import sharedclasses.dal.DALException;
 import studentclient.gui.model.MainModel;
 
 /**
@@ -65,7 +68,11 @@ public class MainWindowViewController implements Initializable
         mainModel.setActiveUser(student);
         loginLbl.setText(LOGIN_PRETEXT + student.getName());
         mainModel.changeMenubarForMac(menuBar, mainAnchorPane);
-
+//        try {
+//            mainModel.getPresence(btnPresent);
+//        } catch (DALException ex) {
+//            Logger.getLogger(MainWindowViewController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**

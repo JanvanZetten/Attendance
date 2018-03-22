@@ -6,6 +6,8 @@
 package studentclient.dal;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.chart.XYChart;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
@@ -52,6 +54,11 @@ public class DalManager implements DALFacade {
     @Override
     public void setPresence(Student activeUser) throws DALException {
         studentDB.setPresence(activeUser);
+    }
+
+    @Override
+    public boolean getPresence(Student activeUser) throws DALException{
+            return studentDB.getPresence(activeUser);
     }
     
 }

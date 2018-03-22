@@ -32,5 +32,11 @@ public interface DALFacade {
     public Student login(String username, String encryptedPassword) throws DALException;
     
     public void setPresence(Student activeUser) throws DALException;
+
+    /**
+     * Gets the student's presence upon login.
+     * @param activeUser 
+     */
+    public boolean getPresence(Student activeUser) throws DALException;
     
 }

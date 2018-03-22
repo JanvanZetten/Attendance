@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
 import sharedclasses.bll.BLLException;
@@ -71,6 +72,10 @@ public class BllManager
         } catch (DALException ex) {
             throw new BLLException(ex.getMessage(),ex.getCause());
         }
+    }
+
+    public boolean getPresence(Student activeUser) throws DALException {
+        return dal.getPresence(activeUser);
     }
 
 }

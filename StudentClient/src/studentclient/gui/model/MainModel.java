@@ -14,8 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -25,10 +23,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -36,6 +32,7 @@ import javafx.util.Duration;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
 import sharedclasses.bll.BLLException;
+import sharedclasses.dal.DALException;
 import studentclient.bll.BllManager;
 import studentclient.gui.controller.AbsenceWindowController;
 import studentclient.gui.controller.LoginWindowController;
@@ -216,5 +213,9 @@ public class MainModel
             menubar.setMaxHeight(0.0);
             mainPane.setPadding(new Insets(-25, 0, 0, 0));
         }
+    }
+
+    public void getPresence(Button btnPresent) throws DALException {
+        System.out.println(bm.getPresence(activeUser));
     }
 }

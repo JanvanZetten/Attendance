@@ -8,7 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sharedclasses.be.Student;
 
 /**
@@ -23,18 +26,6 @@ public class DB_DAO {
     public DB_DAO() {
         connecter = new DBConnecter();
         shared = new Shared_DB_DAO(false);
-    }
-
-    public void SOMEMETHOD() throws DALException {
-        try (Connection con = connecter.getConnection()) {
-            String sql = "SELECT * FROM Message";
-
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-
-        } catch (SQLException ex) {
-            throw new DALException(ex.getMessage(), ex.getCause());
-        }
     }
 
     /**
@@ -76,6 +67,7 @@ public class DB_DAO {
      */
     public void setPresence(Student currentStudent) throws DALException {
         try (Connection con = connecter.getConnection()) {
+            
             String sql = "INSERT INTO StudentPresent VALUES (?, ?)";
 
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -90,4 +82,46 @@ public class DB_DAO {
             throw new DALException(ex.getMessage(), ex.getCause());
         }
     }
+    
+    /**
+     * Gets the presence of the student upon log-in.
+     *
+     * @param currentStudent
+     */
+    public boolean getPresence(Student currentStudent) throws DALException {
+        try (Connection con = connecter.getConnection()) {
+            
+            String sql = "SELECT date FROM StudentPresent WHERE studentId = ?";
+            
+            System.out.println("1");
+            
+            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            System.out.println(currentStudent.getId());
+            
+            statement.setInt(1, currentStudent.getId());
+            
+            Calendar date = Calendar.getInstance();
+            statement.setString(2, "%" + date.get(Calendar.YEAR) + "-0" + (date.get(Calendar.MONTH) + 1) + "-" + date.get(Calendar.DATE) + "%");
+
+            ResultSet rs = statement.executeQuery();
+            
+            System.out.println("2");
+            
+            boolean absent = false;
+            while (rs.next())
+            {
+                System.out.println("3");
+                absent = true;
+                System.out.println("4");
+            }
+            
+            System.out.println("5");
+            
+            return absent;
+
+        } catch (SQLException ex) {
+            throw new DALException(ex.getMessage(), ex.getCause());
+        }
+    }   
 }
