@@ -5,6 +5,7 @@
  */
 package teacherclient.gui.model;
 
+import java.util.List;
 import sharedclasses.be.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -65,33 +66,37 @@ public class AbsenceModel
     private void setStudentList(ListView<Student> listviewStudents) throws BLLException
     {
         ObservableList<Student> ol = FXCollections.observableArrayList();
-        for (Student student : bll.getStudentsInClass(schoolClass))
+        List<Student> studentsInClass = bll.getStudentsInClass(schoolClass);
+        if (studentsInClass != null)
         {
-            for (sharedclasses.be.SchoolClass sClass : student.getClasses())
+            for (Student student : bll.getStudentsInClass(schoolClass))
             {
-                if (sClass.getName().equals(schoolClass.getName()))
+                for (sharedclasses.be.SchoolClass sClass : student.getClasses())
                 {
-                    ol.add(student);
+                    if (sClass.getName().equals(schoolClass.getName()))
+                    {
+                        ol.add(student);
+                    }
                 }
             }
-        }
-        listviewStudents.setItems(ol);
-        listviewStudents.setCellFactory(param -> new ListCell<Student>()
-        {
-            @Override
-            protected void updateItem(Student item, boolean empty)
+            listviewStudents.setItems(ol);
+            listviewStudents.setCellFactory(param -> new ListCell<Student>()
             {
-                super.updateItem(item, empty);
+                @Override
+                protected void updateItem(Student item, boolean empty)
+                {
+                    super.updateItem(item, empty);
 
-                if (empty || item == null || item.getName() == null)
-                {
-                    setText(null);
+                    if (empty || item == null || item.getName() == null)
+                    {
+                        setText(null);
+                    }
+                    else
+                    {
+                        setText(item.getName());
+                    }
                 }
-                else
-                {
-                    setText(item.getName());
-                }
-            }
-        });
+            });
+        }
     }
 }
