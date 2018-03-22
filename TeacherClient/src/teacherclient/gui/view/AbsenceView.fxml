@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="487.0" prefWidth="811.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="teacherclient.gui.controller.AbsenceController">
    <children>
-      <ListView fx:id="listviewStudents" focusTraversable="false" layoutX="14.0" layoutY="52.0" maxWidth="-Infinity" minWidth="250.0" prefHeight="386.0" prefWidth="250.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="52.0" />
+      <ListView fx:id="listviewStudents" focusTraversable="false" layoutX="14.0" layoutY="52.0" maxWidth="-Infinity" minWidth="250.0" onMouseClicked="#studentSelected" prefHeight="386.0" prefWidth="250.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="52.0" />
       <AnchorPane fx:id="chartPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="52.0" />
       <GridPane layoutX="355.0" layoutY="-10.0" maxWidth="1.7976931348623157E308" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>

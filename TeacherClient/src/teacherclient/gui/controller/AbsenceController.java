@@ -48,8 +48,6 @@ public class AbsenceController implements Initializable
     /**
      * Sets the model to have the same data class instances as other classes and
      * sends FXML items to be set in the model.
-     * @param cData
-     * @param mData
      */
     public void setData(SchoolClass schoolClass, BllManager bll)
     {
@@ -63,12 +61,9 @@ public class AbsenceController implements Initializable
     @FXML
     private void studentSelected(MouseEvent event)
     {
+        if (listviewStudents.getSelectionModel().getSelectedItem() != null && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem())
         {
-            if (listviewStudents.getSelectionModel().getSelectedItem() != null && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem())
-            {
-                model.selectStudent(listviewStudents.getSelectionModel().getSelectedItem());
-                System.out.println(listviewStudents.getSelectionModel().getSelectedItem());
-            }
+            model.selectStudent(listviewStudents.getSelectionModel().getSelectedItem());
         }
     }
 }
