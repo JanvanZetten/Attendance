@@ -99,14 +99,14 @@ public class DB_DAO {
     
     
     /**
-     * Get a list of all the students in a class
+     * Get a list of all the dates in a class
      * @param schoolClass
-     * @return list of students
+     * @return list of dates
      * @throws DALException 
      */
     public List<Student> getStudentsInClass(SchoolClass schoolClass) throws DALException{
         try (Connection con = connecter.getConnection()) {
-             String sql = "SELECT st.* FROM Student st JOIN StudentInClass sc ON st.id = sc.studentId WHERE  sc.classId = ?";
+             String sql = "SELECT st.* FROM Student st JOIN StudentsInClass sc ON st.id = sc.studentId WHERE  sc.classId = ?";
              
               PreparedStatement statement = con.prepareStatement(sql);
             
@@ -133,15 +133,30 @@ public class DB_DAO {
     
     /**
      * Get all the days where the Student has pressed present
-     * @param student the student to check for
-     * @return a list og date objects where the student was present
+     * @param student the date to check for
+     * @return a list og date objects where the date was present
      * @throws DALException 
      */
     public List<Date> getPresentDays(Student student) throws DALException{
-        
-        
-        return null;
-        
-        
+        try (Connection con = connecter.getConnection()) {
+             String sql = "SELECT date FROM StudentPresent WHERE studentID = ?";
+             
+              PreparedStatement statement = con.prepareStatement(sql);
+            
+              statement.setInt(1, student.getId());
+              
+              ResultSet rs = statement.executeQuery();
+              
+              List<Date> dates = new ArrayList<>();
+              
+              while (rs.next()){
+                  dates.add(rs.getDate("date"));
+              }
+              
+              return dates;
+            
+        } catch (SQLException ex) {
+            throw new DALException(ex.getMessage(), ex.getCause());
+        }
     }
 }
