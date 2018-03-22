@@ -6,8 +6,10 @@
 package teacherclient.dal;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import sharedclasses.be.SchoolClass;
@@ -71,12 +73,28 @@ public class DB_DAO {
      */
     public List<SchoolClass> getClasses(Teacher currentTeacher)throws DALException{
         try (Connection con = connecter.getConnection()) {
-             String sql = "SELECT * FROM Class";
+             String sql = "SELECT cl.* FROM Class cl JOIN StudentsInCLass sc ON cl.id = sc.classId WHERE sc.studentId = ?";
+             
+              PreparedStatement statement = con.prepareStatement(sql);
+            
+              statement.setInt(1, currentTeacher.getId());
+              
+              ResultSet rs = statement.executeQuery();
+              
+              List<SchoolClass> classes = new ArrayList<>();
+              
+              while (rs.next()){
+                  int id = rs.getInt("id");
+                  String name = rs.getString("className");
+                  SchoolClass schoolClass = new SchoolClass(id, name);
+                  classes.add(schoolClass);
+              }
+              
+              return classes;
             
         } catch (SQLException ex) {
             throw new DALException(ex.getMessage(), ex.getCause());
         }
-        return null;
     }
     
     
