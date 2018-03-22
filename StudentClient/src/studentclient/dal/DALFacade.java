@@ -31,6 +31,11 @@ public interface DALFacade {
      */
     public Student login(String username, String encryptedPassword) throws DALException;
     
+    /**
+     * Sets presence to the current day for the user.
+     * @param activeUser
+     * @throws DALException 
+     */
     public void setPresence(Student activeUser) throws DALException;
 
     /**

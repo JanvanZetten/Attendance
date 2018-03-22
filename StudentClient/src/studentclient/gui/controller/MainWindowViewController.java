@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,6 +62,10 @@ public class MainWindowViewController implements Initializable
         mainModel.getSchedule().prefHeightProperty().bind(scheduleAnchor.heightProperty());
     }
 
+    /**
+     * Sets up the user.
+     * @param student 
+     */
     public void setUser(Student student)
     {
         mainModel.setActiveUser(student);

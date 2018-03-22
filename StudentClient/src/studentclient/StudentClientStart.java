@@ -6,8 +6,6 @@
 package studentclient;
 
 import java.io.File;
-import java.net.URL;
-import java.util.Calendar;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -214,7 +214,14 @@ public class MainModel
             mainPane.setPadding(new Insets(-25, 0, 0, 0));
         }
     }
-
+    
+    /**
+     * Changes the Presence button depending on whether the user has already
+     * pressed present for the day.
+     * 
+     * @param btnPresent
+     * @throws DALException 
+     */
     public void getPresence(Button btnPresent) throws DALException {
         changeButton(btnPresent, bm.getPresence(activeUser));
     }

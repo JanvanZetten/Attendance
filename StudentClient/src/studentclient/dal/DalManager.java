@@ -6,8 +6,6 @@
 package studentclient.dal;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.chart.XYChart;
 import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
