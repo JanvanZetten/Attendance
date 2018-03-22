@@ -68,11 +68,11 @@ public class MainWindowViewController implements Initializable
         mainModel.setActiveUser(student);
         loginLbl.setText(LOGIN_PRETEXT + student.getName());
         mainModel.changeMenubarForMac(menuBar, mainAnchorPane);
-//        try {
-//            mainModel.getPresence(btnPresent);
-//        } catch (DALException ex) {
-//            Logger.getLogger(MainWindowViewController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            mainModel.getPresence(btnPresent);
+        } catch (DALException ex) {
+            Logger.getLogger(MainWindowViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -58,7 +58,7 @@ public class DalManager implements DALFacade {
 
     @Override
     public boolean getPresence(Student activeUser) throws DALException{
-            return studentDB.getPresence(activeUser);
+            return studentDB.checkIfPresent(activeUser);
     }
     
 }

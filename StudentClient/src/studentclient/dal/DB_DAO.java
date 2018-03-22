@@ -67,7 +67,7 @@ public class DB_DAO {
      */
     public void setPresence(Student currentStudent) throws DALException {
         try (Connection con = connecter.getConnection()) {
-            
+
             String sql = "INSERT INTO StudentPresent VALUES (?, ?)";
 
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -75,53 +75,54 @@ public class DB_DAO {
             Date date = new Date();
             Object param = new java.sql.Timestamp(date.getTime());
             statement.setObject(2, param);
-            
+
             statement.execute();
 
         } catch (SQLException ex) {
             throw new DALException(ex.getMessage(), ex.getCause());
         }
     }
-    
+
     /**
      * Gets the presence of the student upon log-in.
      *
      * @param currentStudent
      */
-    public boolean getPresence(Student currentStudent) throws DALException {
+    public boolean checkIfPresent(Student currentStudent) throws DALException {
         try (Connection con = connecter.getConnection()) {
-            
-            String sql = "SELECT date FROM StudentPresent WHERE studentId = ?";
-            
-            System.out.println("1");
-            
-            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            System.out.println(currentStudent.getId());
-            
+            String sql = "SELECT date FROM StudentPresent WHERE studentId = ?";
+
+            PreparedStatement statement = con.prepareStatement(sql);
+
             statement.setInt(1, currentStudent.getId());
-            
-            Calendar date = Calendar.getInstance();
-            statement.setString(2, "%" + date.get(Calendar.YEAR) + "-0" + (date.get(Calendar.MONTH) + 1) + "-" + date.get(Calendar.DATE) + "%");
+
+            Calendar cal1 = Calendar.getInstance();
 
             ResultSet rs = statement.executeQuery();
-            
-            System.out.println("2");
-            
-            boolean absent = false;
-            while (rs.next())
-            {
-                System.out.println("3");
-                absent = true;
-                System.out.println("4");
+
+            boolean present = false;
+
+            while (rs.next()) {
+                if (present == false) {
+                    Calendar cal2 = Calendar.getInstance();
+                    
+                    Date date2 = (rs.getDate("date"));
+                    cal2.setTime(date2);
+                    
+                    boolean sameDay = cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
+                            && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
+                    
+                    if (sameDay == true) {
+                        present = true;
+                    }
+                }
             }
-            
-            System.out.println("5");
-            
-            return absent;
+
+            return present;
 
         } catch (SQLException ex) {
             throw new DALException(ex.getMessage(), ex.getCause());
         }
-    }   
+    }
 }

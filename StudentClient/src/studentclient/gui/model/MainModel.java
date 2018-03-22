@@ -216,6 +216,6 @@ public class MainModel
     }
 
     public void getPresence(Button btnPresent) throws DALException {
-        System.out.println(bm.getPresence(activeUser));
+        changeButton(btnPresent, bm.getPresence(activeUser));
     }
 }
