@@ -105,7 +105,30 @@ public class DB_DAO {
      * @throws DALException 
      */
     public List<Student> getStudentsInClass(SchoolClass schoolClass) throws DALException{
-        return null;
+        try (Connection con = connecter.getConnection()) {
+             String sql = "SELECT st.* FROM Student st JOIN StudentInClass sc ON st.id = sc.studentId WHERE  sc.classId = ?";
+             
+              PreparedStatement statement = con.prepareStatement(sql);
+            
+              statement.setInt(1, schoolClass.getId());
+              
+              ResultSet rs = statement.executeQuery();
+              
+              List<Student> students = new ArrayList<>();
+              
+              while (rs.next()){
+                  int id = rs.getInt("id");
+                  String name = rs.getString("fName") + " " + rs.getString("lName");
+                  String username = rs.getString("username");
+                  Student student = new Student(id, name, username);
+                  students.add(student);
+              }
+              
+              return students;
+            
+        } catch (SQLException ex) {
+            throw new DALException(ex.getMessage(), ex.getCause());
+        }
     }
     
     /**
