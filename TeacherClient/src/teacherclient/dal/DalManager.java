@@ -12,10 +12,12 @@ import sharedclasses.dal.DALException;
  *
  * @author janvanzetten
  */
-public class DalManager {
+public class DalManager
+{
     DB_DAO db;
 
-    public DalManager() {
+    public DalManager()
+    {
         this.db = new DB_DAO();
     }
 
@@ -24,10 +26,14 @@ public class DalManager {
      * @param username
      * @param encryptedPassword
      * @return
-     * @throws DALException if something went wrong like that the teacher is not in the database
+     * @throws DALException if something went wrong like that the teacher is not
+     * in the database
      */
-    public Teacher login(String username, String encryptedPassword) throws DALException{
-        return db.login(username, encryptedPassword);
+    public Teacher login(String username, String encryptedPassword) throws DALException
+    {
+        Teacher teacher = db.login(username, encryptedPassword);
+        teacher.setClasses(db.getClasses(teacher));
+        return teacher;
     }
-    
+
 }

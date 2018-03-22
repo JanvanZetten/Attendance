@@ -62,17 +62,20 @@ public class MainModel
      */
     public void setClassList(ListView<HBoxCell> listviewClasses)
     {
-        List<HBoxCell> tbl = new ArrayList<>();
-        List<SchoolClass> classes = bll.getListAllClasses();
-
-        for (int i = 0; i < classes.size(); i++)
+        if (activeUser != null)
         {
-            tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), cData, bll));
-        }
+            List<HBoxCell> tbl = new ArrayList<>();
+            List<SchoolClass> classes = activeUser.getClasses();
 
-        ObservableList<HBoxCell> ol = FXCollections.observableArrayList();
-        ol.addAll(tbl);
-        listviewClasses.setItems(ol);
+            for (int i = 0; i < classes.size(); i++)
+            {
+                tbl.add(new HBoxCell(classes.get(i).getName(), classes.get(i), cData, bll));
+            }
+
+            ObservableList<HBoxCell> ol = FXCollections.observableArrayList();
+            ol.addAll(tbl);
+            listviewClasses.setItems(ol);
+        }
     }
 
     /**

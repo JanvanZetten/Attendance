@@ -41,7 +41,6 @@ public class MainController implements Initializable
     {
         model = new MainModel();
         model.createMockData();
-        model.setClassList(listviewClasses);
     }
 
     public void setUser(Teacher teacher)
@@ -49,6 +48,7 @@ public class MainController implements Initializable
         model.setActiveUser(teacher);
         loginLbl.setText(LOGIN_PRETEXT + teacher.getName());
         model.changeMenubarForMac(menuBar, mainAnchorPane);
+        model.setClassList(listviewClasses);
     }
 
     /**
