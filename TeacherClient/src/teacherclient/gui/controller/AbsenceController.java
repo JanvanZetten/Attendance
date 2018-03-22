@@ -66,9 +66,8 @@ public class AbsenceController implements Initializable
         {
             if (listviewStudents.getSelectionModel().getSelectedItem() != null && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem())
             {
-                selectedStudent = listviewStudents.getSelectionModel().getSelectedItem();
+                model.selectStudent(listviewStudents.getSelectionModel().getSelectedItem());
                 System.out.println(listviewStudents.getSelectionModel().getSelectedItem());
-
             }
         }
     }

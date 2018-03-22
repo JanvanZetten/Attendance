@@ -73,6 +73,10 @@ public class MainModel
             ol.addAll(tbl);
             listviewClasses.setItems(ol);
         }
+        else
+        {
+            System.out.println("ActiveUser is null");
+        }
     }
 
     /**
