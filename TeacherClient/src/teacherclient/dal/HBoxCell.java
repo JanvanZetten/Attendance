@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -139,19 +140,19 @@ public class HBoxCell extends HBox
         label.setMaxWidth(200);
         absence.setText(student.getId() + "%");
         
-        model.selectStudent(student);
+        label.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
+        label.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(label, Priority.ALWAYS);
         
+        absence.setAlignment(Pos.CENTER_RIGHT);
+        absence.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
         
 //        button1.setMaxWidth(Double.MAX_VALUE);
 //        button2.setMaxWidth(Double.MAX_VALUE);
 //        HBox.setHgrow(label, Priority.ALWAYS);
 //        HBox.setHgrow(button1, Priority.ALWAYS);
 //        HBox.setHgrow(button2, Priority.ALWAYS);
-//
-//        //styling
-//        label.setFont(Font.font("Helvetica Neue"));
-//        label.setFont(Font.font(29));
-//        label.setTextFill(Paint.valueOf("gray"));
+
 //        label.setAlignment(Pos.CENTER_LEFT);
 //
 //        middleString.setText(" ");

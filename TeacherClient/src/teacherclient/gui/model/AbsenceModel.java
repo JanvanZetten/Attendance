@@ -80,6 +80,7 @@ public class AbsenceModel {
                 ol.add(new HBoxCell(student, this));
             }
             listviewStudents.setItems(ol);
+            selectStudent(ol.get(0).getStudent());
         }
         else
         {
@@ -103,12 +104,6 @@ public class AbsenceModel {
             alert.showAndWait();
         }
     }
-
-    public ObservableList<HBoxCell> getOl() {
-        return ol;
-    }
-    
-    
 
     public LocalDate getStartDate() {
 
