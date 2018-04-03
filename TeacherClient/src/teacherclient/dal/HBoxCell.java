@@ -3,6 +3,10 @@ package teacherclient.dal;
 import sharedclasses.be.SchoolClass;
 import teacherclient.gui.controller.AbsenceController;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -131,6 +135,7 @@ public class HBoxCell extends HBox
     public HBoxCell(Student student, AbsenceModel model)
     {
         super();
+        DalFacade dal = new DalManager();
         
         label = new Label();
         absence = new Label();
@@ -140,22 +145,19 @@ public class HBoxCell extends HBox
         label.setMaxWidth(200);
         absence.setText(student.getId() + "%");
         
+        Calendar cal = Calendar.getInstance();
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        System.out.println(dateFormat.format(date));
+        System.out.println(dal.getIntevalStartDate());
+        
         label.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
         label.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(label, Priority.ALWAYS);
         
         absence.setAlignment(Pos.CENTER_RIGHT);
         absence.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
-        
-//        button1.setMaxWidth(Double.MAX_VALUE);
-//        button2.setMaxWidth(Double.MAX_VALUE);
-//        HBox.setHgrow(label, Priority.ALWAYS);
-//        HBox.setHgrow(button1, Priority.ALWAYS);
-//        HBox.setHgrow(button2, Priority.ALWAYS);
-
-//        label.setAlignment(Pos.CENTER_LEFT);
-//
-//        middleString.setText(" ");
 
         this.getChildren().addAll(label, absence);
     }
@@ -163,5 +165,7 @@ public class HBoxCell extends HBox
     public Student getStudent() {
         return student;
     }
+    
+    
 
 }
