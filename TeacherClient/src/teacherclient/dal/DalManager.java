@@ -5,6 +5,8 @@
  */
 package teacherclient.dal;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Date;
 import java.util.List;
 import sharedclasses.be.SchoolClass;
@@ -19,6 +21,7 @@ import sharedclasses.dal.DALException;
 public class DalManager implements DalFacade
 {
     DB_DAO db;
+    private static LocalDate startdate;
 
     public DalManager()
     {
@@ -63,5 +66,19 @@ public class DalManager implements DalFacade
     public List<Date> getPresentDays(Student student) throws DALException
     {
         return db.getPresentDays(student);
+    }
+
+    @Override
+    public LocalDate getIntevalStartDate() {
+        if (startdate != null){
+        } else {
+            if (LocalDate.now().getMonth().compareTo(Month.AUGUST) < 0){
+                startdate = LocalDate.of(LocalDate.now().getYear()-1, Month.AUGUST, 1);
+            }
+            else{
+                startdate = LocalDate.of(LocalDate.now().getYear(), Month.AUGUST, 1);
+            }
+        }
+        return startdate;
     }
 }
