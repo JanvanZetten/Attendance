@@ -5,9 +5,9 @@
  */
 package teacherclient.gui.model;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import sharedclasses.be.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,7 +111,11 @@ public class AbsenceModel
         chartPane.getChildren().clear();
         try
         {
-            ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(bll.getPresentDays(student)));
+            Calendar startDate = Calendar.getInstance();
+            Calendar endDate = Calendar.getInstance();
+            // Months are 0-based indexed.
+            startDate.set(2018, 2, 22);
+            ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(startDate.getTime(), endDate.getTime(), bll.getPresentDays(student)));
         }
         catch (BLLException ex)
         {
