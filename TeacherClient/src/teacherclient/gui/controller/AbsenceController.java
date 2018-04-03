@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -29,7 +30,6 @@ import teacherclient.dal.HBoxCell;
  */
 public class AbsenceController implements Initializable
 {
-
     @FXML
     private ListView<HBoxCell> listviewStudents;
     @FXML
@@ -40,10 +40,11 @@ public class AbsenceController implements Initializable
     private DatePicker calStart;
     @FXML
     private DatePicker calEnd;
+    @FXML
+    private ComboBox<?> cmbSortListView;
 
     private AbsenceModel model;
     private Student selectedStudent;
-    
 
     /**
      * Initializes the controller class.
@@ -73,15 +74,16 @@ public class AbsenceController implements Initializable
     @FXML
     private void studentSelected(MouseEvent event)
     {
-        if (listviewStudents.getSelectionModel().getSelectedItem() != null 
-            && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem().getStudent())
+        if (listviewStudents.getSelectionModel().getSelectedItem() != null
+                && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem().getStudent())
         {
             model.selectStudent(listviewStudents.getSelectionModel().getSelectedItem().getStudent());
         }
     }
 
     @FXML
-    private void IntervalAction(ActionEvent event) {
+    private void IntervalAction(ActionEvent event)
+    {
         //TODO set the inteval on the absenceview and save it somewhere for later use
     }
 }
