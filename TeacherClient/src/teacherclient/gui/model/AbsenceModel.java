@@ -99,7 +99,6 @@ public class AbsenceModel {
                     startDate.setTime(new Date(this.startDate.toEpochDay()));
             Calendar endDate = Calendar.getInstance();
             // Months are 0-based indexed.
-            //startDate.set(2018, 2, 22);
             ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(startDate.getTime(), endDate.getTime(), bll.getPresentDays(student)));
         }
         catch (BLLException ex)
