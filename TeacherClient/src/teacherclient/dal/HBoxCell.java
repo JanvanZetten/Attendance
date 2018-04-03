@@ -19,8 +19,10 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sharedclasses.be.Student;
 import teacherclient.bll.BllManager;
 import teacherclient.gui.controller.ScheduleViewController;
+import teacherclient.gui.model.AbsenceModel;
 
 /**
  * @author Alex, Asbjørn & Jan
@@ -28,11 +30,12 @@ import teacherclient.gui.controller.ScheduleViewController;
 public class HBoxCell extends HBox
 {
 
-    private Label label = new Label();
-    private Button button1 = new Button();
-    private Label filler = new Label();
-    private Button button2 = new Button();
-    private Label middleString = new Label();
+    private Label label;
+    private Button button1;
+    private Button button2;
+    private Label middleString;
+    private Label absence;
+    private Student student;
 
     /**
      * Creates HBox from super class. Sets JavaFX Nodes.
@@ -42,6 +45,11 @@ public class HBoxCell extends HBox
     public HBoxCell(String labelText, SchoolClass schoolClass, BllManager bll)
     {
         super();
+        
+        label = new Label();
+        button1 = new Button();
+        button2 = new Button();
+        middleString = new Label();
 
         label.setText(labelText);
         label.setMaxWidth(200);
@@ -119,6 +127,42 @@ public class HBoxCell extends HBox
         });
 
         this.getChildren().addAll(label, button1, middleString, button2);
+    }
+    
+    public HBoxCell(Student student, AbsenceModel model)
+    {
+        super();
+        
+        label = new Label();
+        absence = new Label();
+        this.student = student;
+
+        label.setText(student.getName());
+        label.setMaxWidth(200);
+        absence.setText(student.getId() + "%");
+        
+        model.selectStudent(student);
+        
+        
+//        button1.setMaxWidth(Double.MAX_VALUE);
+//        button2.setMaxWidth(Double.MAX_VALUE);
+//        HBox.setHgrow(label, Priority.ALWAYS);
+//        HBox.setHgrow(button1, Priority.ALWAYS);
+//        HBox.setHgrow(button2, Priority.ALWAYS);
+//
+//        //styling
+//        label.setFont(Font.font("Helvetica Neue"));
+//        label.setFont(Font.font(29));
+//        label.setTextFill(Paint.valueOf("gray"));
+//        label.setAlignment(Pos.CENTER_LEFT);
+//
+//        middleString.setText(" ");
+
+        this.getChildren().addAll(label, absence);
+    }
+    
+    public Student getStudent() {
+        return student;
     }
 
 }

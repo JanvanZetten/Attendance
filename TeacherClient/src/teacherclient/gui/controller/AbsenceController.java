@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import sharedclasses.be.SchoolClass;
 import teacherclient.bll.BllManager;
+import teacherclient.dal.HBoxCell;
 
 /**
  * FXML Controller class
@@ -27,7 +28,7 @@ public class AbsenceController implements Initializable
 {
 
     @FXML
-    private ListView<Student> listviewStudents;
+    private ListView<HBoxCell> listviewStudents;
     @FXML
     private Label labelClass;
     @FXML
@@ -62,9 +63,10 @@ public class AbsenceController implements Initializable
     @FXML
     private void studentSelected(MouseEvent event)
     {
-        if (listviewStudents.getSelectionModel().getSelectedItem() != null && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem())
+        if (listviewStudents.getSelectionModel().getSelectedItem() != null 
+            && selectedStudent != listviewStudents.getSelectionModel().getSelectedItem().getStudent())
         {
-            model.selectStudent(listviewStudents.getSelectionModel().getSelectedItem());
+            model.selectStudent(listviewStudents.getSelectionModel().getSelectedItem().getStudent());
         }
     }
 }
