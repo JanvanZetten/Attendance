@@ -80,6 +80,7 @@ public class AbsenceModel
                 ol.add(new HBoxCell(student, this));
             }
             listviewStudents.setItems(ol);
+            selectStudent(ol.get(0).getStudent());
         }
         else
         {
