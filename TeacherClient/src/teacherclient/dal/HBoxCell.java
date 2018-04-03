@@ -5,8 +5,11 @@ import teacherclient.gui.controller.AbsenceController;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
+import static java.util.concurrent.TimeUnit.DAYS;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -25,6 +28,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sharedclasses.be.Student;
+import sharedclasses.dal.DALException;
 import teacherclient.bll.BllManager;
 import teacherclient.gui.model.AbsenceModel;
 
@@ -132,7 +136,7 @@ public class HBoxCell extends HBox
         this.getChildren().addAll(label, button1, middleString, button2);
     }
     
-    public HBoxCell(Student student, AbsenceModel model)
+    public HBoxCell(Student student, AbsenceModel model) throws DALException
     {
         super();
         DalFacade dal = new DalManager();
@@ -149,8 +153,13 @@ public class HBoxCell extends HBox
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
-        System.out.println(dateFormat.format(date));
-        System.out.println(dal.getIntevalStartDate());
+        LocalDate selectedDate = LocalDate.now();
+        
+        System.out.println("Present days: " + dal.getPresentDays(student).size());
+        System.out.println("Days between dates: " + ChronoUnit.DAYS.between(dal.getIntevalStartDate(), LocalDate.now()));
+        
+        absence.setText(dal.getPresentDays(student).size() / ChronoUnit.DAYS.between(dal.getIntevalStartDate(), LocalDate.now()) * 100 + "%");
+        
         
         label.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
         label.setMaxWidth(Double.MAX_VALUE);
