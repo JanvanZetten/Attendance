@@ -105,12 +105,6 @@ public class AbsenceModel {
         }
     }
 
-    public ObservableList<HBoxCell> getOl() {
-        return ol;
-    }
-    
-    
-
     public LocalDate getStartDate() {
 
         return bll.getIntevalStartDate();
