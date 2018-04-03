@@ -9,8 +9,10 @@ import sharedclasses.be.Student;
 import teacherclient.gui.model.AbsenceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -32,9 +34,14 @@ public class AbsenceController implements Initializable
     private Label labelClass;
     @FXML
     private AnchorPane chartPane;
+    @FXML
+    private DatePicker calStart;
+    @FXML
+    private DatePicker calEnd;
 
     private AbsenceModel model;
     private Student selectedStudent;
+    
 
     /**
      * Initializes the controller class.
@@ -66,5 +73,10 @@ public class AbsenceController implements Initializable
         {
             model.selectStudent(listviewStudents.getSelectionModel().getSelectedItem());
         }
+    }
+
+    @FXML
+    private void IntervalAction(ActionEvent event) {
+        //TODO set the inteval on the absenceview and save it somewhere for later use
     }
 }
