@@ -22,6 +22,7 @@ public class DalManager implements DalFacade
 {
     DB_DAO db;
     private static LocalDate startdate;
+    private static LocalDate enddate = LocalDate.now();
 
     public DalManager()
     {
