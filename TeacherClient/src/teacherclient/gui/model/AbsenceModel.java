@@ -20,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import sharedclasses.be.SchoolClass;
 import sharedclasses.bll.BLLException;
+import sharedclasses.bll.TimeUtils;
 import sharedclasses.gui.model.AbsenceGraph;
 import teacherclient.bll.BllManager;
 import teacherclient.dal.HBoxCell;
@@ -28,7 +29,8 @@ import teacherclient.dal.HBoxCell;
  *
  * @author alexl
  */
-public class AbsenceModel {
+public class AbsenceModel
+{
 
     private final String PRETEXT = "Absence in ";
     private final String POSTTEXT = ":";
@@ -39,7 +41,6 @@ public class AbsenceModel {
     private AnchorPane chartPane;
     private ObservableList<HBoxCell> ol;
     private LocalDate startDate;
-    
 
     /**
      * Sets data class instances to be the same as other classes and sets items
@@ -57,9 +58,12 @@ public class AbsenceModel {
         this.chartPane = chartPane;
         this.bll = bll;
         labelClass.setText(PRETEXT + schoolClass.getName() + POSTTEXT);
-        try {
+        try
+        {
             setStudentList(listviewStudents);
-        } catch (BLLException ex) {
+        }
+        catch (BLLException ex)
+        {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Getting students: " + ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
@@ -90,16 +94,18 @@ public class AbsenceModel {
         }
     }
 
-    public void selectStudent(Student student) {
+    public void selectStudent(Student student)
+    {
         chartPane.getChildren().clear();
         this.startDate = getStartDate();
         try
         {
+            TimeUtils tu = new TimeUtils();
             Calendar startDate = Calendar.getInstance();
-                    startDate.setTime(new Date(this.startDate.toEpochDay()));
+            startDate.setTime(new Date(this.startDate.toEpochDay()));
             Calendar endDate = Calendar.getInstance();
             // Months are 0-based indexed.
-            ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(startDate.getTime(), endDate.getTime(), bll.getPresentDays(student)));
+            ag = new AbsenceGraph(chartPane, tu.getChartSeriesFromStudentAbsenceInWeekDays(startDate.getTime(), endDate.getTime(), bll.getPresentDays(student)));
         }
         catch (BLLException ex)
         {
@@ -108,8 +114,9 @@ public class AbsenceModel {
         }
     }
 
-    public LocalDate getStartDate() {
-        
+    public LocalDate getStartDate()
+    {
+
         return bll.getIntevalStartDate();
 
     }
