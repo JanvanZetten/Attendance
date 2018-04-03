@@ -66,7 +66,6 @@ public class LoginWindowModel
                 MainWindowViewController cont = fxLoader.getController();
 
                 cont.setUser(approvedUser);
-                cont.updateSchedule(bll.getScheduleItems());
 
                 Scene scene = new Scene(root);
                 stage.setResizable(true);

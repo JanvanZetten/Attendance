@@ -6,12 +6,8 @@
 package studentclient.gui.model;
 
 import java.io.File;
-import sharedclasses.gui.model.Schedule;
 import sharedclasses.gui.model.PopUpBubble;
 import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -20,21 +16,20 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import sharedclasses.be.ScheduleItem;
 import sharedclasses.be.Student;
 import sharedclasses.bll.BLLException;
 import sharedclasses.dal.DALException;
+import sharedclasses.gui.model.AbsenceGraph;
 import studentclient.bll.BllManager;
-import studentclient.gui.controller.AbsenceWindowController;
 import studentclient.gui.controller.LoginWindowController;
 
 /**
@@ -43,28 +38,16 @@ import studentclient.gui.controller.LoginWindowController;
  */
 public class MainModel
 {
-    private Schedule schedule;
     private BllManager bm;
     private Student activeUser;
+    private AbsenceGraph ag;
+    private AnchorPane chartPane;
 
-    public MainModel()
+    public MainModel(AnchorPane chartPane)
     {
-        schedule = new Schedule(8, 16);
+        this.chartPane = chartPane;
         bm = new BllManager();
-    }
-
-    public Schedule getSchedule()
-    {
-        return schedule;
-    }
-
-    /**
-     * Update courses in schedule.
-     * @param courses in schedule.
-     */
-    public void updateSchedule(List<ScheduleItem> courses)
-    {
-        schedule.setupCourses(courses, activeUser);
+        setAbsenceGraphData(bm.getChartSeries());
     }
 
     /**
@@ -138,27 +121,9 @@ public class MainModel
         }
     }
 
-    public void showAbsenceGraph()
+    public void setAbsenceGraphData(XYChart.Series<String, Number> series)
     {
-        try
-        {
-            Stage newStage = new Stage();
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/studentclient/gui/view/AbsenceWindow.fxml"));
-            Parent root = fxLoader.load();
-
-            AbsenceWindowController awc = (AbsenceWindowController) fxLoader.getController();
-            awc.passData(bm.getChartSeries());
-
-            Scene scene = new Scene(root);
-            newStage.setTitle("Absence");
-            newStage.setScene(scene);
-            newStage.showAndWait();
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(MainModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ag = new AbsenceGraph(chartPane, series);
     }
 
     public Student getActiveUser()
@@ -214,15 +179,16 @@ public class MainModel
             mainPane.setPadding(new Insets(-25, 0, 0, 0));
         }
     }
-    
+
     /**
      * Changes the Presence button depending on whether the user has already
      * pressed present for the day.
-     * 
+     *
      * @param btnPresent
-     * @throws DALException 
+     * @throws DALException
      */
-    public void getPresence(Button btnPresent) throws DALException {
+    public void getPresence(Button btnPresent) throws DALException
+    {
         changeButton(btnPresent, bm.getPresence(activeUser));
     }
 }
