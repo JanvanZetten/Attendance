@@ -51,16 +51,6 @@ public class MainController implements Initializable
         model.setClassList(listviewClasses);
     }
 
-    /**
-     * Sends the My Schedule button over to the model.
-     * @param event
-     */
-    @FXML
-    private void btnMyScheduele(ActionEvent event)
-    {
-        model.openSchedule();
-    }
-
     @FXML
     private void handleLogOut(ActionEvent event)
     {

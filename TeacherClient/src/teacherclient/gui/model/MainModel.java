@@ -11,8 +11,6 @@ import sharedclasses.be.SchoolClass;
 import teacherclient.dal.HBoxCell;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -23,15 +21,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sharedclasses.be.Teacher;
 import teacherclient.bll.BllManager;
 import teacherclient.gui.controller.LoginWindowController;
-import teacherclient.gui.controller.ScheduleViewController;
 
 /**
  *
@@ -76,33 +71,6 @@ public class MainModel
         else
         {
             System.out.println("ActiveUser is null");
-        }
-    }
-
-    /**
-     * Opens a schedule which only shows classes for the logged in teacher.
-     */
-    public void openSchedule()
-    {
-        try
-        {
-            Stage newStage = new Stage();
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/ScheduleView.fxml"));
-            Parent root = fxLoader.load();
-
-            ScheduleViewController cont = fxLoader.getController();
-
-            cont.updateSchedule(bll.getSchedueleItemsTeacher());
-
-            Scene scene = new Scene(root);
-            newStage.setTitle("Schedule for Teacher");
-            newStage.setScene(scene);
-            newStage.showAndWait();
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(HBoxCell.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
