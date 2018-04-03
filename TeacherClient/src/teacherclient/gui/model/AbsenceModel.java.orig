@@ -5,9 +5,12 @@
  */
 package teacherclient.gui.model;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
+=======
 import java.util.Calendar;
 import java.util.Date;
+>>>>>>> f661b73e7701c45059d33ea8db094777eae1f5a3
 import java.util.List;
 import sharedclasses.be.Student;
 import javafx.collections.FXCollections;
@@ -49,8 +52,12 @@ public class AbsenceModel {
      * @param schoolClass
      * @param bll
      */
+<<<<<<< HEAD
+    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll) {
+=======
     public void setInformation(Label labelClass, ListView<HBoxCell> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll)
     {
+>>>>>>> f661b73e7701c45059d33ea8db094777eae1f5a3
         this.schoolClass = schoolClass;
         this.chartPane = chartPane;
         this.bll = bll;
@@ -69,6 +76,32 @@ public class AbsenceModel {
      *
      * @param listviewStudents
      */
+<<<<<<< HEAD
+    private void setStudentList(ListView<Student> listviewStudents) throws BLLException {
+        ObservableList<Student> ol = FXCollections.observableArrayList();
+        List<Student> studentsInClass = bll.getStudentsInClass(schoolClass);
+        if (studentsInClass != null) {
+            for (Student student : studentsInClass) {
+                ol.add(student);
+            }
+            listviewStudents.setItems(ol);
+            listviewStudents.setCellFactory(param -> new ListCell<Student>() {
+                @Override
+                protected void updateItem(Student item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null || item.getName() == null) {
+                        setText(null);
+                    } else {
+                        setText(item.getName());
+                    }
+                }
+            });
+            if (ol.size() > 0) {
+                selectStudent(ol.get(0));
+            }
+        } else {
+=======
     private void setStudentList(ListView<HBoxCell> listviewStudents) throws BLLException
     {
         ol = FXCollections.observableArrayList();
@@ -83,12 +116,18 @@ public class AbsenceModel {
         }
         else
         {
+>>>>>>> f661b73e7701c45059d33ea8db094777eae1f5a3
             System.out.println("StudentInClass is null");
         }
     }
 
     public void selectStudent(Student student) {
         chartPane.getChildren().clear();
+<<<<<<< HEAD
+        try {
+            ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(bll.getPresentDays(student)));
+        } catch (BLLException ex) {
+=======
         try
         {
             Calendar startDate = Calendar.getInstance();
@@ -99,20 +138,23 @@ public class AbsenceModel {
         }
         catch (BLLException ex)
         {
+>>>>>>> f661b73e7701c45059d33ea8db094777eae1f5a3
             Alert alert = new Alert(Alert.AlertType.ERROR, "Selecting student: " + ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
     }
 
-    public ObservableList<HBoxCell> getOl() {
-        return ol;
-    }
-    
-    
-
+<<<<<<< HEAD
     public LocalDate getStartDate() {
 
         return bll.getIntevalStartDate();
 
     }
+=======
+    public ObservableList<HBoxCell> getOl() {
+        return ol;
+    }
+    
+    
+>>>>>>> f661b73e7701c45059d33ea8db094777eae1f5a3
 }

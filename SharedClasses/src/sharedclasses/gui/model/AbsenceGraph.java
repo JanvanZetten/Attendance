@@ -226,44 +226,34 @@ public class AbsenceGraph
      * @param presence
      * @return
      */
-    public static XYChart.Series<String, Number> getChartSeriesFromStudentAbsenceInWeekDays(List<Date> presence)
+    public static XYChart.Series<String, Number> getChartSeriesFromStudentAbsenceInWeekDays(Date startDate, Date endDate, List<Date> presence)
     {
         TimeUtils tu = new TimeUtils();
         XYChart.Series<String, Number> series = new XYChart.Series();
 
-        Date startDate = null;
-        for (Date date : presence)
-        {
-            if (startDate == null)
-            {
-                startDate = date;
-            }
-            if (startDate.after(date))
-            {
-                startDate = date;
-            }
-        }
-
-        if (startDate != null)
+        if (startDate != null || endDate != null)
         {
             Calendar today = Calendar.getInstance();
-            Calendar c = Calendar.getInstance();
-            c.setTime(startDate);
+            Calendar sc = Calendar.getInstance();
+            sc.setTime(startDate);
+            Calendar ec = Calendar.getInstance();
+            ec.setTime(endDate);
             List<Double> schoolDays = new ArrayList<>();
             for (int i = 0; i < ScheduleDay.values().length; i++)
             {
                 schoolDays.add(0.0);
             }
-            while (c.getTime().before(today.getTime()))
+
+            while (sc.getTime().before(today.getTime()) && sc.getTime().before(ec.getTime()))
             {
                 for (int i = 0; i < ScheduleDay.values().length; i++)
                 {
-                    if (tu.dayFromDate(c.getTime()).equalsIgnoreCase(ScheduleDay.values()[i].getDay()))
+                    if (tu.dayFromDate(sc.getTime()).equalsIgnoreCase(ScheduleDay.values()[i].getDay()))
                     {
                         schoolDays.set(i, schoolDays.get(i) + 1.0);
                     }
                 }
-                c.add(Calendar.DATE, 1);
+                sc.add(Calendar.DATE, 1);
             }
 
             List<Double> presentDays = new ArrayList<>();
@@ -299,7 +289,7 @@ public class AbsenceGraph
         }
         else
         {
-            System.out.println("Present dates for absence graph is null");
+            System.out.println("Start date or end date is null!");
 
             for (int i = 0; i < ScheduleDay.values().length; i++)
             {
