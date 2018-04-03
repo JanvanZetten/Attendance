@@ -70,15 +70,15 @@ public class DalManager implements DalFacade
 
     @Override
     public LocalDate getIntevalStartDate() {
-        //if (startdate != null){
-        //} else {
+        if (startdate != null){
+        } else {
             if (LocalDate.now().getMonth().compareTo(Month.AUGUST) < 0){
                 startdate = LocalDate.of(LocalDate.now().getYear()-1, Month.AUGUST, 1);
             }
             else{
                 startdate = LocalDate.of(LocalDate.now().getYear(), Month.AUGUST, 1);
             }
-        //}
+        }
         return startdate;
     }
 }

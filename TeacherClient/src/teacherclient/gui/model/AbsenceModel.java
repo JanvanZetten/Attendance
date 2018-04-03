@@ -34,7 +34,7 @@ public class AbsenceModel {
     private final String POSTTEXT = ":";
 
     private SchoolClass schoolClass;
-    private BllManager bll;
+    private BllManager bll = new BllManager();
     private AbsenceGraph ag;
     private AnchorPane chartPane;
     private ObservableList<HBoxCell> ol;
