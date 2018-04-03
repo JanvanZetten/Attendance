@@ -21,6 +21,7 @@ import sharedclasses.be.SchoolClass;
 import sharedclasses.bll.BLLException;
 import sharedclasses.gui.model.AbsenceGraph;
 import teacherclient.bll.BllManager;
+import teacherclient.dal.HBoxCell;
 
 /**
  *
@@ -35,6 +36,7 @@ public class AbsenceModel
     private BllManager bll;
     private AbsenceGraph ag;
     private AnchorPane chartPane;
+    private ObservableList<HBoxCell> ol;
 
     /**
      * Sets data class instances to be the same as other classes and sets items
@@ -45,7 +47,7 @@ public class AbsenceModel
      * @param schoolClass
      * @param bll
      */
-    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll)
+    public void setInformation(Label labelClass, ListView<HBoxCell> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll)
     {
         this.schoolClass = schoolClass;
         this.chartPane = chartPane;
@@ -67,38 +69,17 @@ public class AbsenceModel
      * that course.
      * @param listviewStudents
      */
-    private void setStudentList(ListView<Student> listviewStudents) throws BLLException
+    private void setStudentList(ListView<HBoxCell> listviewStudents) throws BLLException
     {
-        ObservableList<Student> ol = FXCollections.observableArrayList();
+        ol = FXCollections.observableArrayList();
         List<Student> studentsInClass = bll.getStudentsInClass(schoolClass);
         if (studentsInClass != null)
         {
             for (Student student : studentsInClass)
             {
-                ol.add(student);
+                ol.add(new HBoxCell(student, this));
             }
             listviewStudents.setItems(ol);
-            listviewStudents.setCellFactory(param -> new ListCell<Student>()
-            {
-                @Override
-                protected void updateItem(Student item, boolean empty)
-                {
-                    super.updateItem(item, empty);
-
-                    if (empty || item == null || item.getName() == null)
-                    {
-                        setText(null);
-                    }
-                    else
-                    {
-                        setText(item.getName());
-                    }
-                }
-            });
-            if (ol.size() > 0)
-            {
-                selectStudent(ol.get(0));
-            }
         }
         else
         {
@@ -123,4 +104,10 @@ public class AbsenceModel
             alert.showAndWait();
         }
     }
+
+    public ObservableList<HBoxCell> getOl() {
+        return ol;
+    }
+    
+    
 }
