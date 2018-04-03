@@ -8,6 +8,7 @@ package teacherclient.gui.controller;
 import sharedclasses.be.Student;
 import teacherclient.gui.model.AbsenceModel;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,6 +51,8 @@ public class AbsenceController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         model = new AbsenceModel();
+        calEnd.setValue(LocalDate.now());
+        calStart.setValue(model.getStartDate());
     }
 
     /**

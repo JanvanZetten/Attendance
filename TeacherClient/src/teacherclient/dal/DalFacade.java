@@ -5,6 +5,7 @@
  */
 package teacherclient.dal;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import sharedclasses.be.SchoolClass;
@@ -44,4 +45,10 @@ public interface DalFacade
      * @throws DALException
      */
     public List<Date> getPresentDays(Student student) throws DALException;
+
+    /**
+     * Get the latest saved interval startdate or if there is not any gets the 1. of august of this or the last year
+     * @return LocalDate object
+     */
+    public LocalDate getIntevalStartDate();
 }

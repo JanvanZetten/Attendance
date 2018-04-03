@@ -5,6 +5,7 @@
  */
 package teacherclient.bll;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javafx.scene.chart.XYChart;
@@ -106,5 +107,13 @@ public class BllManager
         {
             throw new BLLException(ex.getMessage(), ex.getCause());
         }
+    }
+
+    /**
+     * Get the latest saved interval startdate or if there is not any gets the 1. of august of this or the last year
+     * @return LocalDate object
+     */
+    public LocalDate getIntevalStartDate() {
+        return dal.getIntevalStartDate();
     }
 }

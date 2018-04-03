@@ -5,6 +5,7 @@
  */
 package teacherclient.gui.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,8 +27,8 @@ import teacherclient.bll.BllManager;
  *
  * @author alexl
  */
-public class AbsenceModel
-{
+public class AbsenceModel {
+
     private final String PRETEXT = "Absence in ";
     private final String POSTTEXT = ":";
 
@@ -39,24 +40,21 @@ public class AbsenceModel
     /**
      * Sets data class instances to be the same as other classes and sets items
      * from the view to be according to the mock data.
+     *
      * @param labelClass
      * @param listviewStudents
      * @param chartPane
      * @param schoolClass
      * @param bll
      */
-    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll)
-    {
+    public void setInformation(Label labelClass, ListView<Student> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll) {
         this.schoolClass = schoolClass;
         this.chartPane = chartPane;
         this.bll = bll;
         labelClass.setText(PRETEXT + schoolClass.getName() + POSTTEXT);
-        try
-        {
+        try {
             setStudentList(listviewStudents);
-        }
-        catch (BLLException ex)
-        {
+        } catch (BLLException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Getting students: " + ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
@@ -65,58 +63,50 @@ public class AbsenceModel
     /**
      * Sets the list view to be filled with relevant students that prticipate in
      * that course.
+     *
      * @param listviewStudents
      */
-    private void setStudentList(ListView<Student> listviewStudents) throws BLLException
-    {
+    private void setStudentList(ListView<Student> listviewStudents) throws BLLException {
         ObservableList<Student> ol = FXCollections.observableArrayList();
         List<Student> studentsInClass = bll.getStudentsInClass(schoolClass);
-        if (studentsInClass != null)
-        {
-            for (Student student : studentsInClass)
-            {
+        if (studentsInClass != null) {
+            for (Student student : studentsInClass) {
                 ol.add(student);
             }
             listviewStudents.setItems(ol);
-            listviewStudents.setCellFactory(param -> new ListCell<Student>()
-            {
+            listviewStudents.setCellFactory(param -> new ListCell<Student>() {
                 @Override
-                protected void updateItem(Student item, boolean empty)
-                {
+                protected void updateItem(Student item, boolean empty) {
                     super.updateItem(item, empty);
 
-                    if (empty || item == null || item.getName() == null)
-                    {
+                    if (empty || item == null || item.getName() == null) {
                         setText(null);
-                    }
-                    else
-                    {
+                    } else {
                         setText(item.getName());
                     }
                 }
             });
-            if (ol.size() > 0)
-            {
+            if (ol.size() > 0) {
                 selectStudent(ol.get(0));
             }
-        }
-        else
-        {
+        } else {
             System.out.println("StudentInClass is null");
         }
     }
 
-    public void selectStudent(Student student)
-    {
+    public void selectStudent(Student student) {
         chartPane.getChildren().clear();
-        try
-        {
+        try {
             ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(bll.getPresentDays(student)));
-        }
-        catch (BLLException ex)
-        {
+        } catch (BLLException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Selecting student: " + ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
+    }
+
+    public LocalDate getStartDate() {
+
+        return bll.getIntevalStartDate();
+
     }
 }
