@@ -21,7 +21,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sharedclasses.be.Student;
 import teacherclient.bll.BllManager;
-import teacherclient.gui.controller.ScheduleViewController;
 import teacherclient.gui.model.AbsenceModel;
 
 /**
