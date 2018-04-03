@@ -228,8 +228,6 @@ public class AbsenceGraph
      */
     public static XYChart.Series<String, Number> getChartSeriesFromStudentAbsenceInWeekDays(Date startDate, Date endDate, List<Date> presence)
     {
-        System.out.println(startDate);
-        System.out.println(endDate);
         TimeUtils tu = new TimeUtils();
         XYChart.Series<String, Number> series = new XYChart.Series();
 
