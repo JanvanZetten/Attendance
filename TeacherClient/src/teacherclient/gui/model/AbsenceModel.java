@@ -38,6 +38,8 @@ public class AbsenceModel {
     private AbsenceGraph ag;
     private AnchorPane chartPane;
     private ObservableList<HBoxCell> ol;
+    private LocalDate startDate;
+    
 
     /**
      * Sets data class instances to be the same as other classes and sets items
@@ -90,12 +92,14 @@ public class AbsenceModel {
 
     public void selectStudent(Student student) {
         chartPane.getChildren().clear();
+        this.startDate = getStartDate();
         try
         {
             Calendar startDate = Calendar.getInstance();
+                    startDate.setTime(new Date(this.startDate.toEpochDay()));
             Calendar endDate = Calendar.getInstance();
             // Months are 0-based indexed.
-            startDate.set(2018, 2, 22);
+            //startDate.set(2018, 2, 22);
             ag = new AbsenceGraph(chartPane, AbsenceGraph.getChartSeriesFromStudentAbsenceInWeekDays(startDate.getTime(), endDate.getTime(), bll.getPresentDays(student)));
         }
         catch (BLLException ex)
@@ -106,7 +110,7 @@ public class AbsenceModel {
     }
 
     public LocalDate getStartDate() {
-
+        
         return bll.getIntevalStartDate();
 
     }
