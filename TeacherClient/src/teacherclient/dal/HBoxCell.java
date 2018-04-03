@@ -96,7 +96,7 @@ public class HBoxCell extends HBox
             }
         });
 
-        button2.setText("Schedule");
+        button2.setText("Statistics");
         button2.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -106,18 +106,17 @@ public class HBoxCell extends HBox
                 {
                     Stage newStage = new Stage();
                     newStage.initModality(Modality.APPLICATION_MODAL);
-                    FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/ScheduleView.fxml"));
+                    FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/AbsenceView.fxml"));
                     Parent root = fxLoader.load();
-
-                    ScheduleViewController cont = fxLoader.getController();
-
-                    BllManager bll = new BllManager();
-                    cont.updateSchedule(bll.getScheduleItems());
-
                     Scene scene = new Scene(root);
-                    newStage.setTitle("Schedule for " + schoolClass.getName());
+                    newStage.setTitle("Statistics in " + schoolClass.getName());
                     newStage.setScene(scene);
+
+                    AbsenceController cont = fxLoader.getController();
+                    cont.setData(schoolClass, bll);
+
                     newStage.showAndWait();
+
                 }
                 catch (IOException ex)
                 {

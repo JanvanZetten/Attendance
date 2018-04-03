@@ -2,6 +2,11 @@
  * Empty Stylesheet file.
  */
 
+.menu:disabled .label{
+    -fx-text-fill: black;
+    -fx-opacity: 1.0;
+}
+
 .root {
     -fx-font-family: "Helvetica Neue";
 }
