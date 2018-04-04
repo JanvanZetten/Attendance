@@ -25,6 +25,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sharedclasses.be.Teacher;
+import sharedclasses.dal.UserPropertiesDAO;
 import teacherclient.bll.BllManager;
 import teacherclient.gui.controller.LoginWindowController;
 
@@ -97,6 +98,7 @@ public class MainModel
 
         try
         {
+            UserPropertiesDAO.clearProperties();
             File file = new File("../SharedClasses/src/sharedclasses/gui/view/LoginWindow.fxml");
             System.out.println(file.getCanonicalFile().toURI().toString());
             FXMLLoader fxLoader = new FXMLLoader(file.getCanonicalFile().toURI().toURL());

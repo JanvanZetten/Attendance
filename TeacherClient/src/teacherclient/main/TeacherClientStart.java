@@ -21,7 +21,6 @@ import teacherclient.gui.controller.LoginWindowController;
  */
 public class TeacherClientStart extends Application
 {
-
     private Scene scene;
 
     @Override
