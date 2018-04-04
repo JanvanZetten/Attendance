@@ -45,7 +45,8 @@ public class HBoxCell extends HBox
     private Button button1;
     private Button button2;
     private Label middleString;
-    private Label absence;
+    private Label lblAbsence;
+    private Long absence;
     private Student student;
 
     /**
@@ -145,12 +146,12 @@ public class HBoxCell extends HBox
         DalFacade dal = new DalManager();
 
         label = new Label();
-        absence = new Label();
+        lblAbsence = new Label();
         this.student = student;
 
         label.setText(student.getName());
         label.setMaxWidth(200);
-        absence.setText(student.getId() + "%");
+        lblAbsence.setText(student.getId() + "%");
 
         Calendar cal = Calendar.getInstance();
         Date date = new Date();
@@ -165,16 +166,17 @@ public class HBoxCell extends HBox
             System.out.println("Present days: " + presentDays.size());
             System.out.println("Days between dates: " + ChronoUnit.DAYS.between(dal.getIntevalStartDate(), LocalDate.now()));
 
-            absence.setText(presentDays.size() / ChronoUnit.DAYS.between(dal.getIntevalStartDate(), LocalDate.now()) * 100 + "%");
+            absence = presentDays.size() / ChronoUnit.DAYS.between(dal.getIntevalStartDate(), LocalDate.now()) * 100;
+            lblAbsence.setText(absence + "%");
 
             label.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
             label.setMaxWidth(Double.MAX_VALUE);
             HBox.setHgrow(label, Priority.ALWAYS);
 
-            absence.setAlignment(Pos.CENTER_RIGHT);
-            absence.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
+            lblAbsence.setAlignment(Pos.CENTER_RIGHT);
+            lblAbsence.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
 
-            this.getChildren().addAll(label, absence);
+            this.getChildren().addAll(label, lblAbsence);
         }
         catch (DALException ex)
         {
@@ -188,7 +190,7 @@ public class HBoxCell extends HBox
         return student;
     }
 
-    public Label getAbsence()
+    public Long getAbsence()
     {
         return absence;
     }
