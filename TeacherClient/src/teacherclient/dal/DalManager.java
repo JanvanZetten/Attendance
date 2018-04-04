@@ -22,7 +22,7 @@ public class DalManager implements DalFacade
 {
     DB_DAO db;
     private static LocalDate startdate;
-    private static LocalDate enddate = LocalDate.now();
+    private static LocalDate enddate;
 
     public DalManager()
     {
@@ -81,5 +81,21 @@ public class DalManager implements DalFacade
             }
         }
         return startdate;
+    }
+
+    @Override
+    public LocalDate getIntevalEndDate() {
+        if (enddate != null){
+        } else {
+            enddate = LocalDate.now();
+        }
+        
+        return enddate;
+    }
+
+    @Override
+    public void saveInterval(LocalDate startValue, LocalDate endValue) {
+        startdate = startValue;
+        enddate = endValue;
     }
 }
