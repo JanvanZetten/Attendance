@@ -90,9 +90,9 @@ public class AbsenceModel {
         try {
             TimeUtils tu = new TimeUtils();
             Calendar startDate = Calendar.getInstance();
-            startDate.set(this.startDate.getYear(), this.startDate.getMonthValue(), this.startDate.getDayOfMonth());
+            startDate.set(this.startDate.getYear(), this.startDate.getMonthValue() - 1, this.startDate.getDayOfMonth());
             Calendar endDate = Calendar.getInstance();
-            endDate.set(this.endDate.getYear(), this.endDate.getMonthValue(), this.endDate.getDayOfMonth());
+            endDate.set(this.endDate.getYear(), this.endDate.getMonthValue() - 1, this.endDate.getDayOfMonth());
             // Months are 0-based indexed.
             ag = new AbsenceGraph(chartPane, tu.getChartSeriesFromStudentAbsenceInWeekDays(startDate.getTime(), endDate.getTime(), bll.getPresentDays(student)));
         } catch (BLLException ex) {
