@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="230.0" style="-fx-background-color: White;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="230.0" style="-fx-background-color: White;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sharedclasses.gui.view.LoginWindowController">
     <stylesheets>
         <URL value="@../../../../../SharedClasses/src/sharedclasses/gui/css/loginwindow.css" />
     </stylesheets>
@@ -44,7 +44,7 @@
                 <Font name="Helvetica Neue Bold" size="24.0" />
             </font>
         </Label>
-        <CheckBox layoutX="5.0" layoutY="183.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="114.0" selected="true" text="Remember me" textFill="#6c6c6c">
+        <CheckBox fx:id="chckRemberme" layoutX="5.0" layoutY="183.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="114.0" text="Remember me" textFill="#6c6c6c">
             <font>
                 <Font name="Helvetica Neue" size="13.0" />
             </font>

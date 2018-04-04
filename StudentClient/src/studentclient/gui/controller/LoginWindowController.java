@@ -33,6 +33,7 @@ public class LoginWindowController extends LoginController
     public void handleLogin(ActionEvent event)
     {
         lwm.handleLogin(UsernameField, PaswordField);
+        lwm.rememberMe(UsernameField, PaswordField, chckRemberme);
     }
 
 }

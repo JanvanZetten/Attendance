@@ -13,12 +13,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sharedclasses.be.Student;
+import sharedclasses.be.UserOptions;
 import sharedclasses.bll.BLLException;
 import sharedclasses.bll.Encrypter;
+import sharedclasses.bll.OptionsBll;
 import studentclient.bll.BllManager;
 import studentclient.gui.controller.MainWindowViewController;
 
@@ -30,6 +33,7 @@ public class LoginWindowModel
 {
 
     private BllManager bll = new BllManager();
+    private String encryptedPassword = null;
 
     public void handleLogin(TextField username, PasswordField password)
     {
@@ -42,7 +46,7 @@ public class LoginWindowModel
             return;
         }
 
-        String encryptedPassword = null;
+        encryptedPassword = null;
         try
         {
             encryptedPassword = Encrypter.encrypt(password.getText());
@@ -85,6 +89,17 @@ public class LoginWindowModel
             alert.showAndWait();
         }
 
+    }
+
+    public void rememberMe(TextField UsernameField, PasswordField PaswordField, CheckBox chckRemberme) {
+        if (chckRemberme.isSelected()){
+            try {
+                new OptionsBll().saveOptions(new UserOptions(UsernameField.getText(), encryptedPassword, true));
+            } catch (BLLException ex) {
+                Logger.getLogger(LoginWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }
 
 }
