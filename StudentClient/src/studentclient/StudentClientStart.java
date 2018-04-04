@@ -6,6 +6,8 @@
 package studentclient;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +15,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sharedclasses.be.UserOptions;
+import sharedclasses.bll.BLLException;
+import sharedclasses.bll.OptionsBll;
+import sharedclasses.dal.OptionsData;
 import studentclient.gui.controller.LoginWindowController;
 
 /**
@@ -59,7 +64,12 @@ public class StudentClientStart extends Application
 
     private boolean LoginIsRemember()
     {
-        return new UserOptions().getRememberMe();
+        return false;
+//        try {
+//            return new OptionsBll().loadOptiones().getRememberMe();
+//        } catch (BLLException ex) {
+//            return false; 
+//        }
     }
 
 }

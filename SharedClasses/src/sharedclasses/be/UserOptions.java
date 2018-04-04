@@ -5,11 +5,13 @@
  */
 package sharedclasses.be;
 
+import java.io.Serializable;
+
 /**
  *
  * @author janvanzetten
  */
-public class UserOptions
+public class UserOptions implements Serializable
 {
     private static boolean rememberMe;
     private static String user;
@@ -20,6 +22,7 @@ public class UserOptions
      */
     public UserOptions()
     {
+        rememberMe = false;
     }
 
     /**
