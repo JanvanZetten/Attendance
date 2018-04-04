@@ -116,4 +116,14 @@ public class BllManager
     public LocalDate getIntevalStartDate() {
         return dal.getIntevalStartDate();
     }
+    
+    public LocalDate getIntevalEndDate() {
+        return dal.getIntevalEndDate();
+    }
+
+    public void saveInterval(LocalDate startValue, LocalDate endValue) {
+        dal.saveInterval(startValue, endValue);
+    }
+
+
 }

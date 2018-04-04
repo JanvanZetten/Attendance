@@ -29,8 +29,7 @@ import teacherclient.dal.HBoxCell;
  *
  * @author alexl
  */
-public class AbsenceModel
-{
+public class AbsenceModel {
 
     private final String PRETEXT = "Absence in ";
     private final String POSTTEXT = ":";
@@ -41,7 +40,7 @@ public class AbsenceModel
     private AnchorPane chartPane;
     private ObservableList<HBoxCell> ol;
     private LocalDate startDate;
-
+    private LocalDate endDate;
     /**
      * Sets data class instances to be the same as other classes and sets items
      * from the view to be according to the mock data.
@@ -52,18 +51,14 @@ public class AbsenceModel
      * @param schoolClass
      * @param bll
      */
-    public void setInformation(Label labelClass, ListView<HBoxCell> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll)
-    {
+    public void setInformation(Label labelClass, ListView<HBoxCell> listviewStudents, AnchorPane chartPane, SchoolClass schoolClass, BllManager bll) {
         this.schoolClass = schoolClass;
         this.chartPane = chartPane;
         this.bll = bll;
         labelClass.setText(PRETEXT + schoolClass.getName() + POSTTEXT);
-        try
-        {
+        try {
             setStudentList(listviewStudents);
-        }
-        catch (BLLException ex)
-        {
+        } catch (BLLException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Getting students: " + ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
@@ -75,49 +70,63 @@ public class AbsenceModel
      *
      * @param listviewStudents
      */
-    private void setStudentList(ListView<HBoxCell> listviewStudents) throws BLLException
-    {
+    private void setStudentList(ListView<HBoxCell> listviewStudents) throws BLLException {
         ol = FXCollections.observableArrayList();
         List<Student> studentsInClass = bll.getStudentsInClass(schoolClass);
-        if (studentsInClass != null)
-        {
-            for (Student student : studentsInClass)
-            {
+        if (studentsInClass != null) {
+            for (Student student : studentsInClass) {
                 ol.add(new HBoxCell(student, this));
             }
             listviewStudents.setItems(ol);
             selectStudent(ol.get(0).getStudent());
-        }
-        else
-        {
+        } else {
             System.out.println("StudentInClass is null");
         }
     }
 
-    public void selectStudent(Student student)
-    {
+    public void selectStudent(Student student) {
         chartPane.getChildren().clear();
         this.startDate = getStartDate();
-        try
-        {
+        this.endDate = getEndDate();
+        try {
             TimeUtils tu = new TimeUtils();
             Calendar startDate = Calendar.getInstance();
-            startDate.setTime(new Date(this.startDate.toEpochDay()));
+            startDate.set(this.startDate.getYear(), this.startDate.getMonthValue(), this.startDate.getDayOfMonth());
             Calendar endDate = Calendar.getInstance();
+            endDate.set(this.endDate.getYear(), this.endDate.getMonthValue(), this.endDate.getDayOfMonth());
             // Months are 0-based indexed.
             ag = new AbsenceGraph(chartPane, tu.getChartSeriesFromStudentAbsenceInWeekDays(startDate.getTime(), endDate.getTime(), bll.getPresentDays(student)));
-        }
-        catch (BLLException ex)
-        {
+        } catch (BLLException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Selecting student: " + ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
     }
 
-    public LocalDate getStartDate()
-    {
-
+    public LocalDate getStartDate() {
         return bll.getIntevalStartDate();
 
     }
+    
+    public LocalDate getEndDate() {
+        return bll.getIntevalEndDate();
+    }
+
+    /**
+     * sets and saves the interval values
+     * @param startValue the start date
+     * @param endValue the end date 
+     * @param currentStudent 
+     * @throws NumberFormatException 
+     */
+    public void setInterval(LocalDate startValue, LocalDate endValue, Student currentStudent) throws NumberFormatException {
+        if (startValue.toEpochDay() > endValue.toEpochDay()) {
+            throw new NumberFormatException("the start date has to be before the end date");
+        }
+        
+        bll.saveInterval(startValue,endValue);
+        
+        selectStudent(currentStudent);
+    }
+
+
 }

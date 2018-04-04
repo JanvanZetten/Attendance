@@ -51,4 +51,14 @@ public interface DalFacade
      * @return LocalDate object
      */
     public LocalDate getIntevalStartDate();
+
+    /**
+     * Get the latest saved interval enddate or if there is not any get the current date
+     * @return LocalDate object
+     */
+    public LocalDate getIntevalEndDate();
+
+    
+    public void saveInterval(LocalDate startValue, LocalDate endValue);
+    
 }
