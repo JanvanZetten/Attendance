@@ -10,6 +10,7 @@ import teacherclient.gui.model.AbsenceModel;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import sharedclasses.be.SchoolClass;
 import teacherclient.bll.BllManager;
 import teacherclient.dal.HBoxCell;
+import teacherclient.gui.model.HBoxCellComparator.HBoxCellComparator;
 
 /**
  * FXML Controller class
@@ -41,7 +43,7 @@ public class AbsenceController implements Initializable
     @FXML
     private DatePicker calEnd;
     @FXML
-    private ComboBox<?> cmbSortListView;
+    private ComboBox<HBoxCellComparator> cmbSortListView;
 
     private AbsenceModel model;
     private Student selectedStudent;
@@ -55,6 +57,7 @@ public class AbsenceController implements Initializable
         model = new AbsenceModel();
         calEnd.setValue(LocalDate.now());
         calStart.setValue(model.getStartDate());
+        model.setupCmbSort(cmbSortListView);
     }
 
     /**
