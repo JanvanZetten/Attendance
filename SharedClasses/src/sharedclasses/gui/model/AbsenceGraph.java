@@ -43,14 +43,23 @@ public class AbsenceGraph
     private final double ANIMATION_TIME = 1500;
     private final double ANIMATION_PARTING = 100;
     private final double ANIMATION_PAUSE = ANIMATION_TIME / ANIMATION_PARTING;
+    private final String TITLE;
+    private final String X_AXIS_DESCRIPTION;
+    private final String Y_AXIS_DESCRIPTION;
+    private final String VALUE_POSTSYMBOL;
 
     /**
      * Creates graph with given values and adds to pane.
      * @param chartPane
      * @param series
      */
-    public AbsenceGraph(AnchorPane chartPane, XYChart.Series<String, Number> series)
+    public AbsenceGraph(AnchorPane chartPane, XYChart.Series<String, Number> series, String title, String xAxisDesc, String yAxisDesc, String valueSymbol)
     {
+        this.TITLE = title;
+        this.X_AXIS_DESCRIPTION = xAxisDesc;
+        this.Y_AXIS_DESCRIPTION = yAxisDesc;
+        this.VALUE_POSTSYMBOL = valueSymbol;
+
         double max = 0;
         double[] values = new double[series.getData().size()];
         double[] valueIncrs = new double[series.getData().size()];
@@ -92,7 +101,7 @@ public class AbsenceGraph
         double maxPos = max + (10 - max % 10);
         NumberAxis yAxis = new NumberAxis(0, max % 10 > 6 ? maxPos + 10 : maxPos, 10);
         yAxis.setTickLabelFormatter(
-                new NumberAxis.DefaultFormatter(yAxis, null, "%")
+                new NumberAxis.DefaultFormatter(yAxis, null, VALUE_POSTSYMBOL)
         );
         yAxis.setAutoRanging(false);
         yAxis.setUpperBound(100);
@@ -100,9 +109,9 @@ public class AbsenceGraph
 
         // Creating BarChart.
         BarChart<String, Number> absenceChart = new BarChart<>(xAxis, yAxis);
-        absenceChart.setTitle("Absence Chart");
-        absenceChart.getXAxis().setLabel("Day of the week");
-        absenceChart.getYAxis().setLabel("Absence in percentage");
+        absenceChart.setTitle(TITLE);
+        absenceChart.getXAxis().setLabel(Y_AXIS_DESCRIPTION);
+        absenceChart.getYAxis().setLabel(X_AXIS_DESCRIPTION);
         absenceChart.getData().add(series);
         absenceChart.setLegendVisible(false);
         absenceChart.setAnimated(false);
@@ -216,7 +225,7 @@ public class AbsenceGraph
             public void changed(ObservableValue<? extends Number> ov, Number oldNumber, Number Number)
             {
                 NumberFormat formatter = new DecimalFormat("#0.0");
-                dataText.setText(formatter.format(Number.doubleValue()) + "%");
+                dataText.setText(formatter.format(Number.doubleValue()) + VALUE_POSTSYMBOL);
             }
         });
     }
