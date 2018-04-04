@@ -24,12 +24,12 @@
                 <Font name="Helvetica Neue Bold" size="24.0" />
             </font>
         </Label>
-        <TextField fx:id="UsernameField" layoutX="5.0" layoutY="76.0" onAction="#handleLogin" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="76.0">
+        <TextField fx:id="usernameField" layoutX="5.0" layoutY="76.0" onAction="#handleLogin" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="76.0">
             <font>
                 <Font name="Helvetica Neue" size="18.0" />
             </font>
         </TextField>
-        <PasswordField fx:id="PaswordField" layoutX="5.0" layoutY="146.0" onAction="#handleLogin" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="146.0">
+        <PasswordField fx:id="passwordField" layoutX="5.0" layoutY="146.0" onAction="#handleLogin" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="146.0">
             <font>
                 <Font name="Helvetica Neue" size="18.0" />
             </font>

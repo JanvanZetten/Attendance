@@ -32,8 +32,8 @@ public class LoginWindowController extends LoginController
     @Override
     public void handleLogin(ActionEvent event)
     {
-        lwm.handleLogin(UsernameField, PaswordField);
-        lwm.rememberMe(UsernameField, PaswordField, chckRemberme);
+        lwm.handleLogin(usernameField, passwordField);
+        lwm.rememberMe(usernameField, passwordField, chckRemberme);
     }
 
 }

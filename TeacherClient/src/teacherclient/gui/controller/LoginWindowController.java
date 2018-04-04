@@ -44,7 +44,7 @@ public class LoginWindowController extends LoginController
             if (username != null && password != null)
             {
                 usernameField.setText(username);
-                autoLogin.setSelected(true);
+                chckRemberme.setSelected(true);
                 Platform.runLater(() ->
                 {
                     lwm.login(username, password, usernameField);
@@ -61,7 +61,7 @@ public class LoginWindowController extends LoginController
     @FXML
     public void handleLogin(ActionEvent event)
     {
-        lwm.handleLogin(usernameField, passwordField, autoLogin.isSelected());
+        lwm.handleLogin(usernameField, passwordField, chckRemberme.isSelected());
     }
 
 }

@@ -21,9 +21,9 @@ import javafx.scene.control.TextField;
 public abstract class LoginController implements Initializable
 {
     @FXML
-    protected TextField UsernameField;
+    protected TextField usernameField;
     @FXML
-    protected PasswordField PaswordField;
+    protected PasswordField passwordField;
     @FXML
     protected CheckBox chckRemberme;
 
