@@ -88,6 +88,7 @@ public class AbsenceController implements Initializable
     private void IntervalAction(ActionEvent event)
     {
         //TODO set the inteval on the absenceview and save it somewhere for later use
+//        model.setInterval(calStart.getValue(), calEnd.getValue(), listviewStudents.getSelectionModel().getSelectedItem().getStudent(), listviewStudents);
         model.setInterval(calStart.getValue(), calEnd.getValue(), listviewStudents.getSelectionModel().getSelectedItem().getStudent());
     }
 }

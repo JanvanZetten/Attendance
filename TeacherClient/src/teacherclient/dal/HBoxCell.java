@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,15 +39,13 @@ import teacherclient.gui.model.AbsenceModel;
 /**
  * @author Alex, Asbjørn & Jan
  */
-public class HBoxCell extends HBox
-{
+public class HBoxCell extends HBox {
 
     private Label label;
     private Button button1;
     private Button button2;
     private Label middleString;
     private Label lblAbsence;
-    private Long absence;
     private Student student;
 
     /**
@@ -54,8 +53,7 @@ public class HBoxCell extends HBox
      *
      * @param labelText
      */
-    public HBoxCell(String labelText, SchoolClass schoolClass, BllManager bll)
-    {
+    public HBoxCell(String labelText, SchoolClass schoolClass, BllManager bll) {
         super();
 
         label = new Label();
@@ -80,13 +78,10 @@ public class HBoxCell extends HBox
         middleString.setText(" ");
 
         button1.setText("Absence");
-        button1.setOnAction(new EventHandler<ActionEvent>()
-        {
+        button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
+            public void handle(ActionEvent event) {
+                try {
                     Stage newStage = new Stage();
                     newStage.initModality(Modality.APPLICATION_MODAL);
                     FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/AbsenceView.fxml"));
@@ -100,22 +95,17 @@ public class HBoxCell extends HBox
 
                     newStage.showAndWait();
 
-                }
-                catch (IOException ex)
-                {
+                } catch (IOException ex) {
                     Logger.getLogger(HBoxCell.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
 
         button2.setText("Statistics");
-        button2.setOnAction(new EventHandler<ActionEvent>()
-        {
+        button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
+            public void handle(ActionEvent event) {
+                try {
                     Stage newStage = new Stage();
                     newStage.initModality(Modality.APPLICATION_MODAL);
                     FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/AbsenceView.fxml"));
@@ -129,9 +119,7 @@ public class HBoxCell extends HBox
 
                     newStage.showAndWait();
 
-                }
-                catch (IOException ex)
-                {
+                } catch (IOException ex) {
                     Logger.getLogger(HBoxCell.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -140,33 +128,27 @@ public class HBoxCell extends HBox
         this.getChildren().addAll(label, button1, middleString, button2);
     }
 
-    public HBoxCell(Student student, AbsenceModel model)
-    {
+    public HBoxCell(Student student, AbsenceModel model) {
         super();
-        DalFacade dal = new DalManager();
+        try {
+            DalFacade dal = new DalManager();
 
-        label = new Label();
-        lblAbsence = new Label();
-        this.student = student;
+            label = new Label();
+            lblAbsence = new Label();
+            this.student = student;
 
-        label.setText(student.getName());
-        label.setMaxWidth(200);
-        lblAbsence.setText(student.getId() + "%");
+            label.setText(student.getName());
+            label.setMaxWidth(200);
+            lblAbsence.setText(student.getId() + "%");
 
-        Calendar cal = Calendar.getInstance();
-        Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        LocalDate selectedDate = LocalDate.now();
-
-        try
-        {
             List<Date> presentDays = dal.getPresentDays(student);
 
-            System.out.println("Present days: " + presentDays.size());
-            System.out.println("Days between dates: " + ChronoUnit.DAYS.between(dal.getIntevalStartDate(), LocalDate.now()));
-
-            absence = presentDays.size() / ChronoUnit.DAYS.between(dal.getIntevalStartDate(), LocalDate.now()) * 100;
+            Date startDate = Date.from(model.getStartDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Date endDate = Date.from(model.getEndDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            
+            System.out.println(presentDays.size());
+            Long absence = presentDays.size() / daysBetweenDatesWithoutWeekends(startDate, endDate) * 100;
+            absence = absence + 100 - (2 * absence);
             lblAbsence.setText(absence + "%");
 
             label.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
@@ -177,21 +159,54 @@ public class HBoxCell extends HBox
             lblAbsence.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
 
             this.getChildren().addAll(label, lblAbsence);
-        }
-        catch (DALException ex)
-        {
+
+        } catch (DALException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Could not get present days: " + ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
     }
 
-    public Student getStudent()
-    {
+    public Student getStudent() {
         return student;
     }
 
-    public Long getAbsence()
-    {
-        return absence;
+    /**
+     * Calculates the amount of days between two dates and removes weekend days.
+     * @param start
+     * @param end
+     * @return 
+     */
+    private long daysBetweenDatesWithoutWeekends(Date start, Date end) {
+        //Ignore argument check
+
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(start);
+        int w1 = c1.get(Calendar.DAY_OF_WEEK);
+        c1.add(Calendar.DAY_OF_WEEK, -w1);
+
+        Calendar c2 = Calendar.getInstance();
+        c2.setTime(end);
+        int w2 = c2.get(Calendar.DAY_OF_WEEK);
+        c2.add(Calendar.DAY_OF_WEEK, -w2);
+
+        //end Saturday to start Saturday 
+        long days = (c2.getTimeInMillis() - c1.getTimeInMillis()) / (1000 * 60 * 60 * 24);
+        long daysWithoutWeekendDays = days - (days * 2 / 7);
+
+        // Adjust days to add on (w2) and days to subtract (w1) so that Saturday
+        // and Sunday are not included
+        if (w1 == Calendar.SUNDAY && w2 != Calendar.SATURDAY) {
+            w1 = Calendar.MONDAY;
+        } else if (w1 == Calendar.SATURDAY && w2 != Calendar.SUNDAY) {
+            w1 = Calendar.FRIDAY;
+        }
+
+        if (w2 == Calendar.SUNDAY) {
+            w2 = Calendar.MONDAY;
+        } else if (w2 == Calendar.SATURDAY) {
+            w2 = Calendar.FRIDAY;
+        }
+        System.out.println(daysWithoutWeekendDays - w1 + w2);
+        return daysWithoutWeekendDays - w1 + w2;
     }
 }

@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sharedclasses.be.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,7 +79,7 @@ public class AbsenceModel {
     }
 
     /**
-     * Sets the list view to be filled with relevant students that prticipate in
+     * Sets the list view to be filled with relevant students that participate in
      * that course.
      *
      * @param listviewStudents
@@ -172,13 +174,19 @@ public class AbsenceModel {
      * @throws NumberFormatException 
      */
     public void setInterval(LocalDate startValue, LocalDate endValue, Student currentStudent) throws NumberFormatException {
-        if (startValue.toEpochDay() > endValue.toEpochDay()) {
-            throw new NumberFormatException("the start date has to be before the end date");
-        }
-        
-        bll.saveInterval(startValue,endValue);
-        
-        selectStudent(currentStudent);
+//        try {
+            if (startValue.toEpochDay() > endValue.toEpochDay()) {
+                throw new NumberFormatException("the start date has to be before the end date");
+            }
+            
+            bll.saveInterval(startValue,endValue);
+            selectStudent(currentStudent);
+            
+//            setStudentList(listviewStudents);
+//        } catch (BLLException ex) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR, "Selecting time interval: " + ex.getMessage(), ButtonType.OK);
+//            alert.showAndWait();
+//        }
     }
 
 
