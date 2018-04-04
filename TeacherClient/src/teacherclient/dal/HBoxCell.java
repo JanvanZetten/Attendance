@@ -188,4 +188,8 @@ public class HBoxCell extends HBox
         return student;
     }
 
+    public Label getAbsence()
+    {
+        return absence;
+    }
 }
