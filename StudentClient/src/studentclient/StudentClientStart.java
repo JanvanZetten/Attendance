@@ -19,6 +19,7 @@ import sharedclasses.bll.BLLException;
 import sharedclasses.bll.OptionsBll;
 import sharedclasses.dal.OptionsData;
 import studentclient.gui.controller.LoginWindowController;
+import studentclient.gui.model.LoginWindowModel;
 
 /**
  *
@@ -33,8 +34,7 @@ public class StudentClientStart extends Application
         Parent root;
         if (LoginIsRemember())
         {
-            root = FXMLLoader.load(getClass().getResource("gui/view/MainWindowView.fxml"));
-            stage.setResizable(true);
+             new LoginWindowModel().remeberedLogin(stage);
         }
         else
         {
@@ -43,15 +43,17 @@ public class StudentClientStart extends Application
             fxLoader.setController(new LoginWindowController());
             root = fxLoader.load();
             stage.setResizable(false);
+            
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.setTitle("EASV - Student");
+            file = new File("../SharedClasses/src/sharedclasses/Resources/EASVLogo.png");
+            stage.getIcons().add(new Image(file.getCanonicalFile().toURI().toString()));
+            stage.show();
         }
 
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.setTitle("EASV - Student");
-        File file = new File("../SharedClasses/src/sharedclasses/Resources/EASVLogo.png");
-        stage.getIcons().add(new Image(file.getCanonicalFile().toURI().toString()));
-        stage.show();
+        
     }
 
     /**
@@ -64,12 +66,13 @@ public class StudentClientStart extends Application
 
     private boolean LoginIsRemember()
     {
-        return false;
-//        try {
-//            return new OptionsBll().loadOptiones().getRememberMe();
-//        } catch (BLLException ex) {
-//            return false; 
-//        }
+        try {
+            return new OptionsBll().loadOptiones().getRememberMe();
+            
+        } catch (BLLException ex) {
+            ex.printStackTrace();
+            return false; 
+        }
     }
 
 }

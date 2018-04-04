@@ -13,9 +13,9 @@ import java.io.Serializable;
  */
 public class UserOptions implements Serializable
 {
-    private static boolean rememberMe;
-    private static String user;
-    private static String pass;
+    private boolean rememberMe;
+    private String user;
+    private String pass;
 
     /**
      * User Options.
@@ -33,9 +33,9 @@ public class UserOptions implements Serializable
      */
     public UserOptions(String user, String password, boolean remember)
     {
-        UserOptions.user = user;
-        UserOptions.pass = password;
-        UserOptions.rememberMe = remember;
+        this.user = user;
+        this.pass = password;
+        this.rememberMe = remember;
     }
 
     /**
@@ -44,7 +44,7 @@ public class UserOptions implements Serializable
      */
     public String getUsername()
     {
-        return UserOptions.user;
+        return user;
     }
 
     /**
@@ -53,7 +53,7 @@ public class UserOptions implements Serializable
      */
     public String getPassword()
     {
-        return UserOptions.pass;
+        return pass;
     }
 
     /**
@@ -62,7 +62,7 @@ public class UserOptions implements Serializable
      */
     public boolean getRememberMe()
     {
-        return UserOptions.rememberMe;
+        return rememberMe;
     }
 
     /**
@@ -70,8 +70,8 @@ public class UserOptions implements Serializable
      */
     public void dontRememberMe()
     {
-        UserOptions.rememberMe = false;
-        UserOptions.user = null;
-        UserOptions.pass = null;
+        rememberMe = false;
+        user = null;
+        pass = null;
     }
 }

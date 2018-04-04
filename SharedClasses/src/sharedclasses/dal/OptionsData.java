@@ -58,7 +58,6 @@ public class OptionsData {
             catch (FileNotFoundException ex)
             {
                 saveOptions(new UserOptions());
-                return options;
             }
             catch (IOException | ClassNotFoundException ex)
             {

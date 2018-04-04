@@ -56,12 +56,47 @@ public class LoginWindowModel
             Logger.getLogger(LoginWindowModel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        try
-        {
-            Student approvedUser = bll.login(username.getText(), encryptedPassword);
 
             Stage stage = (Stage) username.getScene().getWindow();
+            
+            commonlogin(username.getText(), encryptedPassword, stage);
 
+
+    }
+
+    public void rememberMe(TextField UsernameField, PasswordField PaswordField, CheckBox chckRemberme) {
+        if (chckRemberme.isSelected()){
+            try {
+                String username = UsernameField.getText();
+                String password = Encrypter.encrypt(PaswordField.getText());
+                System.out.println("First:");
+                System.out.println(username);
+                System.out.println(password);
+                new OptionsBll().saveOptions(new UserOptions(username, password, true));
+                
+            } catch (BLLException ex) {
+                Logger.getLogger(LoginWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+                
+            }
+        }
+        
+    }
+    
+    public void remeberedLogin(Stage stage){
+        try {
+            UserOptions options = new OptionsBll().loadOptiones();
+            commonlogin(options.getUsername(), options.getPassword(), stage);
+            stage.show();
+        } catch (BLLException ex) {
+            Logger.getLogger(LoginWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    private void commonlogin(String username, String password, Stage stage){
+        try
+        {
+            Student approvedUser = bll.login(username, password);
             try
             {
                 FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/studentclient/gui/view/MainWindowView.fxml"));
@@ -88,18 +123,5 @@ public class LoginWindowModel
             Alert alert = new Alert(Alert.AlertType.WARNING, ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
         }
-
     }
-
-    public void rememberMe(TextField UsernameField, PasswordField PaswordField, CheckBox chckRemberme) {
-        if (chckRemberme.isSelected()){
-            try {
-                new OptionsBll().saveOptions(new UserOptions(UsernameField.getText(), encryptedPassword, true));
-            } catch (BLLException ex) {
-                Logger.getLogger(LoginWindowModel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-    }
-
 }
