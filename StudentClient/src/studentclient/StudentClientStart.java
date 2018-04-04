@@ -64,11 +64,12 @@ public class StudentClientStart extends Application
 
     private boolean LoginIsRemember()
     {
-        try {
-            return new OptionsBll().loadOptiones().getRememberMe();
-        } catch (BLLException ex) {
-            return false; 
-        }
+        return false;
+//        try {
+//            return new OptionsBll().loadOptiones().getRememberMe();
+//        } catch (BLLException ex) {
+//            return false; 
+//        }
     }
 
 }
