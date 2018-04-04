@@ -170,7 +170,7 @@ public class HBoxCell extends HBox
             lblAbsence.setText(absence + "%");
 
             label.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
-            label.setMaxWidth(Double.MAX_VALUE);
+            label.setMaxWidth(200);
             HBox.setHgrow(label, Priority.ALWAYS);
 
             lblAbsence.setAlignment(Pos.CENTER_RIGHT);
