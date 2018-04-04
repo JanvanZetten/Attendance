@@ -5,9 +5,18 @@
  */
 package teacherclient.gui.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import sharedclasses.dal.UserPropertiesDAO;
 import sharedclasses.gui.controller.LoginController;
 import teacherclient.gui.model.LoginWindowModel;
 
@@ -18,7 +27,7 @@ import teacherclient.gui.model.LoginWindowModel;
  */
 public class LoginWindowController extends LoginController
 {
-    LoginWindowModel lwm = new LoginWindowModel();
+    LoginWindowModel lwm;
 
     /**
      * Initializes the controller class.
@@ -27,12 +36,32 @@ public class LoginWindowController extends LoginController
     public void initialize(URL url, ResourceBundle rb)
     {
         lwm = new LoginWindowModel();
+        try
+        {
+            UserPropertiesDAO.loadAutoLogin();
+            String username = UserPropertiesDAO.getUsername();
+            String password = UserPropertiesDAO.getPassword();
+            if (username != null && password != null)
+            {
+                usernameField.setText(username);
+                autoLogin.setSelected(true);
+                Platform.runLater(() ->
+                {
+                    lwm.login(username, password, usernameField);
+                });
+            }
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(LoginWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
+    @FXML
     public void handleLogin(ActionEvent event)
     {
-        lwm.handleLogin(UsernameField, PaswordField);
+        lwm.handleLogin(usernameField, passwordField, autoLogin.isSelected());
     }
 
 }

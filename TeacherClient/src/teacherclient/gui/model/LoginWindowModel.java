@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import sharedclasses.be.Teacher;
 import sharedclasses.bll.BLLException;
 import sharedclasses.bll.Encrypter;
+import sharedclasses.dal.UserPropertiesDAO;
 import teacherclient.bll.BllManager;
 import teacherclient.gui.controller.MainController;
 
@@ -28,10 +29,9 @@ import teacherclient.gui.controller.MainController;
  */
 public class LoginWindowModel
 {
-
     private BllManager bll = new BllManager();
 
-    public void handleLogin(TextField username, PasswordField password)
+    public void handleLogin(TextField username, PasswordField password, boolean isAutoLogin)
     {
 
         //if the content is wrong
@@ -49,7 +49,8 @@ public class LoginWindowModel
         }
         catch (BLLException ex)
         {
-            Logger.getLogger(LoginWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+            Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
+            alert.showAndWait();
         }
 
         try
@@ -57,29 +58,22 @@ public class LoginWindowModel
             Teacher approvedUser;
             approvedUser = bll.login(username.getText(), encryptedPassword);
 
-            Stage stage = (Stage) username.getScene().getWindow();
-
-            try
+            if (isAutoLogin)
             {
-                FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/MainView.fxml"));
-                Parent root = fxLoader.load();
-
-                MainController cont = fxLoader.getController();
-
-                cont.setUser(approvedUser);
-
-                Scene scene = new Scene(root);
-                stage.setResizable(true);
-                stage.setScene(scene);
-                stage.centerOnScreen();
-                stage.setTitle("EASV - Teacher Client");
+                try
+                {
+                    UserPropertiesDAO.setUsername(approvedUser.getUsername());
+                    UserPropertiesDAO.setPassword(encryptedPassword);
+                    UserPropertiesDAO.saveAutoLogin();
+                }
+                catch (IOException ex)
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
+                    alert.showAndWait();
+                }
             }
-            catch (IOException ex)
-            {
-                Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
-                alert.showAndWait();
 
-            }
+            openWindow(approvedUser, username);
         }
         catch (BLLException ex)
         {
@@ -87,6 +81,47 @@ public class LoginWindowModel
             alert.showAndWait();
         }
 
+    }
+
+    public void login(String username, String password, TextField userfield)
+    {
+        try
+        {
+            Teacher approvedUser;
+            approvedUser = bll.login(username, password);
+            openWindow(approvedUser, userfield);
+        }
+        catch (BLLException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING, ex.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
+    private void openWindow(Teacher approvedUser, TextField userfield)
+    {
+        Stage stage = (Stage) userfield.getScene().getWindow();
+
+        try
+        {
+            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/teacherclient/gui/view/MainView.fxml"));
+            Parent root = fxLoader.load();
+
+            MainController cont = fxLoader.getController();
+
+            cont.setUser(approvedUser);
+
+            Scene scene = new Scene(root);
+            stage.setResizable(true);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.setTitle("EASV - Teacher Client");
+        }
+        catch (IOException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
 }

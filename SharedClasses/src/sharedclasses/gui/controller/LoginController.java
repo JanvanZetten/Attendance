@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -20,9 +21,11 @@ import javafx.scene.control.TextField;
 public abstract class LoginController implements Initializable
 {
     @FXML
-    protected TextField UsernameField;
+    protected TextField usernameField;
     @FXML
-    protected PasswordField PaswordField;
+    protected PasswordField passwordField;
+    @FXML
+    protected CheckBox autoLogin;
 
     @Override
     public abstract void initialize(URL url, ResourceBundle rb);

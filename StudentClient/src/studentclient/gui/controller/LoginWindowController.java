@@ -32,7 +32,7 @@ public class LoginWindowController extends LoginController
     @Override
     public void handleLogin(ActionEvent event)
     {
-        lwm.handleLogin(UsernameField, PaswordField);
+        lwm.handleLogin(usernameField, passwordField);
     }
 
 }
