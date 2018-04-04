@@ -14,15 +14,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 import sharedclasses.be.SchoolClass;
 import sharedclasses.bll.BLLException;
 import sharedclasses.bll.TimeUtils;
 import sharedclasses.gui.model.AbsenceGraph;
 import teacherclient.bll.BllManager;
 import teacherclient.dal.HBoxCell;
+import teacherclient.gui.model.HBoxCellComparator.AbsenceComparator;
+import teacherclient.gui.model.HBoxCellComparator.HBoxCellComparator;
+import teacherclient.gui.model.HBoxCellComparator.NameComparator;
 
 /**
  *
@@ -38,8 +45,14 @@ public class AbsenceModel {
     private AbsenceGraph ag;
     private AnchorPane chartPane;
     private ObservableList<HBoxCell> ol;
+    private ObservableList<HBoxCellComparator> comparatorList;
     private LocalDate startDate;
     private LocalDate endDate;
+    public AbsenceModel()
+    {
+        comparatorList = FXCollections.observableArrayList();
+    }
+
     /**
      * Sets data class instances to be the same as other classes and sets items
      * from the view to be according to the mock data.
@@ -103,7 +116,48 @@ public class AbsenceModel {
 
     public LocalDate getStartDate() {
         return bll.getIntevalStartDate();
+    }
 
+    public void setupCmbSort(ComboBox<HBoxCellComparator> cmbSortListView)
+    {
+        comparatorList.add(new NameComparator());
+        comparatorList.add(new AbsenceComparator());
+
+        cmbSortListView.setItems(comparatorList);
+        cmbSortListView.getSelectionModel().selectFirst();
+
+        cmbSortListView.setConverter(new StringConverter<HBoxCellComparator>()
+        {
+            @Override
+            public String toString(HBoxCellComparator object)
+            {
+                return object.getName();
+            }
+
+            @Override
+            public HBoxCellComparator fromString(String string)
+            {
+                for (HBoxCellComparator hBoxCellComparator : comparatorList)
+                {
+                    if (hBoxCellComparator.getName().equals(string))
+                    {
+                        return hBoxCellComparator;
+                    }
+                }
+                return null;
+            }
+        });
+
+        cmbSortListView.valueProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if (newValue != null)
+            {
+                if (newValue.getComparator() != null)
+                {
+                    ol.sort(newValue.getComparator());
+                }
+            }
+        });
     }
     
     public LocalDate getEndDate() {

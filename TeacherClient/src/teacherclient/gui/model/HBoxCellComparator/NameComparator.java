@@ -16,8 +16,8 @@ public class NameComparator extends HBoxCellComparator
 {
     public NameComparator()
     {
-        this.name = "Name";
-        this.comparator = new Comparator<HBoxCell>()
+        super.name = "Name";
+        super.comparator = new Comparator<HBoxCell>()
         {
             @Override
             public int compare(HBoxCell o1, HBoxCell o2)

@@ -16,8 +16,8 @@ public class AbsenceComparator extends HBoxCellComparator
 {
     public AbsenceComparator()
     {
-        this.name = "Absence";
-        this.comparator = new Comparator<HBoxCell>()
+        super.name = "Absence";
+        super.comparator = new Comparator<HBoxCell>()
         {
             @Override
             public int compare(HBoxCell o1, HBoxCell o2)
