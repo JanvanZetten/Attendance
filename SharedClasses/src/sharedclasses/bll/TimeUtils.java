@@ -171,7 +171,6 @@ public class TimeUtils
             {
                 pc.setTime(date);
                 pc.set(pc.get(Calendar.YEAR), pc.get(Calendar.MONTH), pc.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
-                System.out.println("Presence: " + pc.getTime() + " StartDate: " + sc.getTime());
                 if (pc.after(sc) && pc.before(ec))
                 {
                     for (int i = 0; i < ScheduleDay.values().length; i++)
