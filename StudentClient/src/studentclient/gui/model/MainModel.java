@@ -38,6 +38,11 @@ import studentclient.gui.controller.LoginWindowController;
  */
 public class MainModel
 {
+    private final String TITLE = "Absence Chart";
+    private final String X_AXIS_DESCRIPTION = "Absence in percentage";
+    private final String Y_AXIS_DESCRIPTION = "Course";
+    private final String VALUE_POSTSYMBOL = "%";
+
     private BllManager bm;
     private Student activeUser;
     private AbsenceGraph ag;
@@ -123,7 +128,7 @@ public class MainModel
 
     public void setAbsenceGraphData(XYChart.Series<String, Number> series)
     {
-        ag = new AbsenceGraph(chartPane, series);
+        ag = new AbsenceGraph(chartPane, series, TITLE, X_AXIS_DESCRIPTION, Y_AXIS_DESCRIPTION, VALUE_POSTSYMBOL);
     }
 
     public Student getActiveUser()
