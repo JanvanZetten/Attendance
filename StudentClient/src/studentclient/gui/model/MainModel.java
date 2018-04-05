@@ -40,7 +40,7 @@ public class MainModel
 {
     private final String TITLE = "Absence Chart";
     private final String X_AXIS_DESCRIPTION = "Absence in percentage";
-    private final String Y_AXIS_DESCRIPTION = "Day of the week";
+    private final String Y_AXIS_DESCRIPTION = "Course";
     private final String VALUE_POSTSYMBOL = "%";
 
     private BllManager bm;
