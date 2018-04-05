@@ -167,7 +167,7 @@ public class TimeUtils
                 presentDays.add(0.0);
             }
             // Add present days.
-            for (Date date : presence)
+            for (Date date : distinctDateListByDay(presence))
             {
                 pc.setTime(date);
                 pc.set(pc.get(Calendar.YEAR), pc.get(Calendar.MONTH), pc.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
@@ -211,5 +211,23 @@ public class TimeUtils
             }
         }
         return series;
+    }
+
+    private List<Date> distinctDateListByDay(List<Date> dates)
+    {
+        List<Date> distinctDates = new ArrayList<>();
+
+        Calendar sc = Calendar.getInstance();
+        for (Date date : dates)
+        {
+            sc.setTime(date);
+            sc.set(sc.get(Calendar.YEAR), sc.get(Calendar.MONTH), sc.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
+            if (!distinctDates.contains(sc.getTime()))
+            {
+                distinctDates.add(sc.getTime());
+            }
+        }
+
+        return distinctDates;
     }
 }
