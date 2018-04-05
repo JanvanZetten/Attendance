@@ -36,6 +36,7 @@ public class LoginWindowController extends LoginController
     public void initialize(URL url, ResourceBundle rb)
     {
         lwm = new LoginWindowModel();
+
         try
         {
             UserPropertiesDAO.loadAutoLogin();
@@ -53,7 +54,7 @@ public class LoginWindowController extends LoginController
         }
         catch (IOException ex)
         {
-            Logger.getLogger(LoginWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Could not find auto login!");
         }
     }
 
