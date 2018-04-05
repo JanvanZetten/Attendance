@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +51,7 @@ public class HBoxCell extends HBox {
     private Label lblAbsence;
     private Student student;
     private Double absence;
+    private List<Date> presentDays;
 
     /**
      * Creates HBox from super class. Sets JavaFX Nodes.
@@ -137,24 +139,25 @@ public class HBoxCell extends HBox {
             label = new Label();
             lblAbsence = new Label();
             this.student = student;
-            
+
             label.setText(student.getName());
             label.setMaxWidth(200);
             lblAbsence.setText(student.getId() + "%");
-            
+
             calculateAbsence(model, student);
-            
+
             NumberFormat format = new DecimalFormat("#0.00");
             lblAbsence.setText(format.format(absence) + "%");
-            
+
             label.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
             label.setMaxWidth(200);
             HBox.setHgrow(label, Priority.ALWAYS);
-            
+
             lblAbsence.setAlignment(Pos.CENTER_RIGHT);
             lblAbsence.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
-            
+
             this.getChildren().addAll(label, lblAbsence);
+
         } catch (DALException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Could not get present days: " + ex.getMessage(), ButtonType.OK);
             alert.showAndWait();
@@ -170,15 +173,33 @@ public class HBoxCell extends HBox {
     }
 
     private void calculateAbsence(AbsenceModel model, Student student) throws DALException {
-            DalFacade dal = new DalManager();
-            
-            List<Date> presentDays = dal.getPresentDays(student);
-            
-            Date startDate = Date.from(model.getStartDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Date endDate = Date.from(model.getEndDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            
-            absence = presentDays.size() * 1.0 / daysBetweenDatesWithoutWeekends(startDate, endDate) * 100;
-            absence = absence + 100 - (2 * absence);
+
+        DalFacade dal = new DalManager();
+        List<Date> presentDays = new ArrayList<>();
+        List<Date> dbPresentDays = dal.getPresentDays(student);
+
+        Date startDate = Date.from(model.getStartDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(model.getEndDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Calendar cal = Calendar.getInstance();
+
+        for (int i = 0; i < dbPresentDays.size(); i++) {
+            if (dbPresentDays.get(i).compareTo(startDate) != -1
+                    && dbPresentDays.get(i).compareTo(endDate) != 1) {
+
+                cal.setTime(dbPresentDays.get(i));
+
+                if (cal.get(Calendar.DAY_OF_WEEK) != 6
+                        && cal.get(Calendar.DAY_OF_WEEK) != 7) {
+                    
+                    presentDays.add(dbPresentDays.get(i));
+                }
+            }
+        }
+
+        absence = presentDays.size() * 1.0 / daysBetweenDatesWithoutWeekends(startDate, endDate) * 100;
+        absence = absence + 100 - (2 * absence);
+        presentDays.clear();
     }
 
     /**
@@ -188,7 +209,7 @@ public class HBoxCell extends HBox {
      * @param end
      * @return
      */
-    private long daysBetweenDatesWithoutWeekends(Date start, Date end) {
+    private double daysBetweenDatesWithoutWeekends(Date start, Date end) {
         //Ignore argument check
 
         Calendar c1 = Calendar.getInstance();
