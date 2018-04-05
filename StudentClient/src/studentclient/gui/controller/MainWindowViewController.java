@@ -17,6 +17,9 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import sharedclasses.be.Student;
+import sharedclasses.be.UserOptions;
+import sharedclasses.bll.BLLException;
+import sharedclasses.bll.OptionsBll;
 import sharedclasses.dal.DALException;
 import studentclient.gui.model.MainModel;
 
@@ -79,6 +82,12 @@ public class MainWindowViewController implements Initializable
     @FXML
     private void handleLogOut(ActionEvent event)
     {
-        mainModel.logOut(mainAnchorPane);
+        try {
+            new OptionsBll().saveOptions(new UserOptions());
+            mainModel.logOut(mainAnchorPane);
+        } catch (BLLException ex) {
+            Logger.getLogger(MainWindowViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
