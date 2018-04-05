@@ -133,6 +133,12 @@ public class HBoxCell extends HBox {
         this.getChildren().addAll(label, button1, middleString, button2);
     }
 
+    /**
+     * Sets the HBoxes in the Statistics view (Name + Absence%).
+     * 
+     * @param student
+     * @param model 
+     */
     public HBoxCell(Student student, AbsenceModel model) {
         super();
         try {
@@ -142,19 +148,17 @@ public class HBoxCell extends HBox {
 
             label.setText(student.getName());
             label.setMaxWidth(200);
-            lblAbsence.setText(student.getId() + "%");
-
-            calculateAbsence(model, student);
-
-            NumberFormat format = new DecimalFormat("#0.00");
-            lblAbsence.setText(format.format(absence) + "%");
-
             label.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
             label.setMaxWidth(200);
             HBox.setHgrow(label, Priority.ALWAYS);
-
+            
             lblAbsence.setAlignment(Pos.CENTER_RIGHT);
             lblAbsence.setStyle("-fx-text-fill: white;" + "-fx-font-size: 16;");
+
+            calculateAbsence(model, student);
+            
+            NumberFormat format = new DecimalFormat("#0.00");
+            lblAbsence.setText(format.format(absence) + "%");
 
             this.getChildren().addAll(label, lblAbsence);
 
@@ -172,6 +176,13 @@ public class HBoxCell extends HBox {
         return absence;
     }
 
+    /**
+     * Calculates absence percentage based on week-days from two given dates.
+     * 
+     * @param model
+     * @param student
+     * @throws DALException 
+     */
     private void calculateAbsence(AbsenceModel model, Student student) throws DALException {
 
         DalFacade dal = new DalManager();
