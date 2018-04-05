@@ -192,9 +192,9 @@ public class AbsenceModel
      * @throws NumberFormatException
      */
 
-    public void setInterval(LocalDate startValue, LocalDate endValue, Student currentStudent) throws NumberFormatException
+    public void setInterval(LocalDate startValue, LocalDate endValue, Student currentStudent, ListView<HBoxCell> listviewStudents) throws NumberFormatException
     {
-//        try {
+        try {
         if (startValue.toEpochDay() > endValue.toEpochDay())
         {
             throw new NumberFormatException("the start date has to be before the end date");
@@ -203,11 +203,11 @@ public class AbsenceModel
         bll.saveInterval(startValue, endValue);
 
         selectStudent(currentStudent);
-//            setStudentList(listviewStudents);
-//        } catch (BLLException ex) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR, "Selecting time interval: " + ex.getMessage(), ButtonType.OK);
-//            alert.showAndWait();
-//        }
+            setStudentList(listviewStudents);
+        } catch (BLLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Selecting time interval: " + ex.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
 }

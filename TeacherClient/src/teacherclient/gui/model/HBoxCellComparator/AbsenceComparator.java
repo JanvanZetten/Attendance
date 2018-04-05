@@ -22,10 +22,10 @@ public class AbsenceComparator extends HBoxCellComparator
             @Override
             public int compare(HBoxCell o1, HBoxCell o2)
             {
-                Long name1 = o1.getAbsence();
-                Long name2 = o2.getAbsence();
+                Double name1 = o1.getAbsence();
+                Double name2 = o2.getAbsence();
 
-                return name1.compareTo(name2);
+                return name2.compareTo(name1);
             }
         };
     }
