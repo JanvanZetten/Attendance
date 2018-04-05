@@ -212,7 +212,7 @@ public class TimeUtils
         return series;
     }
 
-    private List<Date> distinctDateListByDay(List<Date> dates)
+    public List<Date> distinctDateListByDay(List<Date> dates)
     {
         List<Date> distinctDates = new ArrayList<>();
 
