@@ -124,27 +124,30 @@ public class TimeUtils
      */
     public XYChart.Series<String, Number> getChartSeriesFromStudentAbsenceInWeekDays(Date startDate, Date endDate, List<Date> presence)
     {
-        TimeUtils tu = new TimeUtils();
         XYChart.Series<String, Number> series = new XYChart.Series();
 
         if (startDate != null || endDate != null)
         {
-            Calendar today = Calendar.getInstance();
             Calendar sc = Calendar.getInstance();
-            sc.setTime(startDate);
             Calendar ec = Calendar.getInstance();
+            sc.setTime(startDate);
+            sc.set(sc.get(Calendar.YEAR), sc.get(Calendar.MONTH), sc.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
             ec.setTime(endDate);
+            ec.set(ec.get(Calendar.YEAR), ec.get(Calendar.MONTH), ec.get(Calendar.DAY_OF_MONTH), 23, 59, 59);
+
+            // Make array for schoolDay count. A index for each day.
             List<Double> schoolDays = new ArrayList<>();
             for (int i = 0; i < ScheduleDay.values().length; i++)
             {
                 schoolDays.add(0.0);
             }
 
-            while (sc.getTime().before(today.getTime()) && sc.getTime().before(ec.getTime()))
+            // Count schedule days within given dates.
+            while (sc.getTime().before(ec.getTime()))
             {
                 for (int i = 0; i < ScheduleDay.values().length; i++)
                 {
-                    if (tu.dayFromDate(sc.getTime()).equalsIgnoreCase(ScheduleDay.values()[i].getDay()))
+                    if (dayFromDate(sc.getTime()).equalsIgnoreCase(ScheduleDay.values()[i].getDay()))
                     {
                         schoolDays.set(i, schoolDays.get(i) + 1.0);
                     }
@@ -152,22 +155,36 @@ public class TimeUtils
                 sc.add(Calendar.DATE, 1);
             }
 
+            sc.setTime(startDate);
+            sc.set(sc.get(Calendar.YEAR), sc.get(Calendar.MONTH), sc.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+
+            Calendar pc = Calendar.getInstance();
+
+            // Create array for count of days present.
             List<Double> presentDays = new ArrayList<>();
             for (int i = 0; i < ScheduleDay.values().length; i++)
             {
                 presentDays.add(0.0);
             }
+            // Add present days.
             for (Date date : presence)
             {
-                for (int i = 0; i < ScheduleDay.values().length; i++)
+                pc.setTime(date);
+                pc.set(pc.get(Calendar.YEAR), pc.get(Calendar.MONTH), pc.get(Calendar.DAY_OF_MONTH), 12, 0, 0);
+                System.out.println("Presence: " + pc.getTime() + " StartDate: " + sc.getTime());
+                if (pc.after(sc) && pc.before(ec))
                 {
-                    if (tu.dayFromDate(date).equalsIgnoreCase(ScheduleDay.values()[i].getDay()))
+                    for (int i = 0; i < ScheduleDay.values().length; i++)
                     {
-                        presentDays.set(i, presentDays.get(i) + 1.0);
+                        if (dayFromDate(date).equalsIgnoreCase(ScheduleDay.values()[i].getDay()))
+                        {
+                            presentDays.set(i, presentDays.get(i) + 1.0);
+                        }
                     }
                 }
             }
 
+            // Create chart series with persentage of absence.
             for (int i = 0; i < ScheduleDay.values().length; i++)
             {
                 if (schoolDays.get(i) == 0.0)
@@ -187,6 +204,7 @@ public class TimeUtils
         {
             System.out.println("Start date or end date is null!");
 
+            // Create chart series with NaN values.
             for (int i = 0; i < ScheduleDay.values().length; i++)
             {
                 series.getData().add(new XYChart.Data(ScheduleDay.values()[i].getDay(), Double.NaN));
