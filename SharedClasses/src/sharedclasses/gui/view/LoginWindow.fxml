@@ -44,7 +44,7 @@
                 <Font name="Helvetica Neue Bold" size="24.0" />
             </font>
         </Label>
-        <CheckBox fx:id="chckRemberme" layoutX="5.0" layoutY="183.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="114.0" text="Remember me" textFill="#6c6c6c">
+        <CheckBox fx:id="chckRemberme" layoutX="5.0" layoutY="187.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="114.0" text="Auto login" textFill="#6c6c6c">
             <font>
                 <Font name="Helvetica Neue" size="13.0" />
             </font>
