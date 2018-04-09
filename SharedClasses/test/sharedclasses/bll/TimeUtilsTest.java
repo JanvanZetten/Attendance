@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import javafx.scene.chart.XYChart;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -178,9 +179,14 @@ public class TimeUtilsTest
         Calendar c2 = Calendar.getInstance(Locale.ENGLISH);
         Calendar c3 = Calendar.getInstance(Locale.ENGLISH);
         Calendar c4 = Calendar.getInstance(Locale.ENGLISH);
+        Calendar c5 = Calendar.getInstance(Locale.ENGLISH);
+        Calendar c6 = Calendar.getInstance(Locale.ENGLISH);
+        Calendar c7 = Calendar.getInstance(Locale.ENGLISH);
+        Calendar c8 = Calendar.getInstance(Locale.ENGLISH);
         XYChart.Series<String, Number> series;
         List<Date> listPresent;
 
+        //Start Calender, End calender and Calender on same date and same time.
         sc.clear();
         sc.set(2018, 3, 2, 12, 0, 0);
         ec.clear();
@@ -188,16 +194,17 @@ public class TimeUtilsTest
         c.clear();
         c.set(2018, 3, 2, 12, 0, 0);
 
+        // Expect 100% absence when listPresent is empty.
         listPresent = new ArrayList<>();
-
         series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
         assertEquals(100.0, series.getData().get(0).getYValue());
 
+        // Add present on the day and expect 0% absence.
         listPresent.add(c.getTime());
-
         series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
         assertEquals(0.0, series.getData().get(0).getYValue());
 
+        // Make new dates from monday to monday April 2018.
         sc.clear();
         sc.set(2018, 3, 2, 12, 0, 0);
         ec.clear();
@@ -210,10 +217,18 @@ public class TimeUtilsTest
         c3.set(2018, 3, 7, 12, 0, 0);
         c4.clear();
         c4.set(2018, 3, 8, 12, 0, 0);
+        c5.clear();
+        c5.set(2018, 3, 3, 12, 0, 0);
+        c6.clear();
+        c6.set(2018, 3, 4, 12, 0, 0);
+        c7.clear();
+        c7.set(2018, 3, 5, 12, 0, 0);
+        c8.clear();
+        c8.set(2018, 3, 6, 12, 0, 0);
 
+        // Expect 100% absence now that the list is empty again.
         listPresent.clear();
         listPresent = new ArrayList<>();
-
         series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
         assertEquals(100.0, series.getData().get(0).getYValue());
         assertEquals(100.0, series.getData().get(1).getYValue());
@@ -221,8 +236,8 @@ public class TimeUtilsTest
         assertEquals(100.0, series.getData().get(3).getYValue());
         assertEquals(100.0, series.getData().get(4).getYValue());
 
+        // Expect 50% absence on mondays now that one date on mondays is added.
         listPresent.add(c.getTime());
-
         series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
         assertEquals(50.0, series.getData().get(0).getYValue());
         assertEquals(100.0, series.getData().get(1).getYValue());
@@ -230,8 +245,8 @@ public class TimeUtilsTest
         assertEquals(100.0, series.getData().get(3).getYValue());
         assertEquals(100.0, series.getData().get(4).getYValue());
 
+        // Expect 0% absence now that both mondays are added.
         listPresent.add(c2.getTime());
-
         series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
         assertEquals(0.0, series.getData().get(0).getYValue());
         assertEquals(100.0, series.getData().get(1).getYValue());
@@ -239,8 +254,8 @@ public class TimeUtilsTest
         assertEquals(100.0, series.getData().get(3).getYValue());
         assertEquals(100.0, series.getData().get(4).getYValue());
 
+        // Expect that saturday does not do a difference.
         listPresent.add(c3.getTime());
-
         series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
         assertEquals(0.0, series.getData().get(0).getYValue());
         assertEquals(100.0, series.getData().get(1).getYValue());
@@ -248,14 +263,66 @@ public class TimeUtilsTest
         assertEquals(100.0, series.getData().get(3).getYValue());
         assertEquals(100.0, series.getData().get(4).getYValue());
 
+        // Expect that sunday does not do a difference.
         listPresent.add(c4.getTime());
-
         series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
         assertEquals(0.0, series.getData().get(0).getYValue());
         assertEquals(100.0, series.getData().get(1).getYValue());
         assertEquals(100.0, series.getData().get(2).getYValue());
         assertEquals(100.0, series.getData().get(3).getYValue());
         assertEquals(100.0, series.getData().get(4).getYValue());
+
+        // Test tuesday.
+        listPresent.add(c5.getTime());
+        series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
+        assertEquals(0.0, series.getData().get(0).getYValue());
+        assertEquals(0.0, series.getData().get(1).getYValue());
+        assertEquals(100.0, series.getData().get(2).getYValue());
+        assertEquals(100.0, series.getData().get(3).getYValue());
+        assertEquals(100.0, series.getData().get(4).getYValue());
+
+        // Test thursday.
+        listPresent.add(c7.getTime());
+        series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
+        assertEquals(0.0, series.getData().get(0).getYValue());
+        assertEquals(0.0, series.getData().get(1).getYValue());
+        assertEquals(100.0, series.getData().get(2).getYValue());
+        assertEquals(0.0, series.getData().get(3).getYValue());
+        assertEquals(100.0, series.getData().get(4).getYValue());
+
+        // Test wednesday.
+        listPresent.add(c6.getTime());
+        series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
+        assertEquals(0.0, series.getData().get(0).getYValue());
+        assertEquals(0.0, series.getData().get(1).getYValue());
+        assertEquals(0.0, series.getData().get(2).getYValue());
+        assertEquals(0.0, series.getData().get(3).getYValue());
+        assertEquals(100.0, series.getData().get(4).getYValue());
+
+        // Test friday.
+        listPresent.add(c8.getTime());
+        series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
+        assertEquals(0.0, series.getData().get(0).getYValue());
+        assertEquals(0.0, series.getData().get(1).getYValue());
+        assertEquals(0.0, series.getData().get(2).getYValue());
+        assertEquals(0.0, series.getData().get(3).getYValue());
+        assertEquals(0.0, series.getData().get(4).getYValue());
+
+        // Test duplicates.
+        listPresent.add(c.getTime());
+        listPresent.add(c2.getTime());
+        listPresent.add(c3.getTime());
+        listPresent.add(c4.getTime());
+        listPresent.add(c5.getTime());
+        listPresent.add(c6.getTime());
+        listPresent.add(c7.getTime());
+        listPresent.add(c8.getTime());
+        series = tu.getChartSeriesFromStudentAbsenceInWeekDays(sc.getTime(), ec.getTime(), listPresent);
+        assertEquals(0.0, series.getData().get(0).getYValue());
+        assertEquals(0.0, series.getData().get(1).getYValue());
+        assertEquals(0.0, series.getData().get(2).getYValue());
+        assertEquals(0.0, series.getData().get(3).getYValue());
+        assertEquals(0.0, series.getData().get(4).getYValue());
     }
 
     /**
@@ -267,17 +334,30 @@ public class TimeUtilsTest
         System.out.println("TimeUtilsTest:testDistinctDateListByDay");
 
         Calendar c = Calendar.getInstance(Locale.ENGLISH);
+        Calendar c2 = Calendar.getInstance(Locale.ENGLISH);
+        Random rand = new Random();
 
         c.clear();
         c.set(2018, 3, 2, 12, 0, 0);
+        c2.clear();
+        c2.set(2018, 3, 3, 12, 0, 0);
 
         List<Date> listWithDuplicates = new ArrayList<>();
         List<Date> listWithNoDuplicates = new ArrayList<>();
         listWithNoDuplicates.add(c.getTime());
+        listWithNoDuplicates.add(c2.getTime());
         for (int i = 0; i < 10; i++)
         {
+            c.set(2018, 3, 2, rand.nextInt(24), rand.nextInt(60), rand.nextInt(60));
             listWithDuplicates.add(c.getTime());
+            if (i > 0 && rand.nextBoolean())
+            {
+                c2.set(2018, 3, 3, rand.nextInt(24), rand.nextInt(60), rand.nextInt(60));
+                listWithDuplicates.add(c2.getTime());
+            }
         }
+        c2.set(2018, 3, 3, rand.nextInt(24), rand.nextInt(60), rand.nextInt(60));
+        listWithDuplicates.add(c2.getTime());
 
         assertArrayEquals(listWithNoDuplicates.toArray(), tu.distinctDateListByDay(listWithDuplicates).toArray());
     }
